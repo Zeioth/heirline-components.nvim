@@ -1,2 +1,2 @@
 # heirline-components.nvim
-Components you can use in your heirline config.
+Distro agnostic components you can use in your Neovim heirline config.
