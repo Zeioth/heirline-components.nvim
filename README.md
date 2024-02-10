@@ -16,6 +16,9 @@ Add it as a dependency of heirline
 ## Available components
 WIP: Please be patient.
 
+## Credits
+Many of the GPL3 lua components this plugin use come from AstroNvim > NormalNvim. So please support both projects if you enjoy this plugin.
+
 ## Roadmap
 * Cleanup utils → Delete functions that are not used in the code from `init.lua` and `buffer.lua`.
 * Refactor → Let's try to organize the code in a more semantically meaningful way.
