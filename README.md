@@ -1,6 +1,9 @@
 # heirline-components.nvim
 Distro agnostic components you can use in your Neovim heirline config.
 
+## Available components
+WIP: Please be patient.
+
 ## Roadmap
 * Cleanup utils → Delete functions that are not used in the code from `init.lua` and `buffer.lua`.
 * Refactor → Let's try to organize the code in a more semantically meaningful way.
