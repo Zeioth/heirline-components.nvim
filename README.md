@@ -1,6 +1,18 @@
 # heirline-components.nvim
 Distro agnostic components you can use in your Neovim heirline config.
 
+![screenshot_2024-02-10_01-17-04_527153682](https://github.com/Zeioth/heirline-components.nvim/assets/3357792/5b1e8dd7-3ae2-4a45-ba79-b0efd2ae6076)
+
+## How to install
+Add it as a dependency of heirline
+
+```lua
+  {
+    "rebelot/heirline.nvim",
+    dependencies = { "Zeioth/heirline-components.nvim" },
+    opts = {}
+  }
+```
 ## Available components
 WIP: Please be patient.
 
