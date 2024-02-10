@@ -9,8 +9,8 @@ Add it as a dependency of heirline
 ```lua
 {
   "rebelot/heirline.nvim",
-    dependencies = { "Zeioth/heirline-components.nvim" },
-    opts = {}
+  dependencies = { "Zeioth/heirline-components.nvim" },
+  opts = {}
 }
 ```
 ## Available components
