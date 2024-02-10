@@ -7,11 +7,11 @@ Distro agnostic components you can use in your Neovim heirline config.
 Add it as a dependency of heirline
 
 ```lua
-  {
-    "rebelot/heirline.nvim",
+{
+  "rebelot/heirline.nvim",
     dependencies = { "Zeioth/heirline-components.nvim" },
     opts = {}
-  }
+}
 ```
 ## Available components
 WIP: Please be patient.
