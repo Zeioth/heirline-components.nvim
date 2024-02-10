@@ -16,6 +16,9 @@ Add it as a dependency of heirline
 ## Available components
 WIP: Please be patient.
 
+## Example config
+This is a example heirline config that uses heirline-components (WIP).
+
 ## Credits
 Currently, most of the GPL3 lua components this plugin use come from AstroNvim and NormalNvim. So please support both projects if you enjoy this plugin.
 
