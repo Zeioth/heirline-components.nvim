@@ -17,7 +17,7 @@ Add it as a dependency of heirline
 WIP: Please be patient.
 
 ## Credits
-Many of the GPL3 lua components this plugin use come from AstroNvim > NormalNvim. So please support both projects if you enjoy this plugin.
+Currently, most of the GPL3 lua components this plugin use come from AstroNvim and NormalNvim. So please support both projects if you enjoy this plugin.
 
 ## FAQ
 * **How can I contribute with a component?** Go to `core.components` and define yours there. Then send a PR.
