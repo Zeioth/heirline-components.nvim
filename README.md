@@ -87,8 +87,3 @@ Currently, most of the GPL3 lua components this plugin use come from AstroNvim a
 * **How can I avoid breaking changes?** Always use the components by importing `heirline-components.all`. That way internal changes won't affect you.
 * **Icons look weird:** Make sure you are using nerd fonts. Otherwise you can set the option `icons` to pass a collection with your own icons. Chech [here](https://github.com/Zeioth/heirline-components.nvim/blob/main/lua/heirline-components/config.lua).
 * **I've found a bug!** Please [report it](https://github.com/Zeioth/heirline-components.nvim/issues) so I can fix it, and make sure you send images. 
-
-
-## Roadmap
-* Implement an aditional component for overseer.
-* On the compiler.nvim component (which we may rebrand, or copy as overseer component), try to remove the hotfix condition that prevents overseer from displaying a error on new buffers. They might have fixed that.
