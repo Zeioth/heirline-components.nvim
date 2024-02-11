@@ -67,10 +67,12 @@ Currently, most of the GPL3 lua components this plugin use come from AstroNvim a
 
 ## FAQ
 * **How can I contribute with a component?** Clone this repo. Go to `core.components` and create yours there. Then open a PR.
+* **What contributions would be very appreciated?** A `mode` component that looks like classic vim would be appreciated by many users.
 * **How do components work?** A component as made of providers. So you can use providers to build your component. Aditionally, conditions are used to decide when a component should be displayed.
 * **What nvim version do I need?** These components have been tested on nvim `v0.9.x`.
 * **How can I avoid breaking changes?** Always use the components by importing `heirline-components.all`. That way internal changes won't affect you.
 * **Icons look weird:** Make sure you are using nerd fonts. Otherwise you can set the option `icons` to pass a collection with your own icons.
+
 
 ## Roadmap
 * Ensure all components are agnostic → Let's ensure there are no external dependencies left.
