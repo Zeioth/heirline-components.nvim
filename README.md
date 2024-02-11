@@ -27,7 +27,6 @@ Currently, most of the GPL3 lua components this plugin use come from AstroNvim a
 * **How do components work?** A component as made of providers. So you can use providers to build your component. Aditionally, conditions are used to decide when a component should be displayed.
 
 ## Roadmap
-* Cleanup utils → Delete functions that are not used in the code from `init.lua` and `buffer.lua`.
-* Refactor → Let's try to organize the code in a more semantically meaningful way.
 * Ensure all components are agnostic → Let's ensure there are no external dependencies left.
-* In the compiler.nvim component (which we may rebrand, or copy as overseer component), try to remove the condition that prevents overseer from displaying a error on new buffers. They might have fixed that.
+* Implement an aditional component for overseer.
+* On the compiler.nvim component (which we may rebrand, or copy as overseer component), try to remove the hotfix condition that prevents overseer from displaying a error on new buffers. They might have fixed that.
