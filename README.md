@@ -72,6 +72,7 @@ Currently, most of the GPL3 lua components this plugin use come from AstroNvim a
 * **What nvim version do I need?** These components have been tested on nvim `v0.9.x`.
 * **How can I avoid breaking changes?** Always use the components by importing `heirline-components.all`. That way internal changes won't affect you.
 * **Icons look weird:** Make sure you are using nerd fonts. Otherwise you can set the option `icons` to pass a collection with your own icons. Chech [here](https://github.com/Zeioth/heirline-components.nvim/blob/main/lua/heirline-components/config.lua).
+* **I've found a bug!** Please [report it](https://github.com/Zeioth/heirline-components.nvim/issues) so I can fix it, and make sure you send images. 
 
 
 ## Roadmap
