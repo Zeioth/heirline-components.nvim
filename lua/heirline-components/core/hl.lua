@@ -1,10 +1,9 @@
---- ### base status highlighting
+--- ### Heirline highlights.
 --
 -- DESCRIPTION:
--- Set colors for heirline.
+-- Highlight colors we use on the components.
 
 local M = {}
-
 local env = require "heirline-components.core.env"
 
 --- Get the highlight background color of the lualine theme for the current colorscheme.
@@ -22,18 +21,18 @@ end
 
 --- Get the highlight for the current mode.
 ---@return table # the highlight group for the current mode.
--- @usage local heirline_component = { provider = "Example Provider", hl = require("heirline-components.status").hl.mode },
+-- @usage local heirline_component = { provider = "Example Provider", hl = require("heirline-components.core").hl.mode },
 function M.mode() return { bg = M.mode_bg() } end
 
 --- Get the foreground color group for the current mode, good for usage with Heirline surround utility.
 ---@return string # the highlight group for the current mode foreground.
--- @usage local heirline_component = require("heirline.utils").surround({ "|", "|" }, require("heirline-components.status").hl.mode_bg, heirline_component),
+-- @usage local heirline_component = require("heirline.utils").surround({ "|", "|" }, require("heirline-components.core").hl.mode_bg, heirline_component),
 
 function M.mode_bg() return env.modes[vim.fn.mode()][2] end
 
 --- Get the foreground color group for the current filetype.
 ---@return table # the highlight group for the current filetype foreground.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.fileicon(), hl = require("heirline-components.status").hl.filetype_color },
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.fileicon(), hl = require("heirline-components.core").hl.filetype_color },
 function M.filetype_color(self)
   local devicons_avail, devicons = pcall(require, "nvim-web-devicons")
   if not devicons_avail then return {} end
@@ -52,7 +51,7 @@ end
 ---@param name string, the name of the element to get the attributes and colors for.
 ---@param include_bg? boolean whether or not to include background color (Default: false).
 ---@return table # a table of highlight information.
--- @usage local heirline_component = { provider = "Example Provider", hl = require("heirline-components.status").hl.get_attributes("treesitter") },
+-- @usage local heirline_component = { provider = "Example Provider", hl = require("heirline-components.core").hl.get_attributes("treesitter") },
 function M.get_attributes(name, include_bg)
   local hl = env.attributes[name] or {}
   hl.fg = name .. "_fg"
@@ -63,7 +62,7 @@ end
 --- Enable filetype color highlight if enabled in icon_highlights.file_icon options.
 ---@param name string the icon_highlights.file_icon table element.
 ---@return function # for setting hl property in a component.
--- @usage local heirline_component = { provider = "Example Provider", hl = require("heirline-components.status").hl.file_icon("winbar") },
+-- @usage local heirline_component = { provider = "Example Provider", hl = require("heirline-components.core").hl.file_icon("winbar") },
 function M.file_icon(name)
   local hl_enabled = env.icon_highlights.file_icon[name]
   return function(self)

@@ -1,13 +1,9 @@
---- ### base status utilities
---
--- DESCRIPTION:
--- Statusline related utility functions.
+--- ### Heirline components core utils.
 
 local M = {}
 
 local env = require "heirline-components.core.env"
-
-local utils = require "heirline-components"
+local utils = require "heirline-components.utils"
 local extend_tbl = utils.extend_tbl
 local get_icon = utils.get_icon
 
@@ -80,7 +76,7 @@ local function escape(str) return str:gsub("%%", "%%%%") end
 ---@param str? string the string to stylize.
 ---@param opts? table options of `{ padding = { left = 0, right = 0 }, separator = { left = "|", right = "|" }, escape = true, show_empty = false, icon = { kind = "NONE", padding = { left = 0, right = 0 } } }`.
 ---@return string # the stylized string.
--- @usage local string = require("heirline-components.status").utils.stylize("Hello", { padding = { left = 1, right = 1 }, icon = { kind = "String" } })
+-- @usage local string = require("heirline-components.core").utils.stylize("Hello", { padding = { left = 1, right = 1 }, icon = { kind = "String" } })
 function M.stylize(str, opts)
   opts = extend_tbl({
     padding = { left = 0, right = 0 },
@@ -212,7 +208,7 @@ end
 ---@param button any the button parameter from Heirline component on_click.callback function call.
 ---@param mods any the button parameter from Heirline component on_click.callback function call.
 ---@return table # the argument table with the decoded mouse information and signcolumn signs information.
--- @usage local heirline_component = { on_click = { callback = function(...) local args = require("heirline-components.status").utils.statuscolumn_clickargs(...) end } }
+-- @usage local heirline_component = { on_click = { callback = function(...) local args = require("heirline-components.core").utils.statuscolumn_clickargs(...) end } }
 function M.statuscolumn_clickargs(self, minwid, clicks, button, mods)
   local args = {
     minwid = minwid,

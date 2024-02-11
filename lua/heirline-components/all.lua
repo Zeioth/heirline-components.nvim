@@ -1,4 +1,4 @@
---- ### Heirline components main file.
+--- ### Heirline-components modules
 --
 --  DESCRIPTION:
 --  We use this file to configure the plugin "Heirline".

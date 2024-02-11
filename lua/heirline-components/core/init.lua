@@ -1,21 +1,21 @@
---- ### base status initializers
+--- ### Heirline initializers.
 --
 -- DESCRIPTION:
--- Statusline related init functions for building dynamic statusline components.
+-- These functions are used to initialize certain components.
 
 local M = {}
 
 local env = require "heirline-components.core.env"
 local provider = require "heirline-components.core.provider"
-local status_utils = require "heirline-components.core.utils"
+local core_utils = require "heirline-components.core.utils"
 
-local utils = require "heirline-components"
+local utils = require "heirline-components.utils"
 local extend_tbl = utils.extend_tbl
 
 --- An `init` function to build a set of children components for LSP breadcrumbs.
 ---@param opts? table # options for configuring the breadcrumbs (default: `{ max_depth = 5, separator = "  ", icon = { enabled = true, hl = false }, padding = { left = 0, right = 0 } }`)
 ---@return function # The Heirline init function.
--- @usage local heirline_component = { init = require("heirline-components.status").init.breadcrumbs { padding = { left = 1 } } }
+-- @usage local heirline_component = { init = require("heirline-components.core").init.breadcrumbs { padding = { left = 1 } } }
 function M.breadcrumbs(opts)
   opts = extend_tbl({
     max_depth = 5,
@@ -40,7 +40,7 @@ function M.breadcrumbs(opts)
         table.insert(
           children,
           {
-            provider = require("heirline-components").get_icon "Ellipsis"
+            provider = require("base.utils").get_icon "Ellipsis"
                 .. opts.separator,
           }
         )
@@ -54,9 +54,9 @@ function M.breadcrumbs(opts)
             provider = string.gsub(d.name, "%%", "%%%%"):gsub("%s*->%s*", ""),
           },           -- add symbol name
           on_click = { -- add on click function
-            minwid = status_utils.encode_pos(d.lnum, d.col, self.winnr),
+            minwid = core_utils.encode_pos(d.lnum, d.col, self.winnr),
             callback = function(_, minwid)
-              local lnum, col, winnr = status_utils.decode_pos(minwid)
+              local lnum, col, winnr = core_utils.decode_pos(minwid)
               vim.api.nvim_win_set_cursor(
                 vim.fn.win_getid(winnr),
                 { lnum, col }
@@ -85,7 +85,7 @@ function M.breadcrumbs(opts)
         children,
         1,
         {
-          provider = status_utils.pad_string(
+          provider = core_utils.pad_string(
             " ",
             { left = opts.padding.left - 1 }
           ),
@@ -96,7 +96,7 @@ function M.breadcrumbs(opts)
       table.insert(
         children,
         {
-          provider = status_utils.pad_string(
+          provider = core_utils.pad_string(
             " ",
             { right = opts.padding.right - 1 }
           ),
@@ -111,7 +111,7 @@ end
 --- An `init` function to build a set of children components for a separated path to file.
 ---@param opts? table options for configuring the breadcrumbs (default: `{ max_depth = 3, path_func = provider.unique_path(), separator = "  ", suffix = true, padding = { left = 0, right = 0 } }`)
 ---@return function # The Heirline init function.
--- @usage local heirline_component = { init = require("heirline-components.status").init.separated_path { padding = { left = 1 } } }
+-- @usage local heirline_component = { init = require("heirline-components.core").init.separated_path { padding = { left = 1 } } }
 function M.separated_path(opts)
   opts = extend_tbl({
     max_depth = 3,
@@ -140,7 +140,7 @@ function M.separated_path(opts)
         table.insert(
           children,
           {
-            provider = require("heirline-components").get_icon "Ellipsis"
+            provider = require("base.utils").get_icon "Ellipsis"
                 .. opts.separator,
           }
         )
@@ -160,7 +160,7 @@ function M.separated_path(opts)
         children,
         1,
         {
-          provider = status_utils.pad_string(
+          provider = core_utils.pad_string(
             " ",
             { left = opts.padding.left - 1 }
           ),
@@ -171,7 +171,7 @@ function M.separated_path(opts)
       table.insert(
         children,
         {
-          provider = status_utils.pad_string(
+          provider = core_utils.pad_string(
             " ",
             { right = opts.padding.right - 1 }
           ),
@@ -186,7 +186,7 @@ end
 --- An `init` function to build multiple update events which is not supported yet by Heirline's update field.
 ---@param opts any[] an array like table of autocmd events as either just a string or a table with custom patterns and callbacks.
 ---@return function # The Heirline init function.
--- @usage local heirline_component = { init = require("heirline-components.status").init.update_events { "BufEnter", { "User", pattern = "LspProgressUpdate" } } }
+-- @usage local heirline_component = { init = require("heirline-components.core").init.update_events { "BufEnter", { "User", pattern = "LspProgressUpdate" } } }
 function M.update_events(opts)
   if not vim.tbl_islist(opts) then opts = { opts } end
   return function(self)

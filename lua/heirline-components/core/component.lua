@@ -1,7 +1,9 @@
---- ### base status components
+--- ### Heirline components.
 --
 -- DESCRIPTION:
--- Components we can load on the plugin heirline 'components' section.
+-- Components we can use on the plugin heirline on any of the opts
+-- 'statusline', 'winbar', 'tabline', and 'statuscolumn' options.
+
 -- A component is made of providers.
 -- So it is very easy to create your own components!
 
@@ -11,7 +13,7 @@
 
 -- function M.my_component(opts)
 --  opts = extend_tbl({ filename = { padding = { left = 1, right = 1 } } }, opts)
---  return M.builder(status_utils.setup_providers(opts, { "filename" }))
+--  return M.builder(core_utils.setup_providers(opts, { "filename" }))
 -- end
 
 -- NOTE:
@@ -46,10 +48,9 @@ local env = require "heirline-components.core.env"
 local hl = require "heirline-components.core.hl"
 local init = require "heirline-components.core.init"
 local provider = require "heirline-components.core.provider"
-local status_utils = require "heirline-components.core.utils"
+local core_utils = require "heirline-components.core.utils"
 
-local utils = require "heirline-components"
-local buffer_utils = require "heirline-components.buffer"
+local utils = require "heirline-components.utils"
 local extend_tbl = utils.extend_tbl
 local get_icon = utils.get_icon
 local is_available = utils.is_available
@@ -58,7 +59,7 @@ local is_available = utils.is_available
 ---@param opts? table options for configuring the other fields
 ---                   of the heirline component.
 ---@return table # The heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.fill()
+-- @usage local heirline_component = require("heirline-components.core").component.fill()
 function M.fill(opts)
   return extend_tbl({
     provider = provider.fill(),
@@ -76,7 +77,7 @@ end
 ---@param opts? table options for configuring file_icon, filename, filetype,
 ---                   file_modified, file_read_only, and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.file_info()
+-- @usage local heirline_component = require("heirline-components.core").component.file_info()
 function M.file_info(opts)
   opts = extend_tbl({
     file_icon = {
@@ -98,7 +99,7 @@ function M.file_info(opts)
     },
     hl = hl.get_attributes "file_info",
   }, opts)
-  return M.builder(status_utils.setup_providers(opts, {
+  return M.builder(core_utils.setup_providers(opts, {
     "file_icon",
     "unique_path",
     "filename",
@@ -112,13 +113,13 @@ end
 --- Displays operative system and file encoding.
 ---@param opts? table options for configuring file_format, encoding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.file_encoding()
+-- @usage local heirline_component = require("heirline-components.core").component.file_encoding()
 function M.file_encoding(opts)
   opts = extend_tbl({
     file_format = { padding = { left = 1, right = 0 } },
     file_encoding = { padding = { left = 1, right = 0 } },
   }, opts)
-  return M.builder(status_utils.setup_providers(opts, {
+  return M.builder(core_utils.setup_providers(opts, {
     "file_format",
     "file_encoding",
   }))
@@ -128,7 +129,7 @@ end
 ---@param opts? table options for configuring file_icon, filename, filetype,
 ---                   file_modified, file_read_only, and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.tabline_file_info()
+-- @usage local heirline_component = require("heirline-components.core").component.tabline_file_info()
 function M.tabline_file_info(opts)
   return M.file_info(extend_tbl({
     file_icon = {
@@ -148,7 +149,7 @@ function M.tabline_file_info(opts)
       hl = function(self) return hl.get_attributes(self.tab_type .. "_close") end,
       padding = { left = 1, right = 1 },
       on_click = {
-        callback = function(_, minwid) buffer_utils.close(minwid) end,
+        callback = function(_, minwid) utils.close(minwid) end,
         minwid = function(self) return self.bufnr end,
         name = "heirline_tabline_close_buffer_callback",
       },
@@ -169,7 +170,7 @@ end
 ---@param opts? table options for configuring ruler, percentage, scrollbar,
 ---                   and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.nav()
+-- @usage local heirline_component = require("heirline-components.core").component.nav()
 function M.nav(opts)
   opts = extend_tbl({
     ruler = {},
@@ -180,7 +181,7 @@ function M.nav(opts)
     update = { "CursorMoved", "CursorMovedI", "BufEnter" },
   }, opts)
   return M.builder(
-    status_utils.setup_providers(opts, { "ruler", "percentage", "scrollbar" })
+    core_utils.setup_providers(opts, { "ruler", "percentage", "scrollbar" })
   )
 end
 
@@ -189,7 +190,7 @@ end
 ---@param opts? table options for configuring macro recording, search count,
 ---                   and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.cmd_info()
+-- @usage local heirline_component = require("heirline-components.core").component.cmd_info()
 function M.cmd_info(opts)
   opts = extend_tbl({
     macro_recording = {
@@ -223,7 +224,7 @@ function M.cmd_info(opts)
     hl = hl.get_attributes "cmd_info",
   }, opts)
   return M.builder(
-    status_utils.setup_providers(
+    core_utils.setup_providers(
       opts,
       { "macro_recording", "search_count", "showcmd" }
     )
@@ -233,7 +234,7 @@ end
 --- A function to build a set of children components for a mode section.
 ---@param opts? table options for configuring mode_text, paste, spell, and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.mode { mode_text = true }
+-- @usage local heirline_component = require("heirline-components.core").component.mode { mode_text = true }
 function M.mode(opts)
   opts = extend_tbl({
     mode_text = false,
@@ -254,7 +255,7 @@ function M.mode(opts)
   }, opts)
   if not opts["mode_text"] then opts.str = { str = " " } end
   return M.builder(
-    status_utils.setup_providers(
+    core_utils.setup_providers(
       opts,
       { "mode_text", "str", "paste", "spell" }
     )
@@ -264,7 +265,7 @@ end
 --- A function to build a set of children components for an LSP breadcrumbs section.
 ---@param opts? table options for configuring breadcrumbs and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.breadcumbs()
+-- @usage local heirline_component = require("heirline-components.core").component.breadcumbs()
 function M.breadcrumbs(opts)
   opts = extend_tbl({
     padding = { left = 1 },
@@ -278,7 +279,7 @@ end
 --- A function to build a set of children components for the current file path.
 ---@param opts? table options for configuring path and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.separated_path()
+-- @usage local heirline_component = require("heirline-components.core").component.separated_path()
 function M.separated_path(opts)
   opts = extend_tbl(
     { padding = { left = 1 }, update = { "BufEnter", "DirChanged" } },
@@ -291,7 +292,7 @@ end
 --- A function to build a set of children components for a git branch section.
 ---@param opts? table options for configuring git branch and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.git_branch()
+-- @usage local heirline_component = require("heirline-components.core").component.git_branch()
 function M.git_branch(opts)
   opts = extend_tbl({
     git_branch = { icon = { kind = "GitBranch", padding = { right = 1 } } },
@@ -312,13 +313,13 @@ function M.git_branch(opts)
     update = { "User", pattern = "GitSignsUpdate" },
     init = init.update_events { "BufEnter" },
   }, opts)
-  return M.builder(status_utils.setup_providers(opts, { "git_branch" }))
+  return M.builder(core_utils.setup_providers(opts, { "git_branch" }))
 end
 
 --- A function to build a set of children components for a git difference section.
 ---@param opts? table options for configuring git changes and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.git_diff()
+-- @usage local heirline_component = require("heirline-components.core").component.git_diff()
 function M.git_diff(opts)
   opts = extend_tbl({
     added = { icon = { kind = "GitAdd", padding = { left = 1, right = 1 } } },
@@ -346,11 +347,11 @@ function M.git_diff(opts)
     init = init.update_events { "BufEnter" },
   }, opts)
   return M.builder(
-    status_utils.setup_providers(
+    core_utils.setup_providers(
       opts,
       { "added", "changed", "removed" },
       function(p_opts, p)
-        local out = status_utils.build_provider(p_opts, p)
+        local out = core_utils.build_provider(p_opts, p)
         if out then
           out.provider = "git_diff"
           out.opts.type = p
@@ -365,7 +366,7 @@ end
 --- A function to build a set of children components for a diagnostics section.
 ---@param opts? table options for configuring diagnostic providers and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.diagnostics()
+-- @usage local heirline_component = require("heirline-components.core").component.diagnostics()
 function M.diagnostics(opts)
   opts = extend_tbl({
     ERROR = {
@@ -397,11 +398,11 @@ function M.diagnostics(opts)
     update = { "DiagnosticChanged", "BufEnter" },
   }, opts)
   return M.builder(
-    status_utils.setup_providers(
+    core_utils.setup_providers(
       opts,
       { "ERROR", "WARN", "INFO", "HINT" },
       function(p_opts, p)
-        local out = status_utils.build_provider(p_opts, p)
+        local out = core_utils.build_provider(p_opts, p)
         if out then
           out.provider = "diagnostics"
           out.opts.severity = p
@@ -416,7 +417,7 @@ end
 --- A function to build a set of children components for a Treesitter section.
 ---@param opts? table options for configuring diagnostic providers and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.treesitter()
+-- @usage local heirline_component = require("heirline-components.core").component.treesitter()
 function M.treesitter(opts)
   opts = extend_tbl({
     str = { str = "TS", icon = { kind = "ActiveTS", padding = { right = 1 } } },
@@ -429,13 +430,13 @@ function M.treesitter(opts)
     update = { "OptionSet", pattern = "syntax" },
     init = init.update_events { "BufEnter" },
   }, opts)
-  return M.builder(status_utils.setup_providers(opts, { "str" }))
+  return M.builder(core_utils.setup_providers(opts, { "str" }))
 end
 
 --- A function to build a set of children components for an LSP section.
 ---@param opts? table options for configuring lsp progress and client_name providers and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.lsp()
+-- @usage local heirline_component = require("heirline-components.core").component.lsp()
 function M.lsp(opts)
   opts = extend_tbl({
     lsp_progress = {
@@ -470,15 +471,15 @@ function M.lsp(opts)
     },
   }, opts)
   return M.builder(
-    status_utils.setup_providers(
+    core_utils.setup_providers(
       opts,
       { "lsp_progress", "lsp_client_names" },
       function(p_opts, p, i)
         return p_opts
             and {
               flexible = i,
-              status_utils.build_provider(p_opts, provider[p](p_opts)),
-              status_utils.build_provider(p_opts, provider.str(p_opts)),
+              core_utils.build_provider(p_opts, provider[p](p_opts)),
+              core_utils.build_provider(p_opts, provider.str(p_opts)),
             }
           or false
       end
@@ -489,7 +490,7 @@ end
 --- A function to get the current python virtual env
 ---@param opts? table options for configuring the virtual env indicator.
 ---@return table # The Heirline component table
--- @usage local heirline_component = require("heirline-components.status").virtual_env()
+-- @usage local heirline_component = require("heirline-components.core").virtual_env()
 function M.virtual_env(opts)
   opts = extend_tbl({
     virtual_env = { icon = { kind = "Environment", padding = { right = 1 } } },
@@ -500,13 +501,13 @@ function M.virtual_env(opts)
     },
     hl = hl.get_attributes "virtual_env",
   }, opts)
-  return M.builder(status_utils.setup_providers(opts, { "virtual_env" }))
+  return M.builder(core_utils.setup_providers(opts, { "virtual_env" }))
 end
 
 --- A function to build a set of components for a foldcolumn section in a statuscolumn.
 ---@param opts? table options for configuring foldcolumn and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.foldcolumn()
+-- @usage local heirline_component = require("heirline-components.core").component.foldcolumn()
 function M.foldcolumn(opts)
   opts = extend_tbl({
     foldcolumn = { padding = { right = 1 } },
@@ -514,7 +515,7 @@ function M.foldcolumn(opts)
     on_click = {
       name = "fold_click",
       callback = function(...)
-        local char = status_utils.statuscolumn_clickargs(...).char
+        local char = core_utils.statuscolumn_clickargs(...).char
         local fillchars = vim.opt_local.fillchars:get()
         if char == (fillchars.foldopen or get_icon "FoldOpened") then
           vim.cmd "norm! zc"
@@ -524,13 +525,13 @@ function M.foldcolumn(opts)
       end,
     },
   }, opts)
-  return M.builder(status_utils.setup_providers(opts, { "foldcolumn" }))
+  return M.builder(core_utils.setup_providers(opts, { "foldcolumn" }))
 end
 
 --- A function to build a set of components for a numbercolumn section in statuscolumn.
 ---@param opts? table options for configuring numbercolumn and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.numbercolumn()
+-- @usage local heirline_component = require("heirline-components.core").component.numbercolumn()
 function M.numbercolumn(opts)
   opts = extend_tbl({
     numbercolumn = { padding = { right = 1 } },
@@ -538,20 +539,20 @@ function M.numbercolumn(opts)
     on_click = {
       name = "line_click",
       callback = function(...)
-        local args = status_utils.statuscolumn_clickargs(...)
+        local args = core_utils.statuscolumn_clickargs(...)
         if args.mods:find "c" then
           if is_available "nvim-dap" then require("dap").toggle_breakpoint() end
         end
       end,
     },
   }, opts)
-  return M.builder(status_utils.setup_providers(opts, { "numbercolumn" }))
+  return M.builder(core_utils.setup_providers(opts, { "numbercolumn" }))
 end
 
 --- A function to build a set of components for a signcolumn section in statuscolumn.
 ---@param opts? table options for configuring signcolumn and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.signcolumn()
+-- @usage local heirline_component = require("heirline-components.core").component.signcolumn()
 function M.signcolumn(opts)
   opts = extend_tbl({
     signcolumn = {},
@@ -559,7 +560,7 @@ function M.signcolumn(opts)
     on_click = {
       name = "sign_click",
       callback = function(...)
-        local args = status_utils.statuscolumn_clickargs(...)
+        local args = core_utils.statuscolumn_clickargs(...)
         if
           args.sign
           and args.sign.name
@@ -571,13 +572,13 @@ function M.signcolumn(opts)
       end,
     },
   }, opts)
-  return M.builder(status_utils.setup_providers(opts, { "signcolumn" }))
+  return M.builder(core_utils.setup_providers(opts, { "signcolumn" }))
 end
 
---- Display an spinner while the compiler is compiling.
+--- Display an spinner while the compiler.nvim is compiling.
 ---@param opts? table options for configuring compiler_state and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").component.compiler_state()
+-- @usage local heirline_component = require("heirline-components.core").component.compiler_state()
 function M.compiler_state(opts)
   opts = extend_tbl({
     compiler_state = {
@@ -596,22 +597,22 @@ function M.compiler_state(opts)
       end,
     },
   }, opts)
-  return M.builder(status_utils.setup_providers(opts, {
+  return M.builder(core_utils.setup_providers(opts, {
     "compiler_state",
   }))
 end
 
---- A general function to build a section of base status providers with highlights,
+--- A general function to build a section of Heirline providers with highlights,
 --- conditions, and section surrounding.
 ---@param opts? table a list of components to build into a section.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.status").components.builder({ { provider = "file_icon", opts = { padding = { right = 1 } } }, { provider = "filename" } })
+-- @usage local heirline_component = require("heirline-components.core").components.builder({ { provider = "file_icon", opts = { padding = { right = 1 } } }, { provider = "filename" } })
 function M.builder(opts)
   opts = extend_tbl({ padding = { left = 0, right = 0 } }, opts)
   local children = {}
   if opts.padding.left > 0 then -- add left padding
     table.insert(children, {
-      provider = status_utils.pad_string(
+      provider = core_utils.pad_string(
         " ",
         { left = opts.padding.left - 1 }
       ),
@@ -630,14 +631,14 @@ function M.builder(opts)
   end
   if opts.padding.right > 0 then -- add right padding
     table.insert(children, {
-      provider = status_utils.pad_string(
+      provider = core_utils.pad_string(
         " ",
         { right = opts.padding.right - 1 }
       ),
     })
   end
   return opts.surround
-      and status_utils.surround(
+      and core_utils.surround(
         opts.surround.separator,
         opts.surround.color,
         children,

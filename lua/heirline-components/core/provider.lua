@@ -1,4 +1,4 @@
---- ### base status providers
+--- ### Heirline providers.
 --
 -- DESCRIPTION:
 -- The main functions we use to configure heirline.
@@ -9,9 +9,9 @@ local M = {}
 
 local condition = require "heirline-components.core.condition"
 local env = require "heirline-components.core.env"
-local status_utils = require "heirline-components.core.utils"
+local core_utils = require "heirline-components.core.utils"
 
-local utils = require "heirline-components"
+local utils = require "heirline-components.utils"
 local extend_tbl = utils.extend_tbl
 local get_icon = utils.get_icon
 local luv = vim.uv or vim.loop -- TODO: REMOVE WHEN DROPPING SUPPORT FOR Neovim v0.9
@@ -20,17 +20,17 @@ local is_available = utils.is_available
 
 --- A provider function for the fill string.
 ---@return string # the statusline string for filling the empty space.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.fill }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.fill }
 function M.fill() return "%=" end
 
 --- A provider function for the signcolumn string.
 ---@param opts? table options passed to the stylize function.
 ---@return string # the statuscolumn string for adding the signcolumn.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.signcolumn }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.signcolumn }
 -- @see heirline-components.core.utils.stylize
 function M.signcolumn(opts)
   opts = extend_tbl({ escape = false }, opts)
-  return status_utils.stylize("%s", opts)
+  return core_utils.stylize("%s", opts)
 end
 
 -- local function to resolve the first sign in the signcolumn
@@ -60,7 +60,7 @@ end
 ---@param opts? table options passed to the stylize function
 ---@return function # the statuscolumn string for adding the numbercolumn
 -- @usage local heirline_component = { provider = require("astroui.status").provider.numbercolumn }
--- @see astroui.core.utils.stylize
+-- @see astroui.status.utils.stylize
 function M.numbercolumn(opts)
   opts = extend_tbl({ thousands = false, culright = true, escape = false }, opts)
   return function(self)
@@ -88,7 +88,7 @@ function M.numbercolumn(opts)
       end
       str = (rnum == 0 and not opts.culright and relnum) and cur .. "%=" or "%=" .. cur
     end
-    return status_utils.stylize(str, opts)
+    return core_utils.stylize(str, opts)
   end
 end
 
@@ -96,7 +96,7 @@ end
 ---@param opts? table options passed to the stylize function.
 ---@return function # a custom foldcolumn function for
 ---                   the statuscolumn that doesn't show the nest levels.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.foldcolumn }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.foldcolumn }
 -- @see heirline-components.core.utils.stylize
 function M.foldcolumn(opts)
   opts = extend_tbl({ escape = false }, opts)
@@ -150,13 +150,13 @@ function M.foldcolumn(opts)
         end
       end
     end
-    return status_utils.stylize(str .. "%*", opts)
+    return core_utils.stylize(str .. "%*", opts)
   end
 end
 
 --- A provider function for the current tab numbre.
 ---@return function # the statusline function to return a string for a tab number.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.tabnr() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.tabnr() }
 function M.tabnr()
   return function(self)
     return (self and self.tabnr)
@@ -168,7 +168,7 @@ end
 --- A provider function for showing if spellcheck is on.
 ---@param opts? table options passed to the stylize function.
 ---@return function # the function for outputting if spell is enabled.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.spell() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.spell() }
 -- @see heirline-components.core.utils.stylize
 function M.spell(opts)
   opts = extend_tbl(
@@ -176,14 +176,14 @@ function M.spell(opts)
     opts
   )
   return function()
-    return status_utils.stylize(vim.wo.spell and opts.str or nil, opts)
+    return core_utils.stylize(vim.wo.spell and opts.str or nil, opts)
   end
 end
 
 --- A provider function for showing if paste is enabled.
 ---@param opts? table options passed to the stylize function.
 ---@return function # the function for outputting if paste is enabled.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.paste() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.paste() }
 -- @see heirline-components.core.utils.stylize
 function M.paste(opts)
   opts = extend_tbl(
@@ -193,7 +193,7 @@ function M.paste(opts)
   local paste = vim.opt.paste
   if type(paste) ~= "boolean" then paste = paste:get() end
   return function()
-    return status_utils.stylize(paste and opts.str or nil, opts)
+    return core_utils.stylize(paste and opts.str or nil, opts)
   end
 end
 
@@ -201,26 +201,26 @@ end
 ---@param opts? table a prefix before the recording register
 ---                   and options passed to the stylize function.
 ---@return function # a function that returns
----                   a string of the current recording core.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.macro_recording() }
+---                   a string of the current recording status.
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.macro_recording() }
 -- @see heirline-components.core.utils.stylize
 function M.macro_recording(opts)
   opts = extend_tbl({ prefix = "@" }, opts)
   return function()
     local register = vim.fn.reg_recording()
     if register ~= "" then register = opts.prefix .. register end
-    return status_utils.stylize(register, opts)
+    return core_utils.stylize(register, opts)
   end
 end
 
 --- A provider function for displaying the current command.
 ---@param opts? table of options passed to the stylize function.
 ---@return string # the statusline string for showing the current command.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.showcmd() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.showcmd() }
 -- @see heirline-components.core.utils.stylize
 function M.showcmd(opts)
   opts = extend_tbl({ minwid = 0, maxwid = 5, escape = false }, opts)
-  return status_utils.stylize(
+  return core_utils.stylize(
     ("%%%d.%d(%%S%%)"):format(opts.minwid, opts.maxwid),
     opts
   )
@@ -231,7 +231,7 @@ end
 ---                   and options passed to the stylize function.
 ---@return function # a function that returns
 ---                   a string of the current search location.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.search_count() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.search_count() }
 -- @see heirline-components.core.utils.stylize
 function M.search_count(opts)
   local search_func = vim.tbl_isempty(opts or {})
@@ -240,7 +240,7 @@ function M.search_count(opts)
   return function()
     local search_ok, search = pcall(search_func)
     if search_ok and type(search) == "table" and search.total then
-      return status_utils.stylize(
+      return core_utils.stylize(
         string.format(
           "%s%d/%s%d",
           search.current > search.maxcount and ">" or "",
@@ -259,7 +259,7 @@ end
 ---                   and options passed to the stylize function.
 ---@return function # the function for displaying
 ---                   the text of the current vim mode.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.mode_text() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.mode_text() }
 -- @see heirline-components.core.utils.stylize
 function M.mode_text(opts)
   local max_length = math.max(
@@ -281,7 +281,7 @@ function M.mode_text(opts)
             .. string.rep(" ", math.ceil(padding / 2))
       end
     end
-    return status_utils.stylize(text, opts)
+    return core_utils.stylize(text, opts)
   end
 end
 
@@ -291,7 +291,7 @@ end
 ---                   and options passed to the stylize function.
 ---@return function # the statusline string for displaying the percentage of
 ---                   current document location.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.percentage() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.percentage() }
 -- @see heirline-components.core.utils.stylize
 function M.percentage(opts)
   opts =
@@ -308,7 +308,7 @@ function M.percentage(opts)
         text = "Bot"
       end
     end
-    return status_utils.stylize(text, opts)
+    return core_utils.stylize(text, opts)
   end
 end
 
@@ -316,7 +316,7 @@ end
 ---@param opts? table options for padding the line and character locations
 ---                   and options passed to the stylize function.
 ---@return function # the statusline string for showing location in document line_num:char_num.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.ruler({ pad_ruler = { line = 3, char = 2 } }) }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.ruler({ pad_ruler = { line = 3, char = 2 } }) }
 -- @see heirline-components.core.utils.stylize
 function M.ruler(opts)
   opts = extend_tbl({ pad_ruler = { line = 3, char = 2 } }, opts)
@@ -325,14 +325,14 @@ function M.ruler(opts)
   return function()
     local line = vim.fn.line "."
     local char = vim.fn.virtcol "."
-    return status_utils.stylize(string.format(padding_str, line, char), opts)
+    return core_utils.stylize(string.format(padding_str, line, char), opts)
   end
 end
 
 --- A provider function for showing the current location as a scrollbar.
 ---@param opts? table options passed to the stylize function.
 ---@return function # the function for outputting the scrollbar.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.scrollbar() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.scrollbar() }
 -- @see heirline-components.core.utils.stylize
 function M.scrollbar(opts)
   local sbar = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" }
@@ -341,7 +341,7 @@ function M.scrollbar(opts)
     local lines = vim.api.nvim_buf_line_count(0)
     local i = math.floor((curr_line - 1) / lines * #sbar) + 1
     if sbar[i] then
-      return status_utils.stylize(string.rep(sbar[i], 2), opts)
+      return core_utils.stylize(string.rep(sbar[i], 2), opts)
     end
   end
 end
@@ -350,22 +350,22 @@ end
 ---@param opts? table options passed to the stylize function
 ---                   and the kind of icon to use.
 ---@return string # the stylized icon.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.close_button() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.close_button() }
 -- @see heirline-components.core.utils.stylize
 function M.close_button(opts)
   opts = extend_tbl({ kind = "BufferClose" }, opts)
-  return status_utils.stylize(get_icon(opts.kind), opts)
+  return core_utils.stylize(get_icon(opts.kind), opts)
 end
 
 --- A provider function for showing the current filetype.
 ---@param opts? table options passed to the stylize function.
 ---@return function  # the function for outputting the filetype.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.filetype() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.filetype() }
 -- @see heirline-components.core.utils.stylize
 function M.filetype(opts)
   return function(self)
     local buffer = vim.bo[self and self.bufnr or 0]
-    return status_utils.stylize(string.lower(buffer.filetype), opts)
+    return core_utils.stylize(string.lower(buffer.filetype), opts)
   end
 end
 
@@ -373,7 +373,7 @@ end
 ---@param opts? table options for argument to fnamemodify to format filename
 ---                   and options passed to the stylize function.
 ---@return function # the function for outputting the filename.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.filename() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.filename() }
 -- @see heirline-components.core.utils.stylize
 function M.filename(opts)
   opts = extend_tbl({
@@ -384,19 +384,19 @@ function M.filename(opts)
   return function(self)
     local path = opts.fname(self and self.bufnr or 0)
     local filename = vim.fn.fnamemodify(path, opts.modify)
-    return status_utils.stylize((path == "" and opts.fallback or filename), opts)
+    return core_utils.stylize((path == "" and opts.fallback or filename), opts)
   end
 end
 
 --- A provider function for showing the current file encoding.
 ---@param opts? table options passed to the stylize function.
 ---@return function  # the function for outputting the file encoding.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.file_encoding() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.file_encoding() }
 -- @see heirline-components.core.utils.stylize
 function M.file_encoding(opts)
   return function(self)
     local buf_enc = vim.bo[self and self.bufnr or 0].fenc
-    return status_utils.stylize(
+    return core_utils.stylize(
       string.upper(buf_enc ~= "" and buf_enc or vim.o.enc),
       opts
     )
@@ -406,12 +406,12 @@ end
 --- A provider function for showing the current file format.
 ---@param opts? table options passed to the stylize function.
 ---@return function  # the function for outputting the file format.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.file_format() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.file_format() }
 -- @see heirline-components.core.utils.stylize
 function M.file_format(opts)
   return function(self)
     local buf_format = vim.bo[self and self.bufnr or 0].fileformat
-    return status_utils.stylize(
+    return core_utils.stylize(
       string.upper(buf_format ~= "" and buf_format or vim.o.fileformat),
       opts
     )
@@ -423,7 +423,7 @@ end
 ---                   a buffer number, max length, and options passed
 ---                   to the stylize function.
 ---@return function # path to file that uniquely identifies each buffer.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.unique_path() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.unique_path() }
 -- @see heirline-components.core.utils.stylize
 function M.unique_path(opts)
   opts = extend_tbl({
@@ -465,7 +465,7 @@ function M.unique_path(opts)
         end
       end
     end
-    return status_utils.stylize(
+    return core_utils.stylize(
       (
         opts.max_length > 0
         and #unique_path > opts.max_length
@@ -482,7 +482,7 @@ end
 ---@param opts? table options passed to the stylize function.
 ---@return function # the function for outputting the indicator
 ---                   if the file is modified.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.file_modified() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.file_modified() }
 -- @see heirline-components.core.utils.stylize
 function M.file_modified(opts)
   opts = extend_tbl(
@@ -490,7 +490,7 @@ function M.file_modified(opts)
     opts
   )
   return function(self)
-    return status_utils.stylize(
+    return core_utils.stylize(
       condition.file_modified((self or {}).bufnr) and opts.str or nil,
       opts
     )
@@ -500,7 +500,7 @@ end
 --- A provider function for showing if the current file is read-only.
 ---@param opts? table options passed to the stylize function.
 ---@return function # the function for outputting the indicator if the file is read-only.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.file_read_only() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.file_read_only() }
 -- @see heirline-components.core.utils.stylize
 function M.file_read_only(opts)
   opts = extend_tbl(
@@ -508,7 +508,7 @@ function M.file_read_only(opts)
     opts
   )
   return function(self)
-    return status_utils.stylize(
+    return core_utils.stylize(
       condition.file_read_only((self or {}).bufnr) and opts.str or nil,
       opts
     )
@@ -518,7 +518,7 @@ end
 --- A provider function for showing the current filetype icon.
 ---@param opts? table options passed to the stylize function.
 ---@return function # the function for outputting the filetype icon.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.file_icon() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.file_icon() }
 -- @see heirline-components.core.utils.stylize
 function M.file_icon(opts)
   return function(self)
@@ -534,18 +534,18 @@ function M.file_icon(opts)
         { default = true }
       )
     end
-    return status_utils.stylize(ft_icon, opts)
+    return core_utils.stylize(ft_icon, opts)
   end
 end
 
 --- A provider function for showing the current git branch.
 ---@param opts table options passed to the stylize function.
 ---@return function # the function for outputting the git branch.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.git_branch() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.git_branch() }
 -- @see heirline-components.core.utils.stylize
 function M.git_branch(opts)
   return function(self)
-    return status_utils.stylize(
+    return core_utils.stylize(
       vim.b[self and self.bufnr or 0].gitsigns_head or "",
       opts
     )
@@ -555,13 +555,13 @@ end
 --- A provider function for showing the current git diff count of a specific type.
 ---@param opts? table options for type of git diff and options passed to the stylize function.
 ---@return function|nil # the function for outputting the git diff.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.git_diff({ type = "added" }) }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.git_diff({ type = "added" }) }
 -- @see heirline-components.core.utils.stylize
 function M.git_diff(opts)
   if not opts or not opts.type then return end
   return function(self)
     local status = vim.b[self and self.bufnr or 0].gitsigns_status_dict
-    return status_utils.stylize(
+    return core_utils.stylize(
       status
       and status[opts.type]
       and status[opts.type] > 0
@@ -577,7 +577,7 @@ end
 ---@param opts table options for severity of diagnostic and options passed
 ---                  to the stylize function.
 ---@return function|nil # the function for outputting the diagnostic count.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.diagnostics({ severity = "ERROR" }) }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.diagnostics({ severity = "ERROR" }) }
 -- @see heirline-components.core.utils.stylize
 function M.diagnostics(opts)
   if not opts or not opts.severity then return end
@@ -593,20 +593,20 @@ function M.diagnostics(opts)
         opts.severity and { severity = vim.diagnostic.severity[opts.severity] }
       )
     end
-    return status_utils.stylize(count ~= 0 and tostring(count) or "", opts)
+    return core_utils.stylize(count ~= 0 and tostring(count) or "", opts)
   end
 end
 
 --- A provider function for showing the current progress of loading language servers.
 ---@param opts? table options passed to the stylize function.
 ---@return function # the function for outputting the LSP progress.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.lsp_progress() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.lsp_progress() }
 -- @see heirline-components.core.utils.stylize
 function M.lsp_progress(opts)
   local spinner = utils.get_spinner("LSPLoading", 1) or { "" }
   return function()
     local _, Lsp = next(base.lsp.progress)
-    return status_utils.stylize(
+    return core_utils.stylize(
       Lsp
       and (
         spinner[math.floor(luv.hrtime() / 12e7) % #spinner + 1]
@@ -625,7 +625,7 @@ end
 ---@param opts? table options for explanding null_ls clients, max width percentage, and options passed to the stylize function.
 ---@return function # the function for outputting the LSP client names
 -- @usage local heirline_component = { provider = require("astroui.status").provider.lsp_client_names({ integrations = { null_ls = true, conform = true, lint = true }, truncate = 0.25 }) }
--- @see astroui.core.utils.stylize
+-- @see astroui.status.utils.stylize
 function M.lsp_client_names(opts)
   opts = extend_tbl(
     {
@@ -647,7 +647,7 @@ function M.lsp_client_names(opts)
         local null_ls_sources = {}
         for _, type in ipairs { "FORMATTING", "DIAGNOSTICS" } do
           for _, source in
-          ipairs(status_utils.null_ls_sources(vim.bo.filetype, type))
+          ipairs(core_utils.null_ls_sources(vim.bo.filetype, type))
           do
             null_ls_sources[source] = true
           end
@@ -677,10 +677,10 @@ function M.lsp_client_names(opts)
     end
     local str = table.concat(buf_client_names, ", ")
     if type(opts.truncate) == "number" then
-      local max_width = math.floor(status_utils.width() * opts.truncate)
+      local max_width = math.floor(core_utils.width() * opts.truncate)
       if #str > max_width then str = string.sub(str, 0, max_width) .. "…" end
     end
-    return status_utils.stylize(str, opts)
+    return core_utils.stylize(str, opts)
   end
 end
 
@@ -689,7 +689,7 @@ end
 ---@param opts table options passed to the stylize function
 ---@return function # the function for outputting the virtual environment
 -- @usage local heirline_component = { provider = require("astroui.status").provider.virtual_env() }
--- @see astroui.core.utils.stylize
+-- @see astroui.status.utils.stylize
 function M.virtual_env(opts)
   opts = extend_tbl(
     {
@@ -712,7 +712,7 @@ function M.virtual_env(opts)
       if conda ~= "base" or not opts.conda.ignore_base then env_str = conda end
     end
     if env_str then
-      return status_utils.stylize(
+      return core_utils.stylize(
         opts.format and opts.format:format(env_str) or env_str,
         opts
       )
@@ -723,11 +723,11 @@ end
 --- A provider function for showing if treesitter is connected.
 ---@param opts? table options passed to the stylize function.
 ---@return function # function for outputting TS if treesitter is connected.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.treesitter_status() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.treesitter_status() }
 -- @see heirline-components.core.utils.stylize
 function M.treesitter_status(opts)
   return function()
-    return status_utils.stylize(
+    return core_utils.stylize(
       require("nvim-treesitter.parser").has_parser() and "TS" or "",
       opts
     )
@@ -737,17 +737,17 @@ end
 --- A provider function for displaying a single string.
 ---@param opts? table options passed to the stylize function.
 ---@return string # the stylized statusline string.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.str({ str = "Hello" }) }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.str({ str = "Hello" }) }
 -- @see heirline-components.core.utils.stylize
 function M.str(opts)
   opts = extend_tbl({ str = " " }, opts)
-  return status_utils.stylize(opts.str, opts)
+  return core_utils.stylize(opts.str, opts)
 end
 
 --- A provider function for displaying the compiler state.
 --- Be aware using this provider, will auto load the plugin compiler.nvim into memory.
 ---@return function # the state of the compiler.
--- @usage local heirline_component = { provider = require("heirline-components.status").provider.compiler_state() }
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.compiler_state() }
 -- @see heirline-components.core.utils.stylize
 function M.compiler_state(opts)
   local ovs
@@ -770,7 +770,7 @@ function M.compiler_state(opts)
     if tasks_by_status["RUNNING"] then state = "RUNNING"
     else state = "INACTIVE" end
 
-    return status_utils.stylize(state == "RUNNING" and (table.concat({
+    return core_utils.stylize(state == "RUNNING" and (table.concat({
           " ",
           spinner[math.floor(luv.hrtime() / 12e7) % #spinner + 1] or "",
           "compiling" or "",

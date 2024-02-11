@@ -1,7 +1,7 @@
---- ### base status environment
+--- ### Heirline environment.
 --
 -- DESCRIPTION:
--- Variables we use mostly on heirline, and gitsigns.
+-- Constants we use mostly on heirline.
 
 local M = {}
 

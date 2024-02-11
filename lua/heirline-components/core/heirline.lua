@@ -1,16 +1,15 @@
---- ### base status heirline extensions
+--- ### Heirline buffer functions.
 --
 -- DESCRIPTION:
--- Extra functionality we add to heirline we use to manage heirline.
+-- Functions to pass buffers to heirline.
 
 local M = {}
 
 local hl = require "heirline-components.core.hl"
 local provider = require "heirline-components.core.provider"
-local status_utils = require "heirline-components.core.utils"
+local core_utils = require "heirline-components.core.utils"
 
-local utils = require "heirline-components"
-local buffer_utils = require "heirline-components.buffer"
+local utils = require "heirline-components.utils"
 local get_icon = utils.get_icon
 
 --- A helper function to get the type a tab or buffer is.
@@ -33,7 +32,7 @@ end
 M.make_buflist = function(component)
   local overflow_hl = hl.get_attributes("buffer_overflow", true)
   return require("heirline.utils").make_buflist(
-    status_utils.surround(
+    core_utils.surround(
       "tab",
       function(self)
         return {
@@ -76,12 +75,12 @@ M.make_buflist = function(component)
         },
         component, -- create buffer component
       },
-      function(self) return buffer_utils.is_valid(self.bufnr) end -- disable surrounding
+      function(self) return utils.is_buf_valid(self.bufnr) end -- disable surrounding
     ),
     { provider = get_icon "ArrowLeft" .. " ", hl = overflow_hl },
     { provider = get_icon "ArrowRight" .. " ", hl = overflow_hl },
     function()
-      vim.t.bufs = vim.tbl_filter(buffer_utils.is_valid, vim.t.bufs or {})
+      vim.t.bufs = vim.tbl_filter(utils.is_buf_valid, vim.t.bufs or {})
       return vim.t.bufs
     end, -- use astronvim bufs variable
     false -- disable internal caching
