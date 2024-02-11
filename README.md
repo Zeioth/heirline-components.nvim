@@ -51,6 +51,7 @@ Currently, most of the GPL3 lua components this plugin use come from AstroNvim a
 * **How do components work?** A component as made of providers. So you can use providers to build your component. Aditionally, conditions are used to decide when a component should be displayed.
 * **What nvim version do I need?** These components have been tested on nvim `v0.9.x`.
 * **How can I avoid breaking changes?** Always use the components by importing `heirline-components.all`. That way internal changes (that will likely happen) won't affect you.
+* **Icons look weird:** Make sure you are using nerd fonts. Otherwise you can set the option `icons` to pass a collection with your own icons.
 
 ## Roadmap
 * BUXFIX: Currently icons will fail to load. Let's create a config optio so users can pass them (and let's also define defaults).
