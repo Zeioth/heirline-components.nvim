@@ -3,6 +3,9 @@ Distro agnostic components you can use in your Neovim heirline config.
 
 ![screenshot_2024-02-10_01-17-04_527153682](https://github.com/Zeioth/heirline-components.nvim/assets/3357792/5b1e8dd7-3ae2-4a45-ba79-b0efd2ae6076)
 
+This is how those heirline components look on the statusline.
+![screenshot_2024-02-11_20-55-55_224394701](https://github.com/Zeioth/heirline-components.nvim/assets/3357792/3ce6a449-4a9e-4e20-bb00-51df8e25a616)
+
 ## How to install
 Add it as a dependency of heirline
 
@@ -50,6 +53,7 @@ Currently, most of the GPL3 lua components this plugin use come from AstroNvim a
 * **How can I avoid breaking changes?** Always use the components by importing `heirline-components.all`. That way internal changes (that will likely happen) won't affect you.
 
 ## Roadmap
+* BUXFIX: Currently icons will fail to load. Let's create a config optio so users can pass them (and let's also define defaults).
 * Ensure all components are agnostic → Let's ensure there are no external dependencies left.
 * Implement an aditional component for overseer.
 * On the compiler.nvim component (which we may rebrand, or copy as overseer component), try to remove the hotfix condition that prevents overseer from displaying a error on new buffers. They might have fixed that.
