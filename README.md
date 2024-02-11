@@ -35,7 +35,7 @@ Add it as a dependency of heirline
 | treesitter | A function to build a set of children components for a Treesitter section. |
 | lsp | A function to build a set of children components for an LSP section. |
 | virtualenv | A function to get the current python virtual env |
-| compiler_state | Display an spinner while compiler.nvim is compiling. |
+| compiler_state | Display an spinner while compiler.nvim is running (overseer, actually) . |
 
 ## Available components (winbar)
 
