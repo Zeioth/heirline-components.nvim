@@ -47,7 +47,7 @@ This is a example heirline config that uses heirline-components (WIP).
 Currently, most of the GPL3 lua components this plugin use come from AstroNvim and NormalNvim. So please support both projects if you enjoy this plugin.
 
 ## FAQ
-* **How can I contribute with a component?** Go to `core.components` and create yours there. Then send a PR so everyone can benefit from your work!.
+* **How can I contribute with a component?** Clone this repo. Go to `core.components` and create yours there. Then open a PR.
 * **How do components work?** A component as made of providers. So you can use providers to build your component. Aditionally, conditions are used to decide when a component should be displayed.
 * **What nvim version do I need?** These components have been tested on nvim `v0.9.x`.
 * **How can I avoid breaking changes?** Always use the components by importing `heirline-components.all`. That way internal changes (that will likely happen) won't affect you.
