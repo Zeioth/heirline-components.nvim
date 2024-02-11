@@ -73,7 +73,6 @@ Currently, most of the GPL3 lua components this plugin use come from AstroNvim a
 * **Icons look weird:** Make sure you are using nerd fonts. Otherwise you can set the option `icons` to pass a collection with your own icons.
 
 ## Roadmap
-* BUXFIX: Currently icons will fail to load. Let's create a config optio so users can pass them (and let's also define defaults).
 * Ensure all components are agnostic → Let's ensure there are no external dependencies left.
 * Implement an aditional component for overseer.
 * On the compiler.nvim component (which we may rebrand, or copy as overseer component), try to remove the hotfix condition that prevents overseer from displaying a error on new buffers. They might have fixed that.
