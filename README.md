@@ -44,7 +44,7 @@ Add it as a dependency of heirline
 | breadcrumbs | A function to build a set of children components for an LSP breadcrumbs section. |
 
 ## Available components (tabline)
-We don't have components for this, but you can use `heirline-components.heirline` that contain helpers for this section.
+We don't have components for the tabline, but you can use `heirline-components.heirline` that contain helpers for this section.
 
 ## Available components (statuscolumn)
 
