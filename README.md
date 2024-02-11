@@ -17,7 +17,7 @@ Add it as a dependency of heirline
 }
 ```
 
-## Available components
+## Available components (statusline)
 
 | Component | Description |
 |-----------|-------------|
@@ -36,12 +36,27 @@ Add it as a dependency of heirline
 | treesitter | A function to build a set of children components for a Treesitter section. |
 | lsp | A function to build a set of children components for an LSP section. |
 | virtualenv | A function to get the current python virtual env |
-| foldcolumn | A function to build a set of components for a foldcolumn section in a statuscolumn. |
-| signcolumn | A function to build a set of components for a signcolumn section in statuscolumn. |
 | compiler_state | Display an spinner while compiler.nvim is compiling. |
 
+## Available components (winbar)
+
+| Component | Description |
+|-----------|-------------|
+| breadcrumbs | A function to build a set of children components for an LSP breadcrumbs section. |
+
+## Available components (tabline)
+We don't have components for this, but you can use `heirline-components.heirline` that contain helpers for this section.
+
+## Available components (statuscolumn)
+
+| Component | Description |
+|-----------|-------------|
+| foldcolumn | A function to build a set of components for a foldcolumn section in a statuscolumn. |
+| numbercolumn | A function to build a set of components for a numbercolumn section in statuscolumn. |
+| signcolumn | A function to build a set of components for a signcolumn section in statuscolumn. |
+
 ## Example config
-This is a example heirline config that uses heirline-components (WIP).
+You can find the example config we use for NormalNvim [here](https://github.com/NormalNvim/NormalNvim/blob/75cb58366cc7b143ee0a0ed15499feff44c4555a/lua/plugins/2-ui.lua#L276).
 
 ## (Optional) Available options
 This is not necessary, but if you want you can customize the icons used by heirline-components
