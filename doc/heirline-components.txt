@@ -1,0 +1,3 @@
+*heirline-components.txt*        Collection of agnostic components for Heirline.
+
+Help wanted to write readme.md in .txt format.
