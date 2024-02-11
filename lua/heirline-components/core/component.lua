@@ -37,6 +37,7 @@
 --      -> lsp
 --      -> virtualenv
 --      -> foldcolumn
+--      -> numbercolumn
 --      -> signcolumn
 --      -> compiler_state
 --      -> builder
