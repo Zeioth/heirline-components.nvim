@@ -43,6 +43,25 @@ Add it as a dependency of heirline
 ## Example config
 This is a example heirline config that uses heirline-components (WIP).
 
+## (Optional) Options
+This is not necessary, but if you want you can customize the icons used by heirline-components
+
+| Option | Accepted values |
+|--------|-------------|
+| icons  | A table like in [this example](https://github.com/Zeioth/heirline-components.nvim/blob/main/lua/heirline-components/config.lua). |
+
+For example:
+```
+"rebelot/heirline.nvim",
+dependencies = {
+  {
+    "Zeioth/heirline-components.nvim",
+    opts = {
+      icons = { DiagnosticError = ";D" }
+    }
+  }
+}
+```
 ## Credits
 Currently, most of the GPL3 lua components this plugin use come from AstroNvim and NormalNvim. So please support both projects if you enjoy this plugin.
 
