@@ -43,7 +43,7 @@ Add it as a dependency of heirline
 ## Example config
 This is a example heirline config that uses heirline-components (WIP).
 
-## (Optional) Options
+## (Optional) Available options
 This is not necessary, but if you want you can customize the icons used by heirline-components
 
 | Option | Accepted values |
