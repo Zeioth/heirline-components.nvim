@@ -48,10 +48,10 @@ This is not necessary, but if you want you can customize the icons used by heirl
 
 | Option | Accepted values |
 |--------|-------------|
-| icons  | A table like in [this example](https://github.com/Zeioth/heirline-components.nvim/blob/main/lua/heirline-components/config.lua). |
+| icons  | A table like in [this example](https://github.com/Zeioth/heirline-components.nvim/blob/main/lua/heirline-components/config.lua) |
 
 For example:
-```
+```lua
 "rebelot/heirline.nvim",
 dependencies = {
   {
