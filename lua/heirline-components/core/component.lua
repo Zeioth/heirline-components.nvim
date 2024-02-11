@@ -576,7 +576,7 @@ function M.signcolumn(opts)
   return M.builder(core_utils.setup_providers(opts, { "signcolumn" }))
 end
 
---- Display an spinner while the compiler.nvim is compiling.
+--- Display a spinner while the compiler.nvim is compiling.
 ---@param opts? table options for configuring compiler_state and the overall padding.
 ---@return table # The Heirline component table.
 -- @usage local heirline_component = require("heirline-components.core").component.compiler_state()
