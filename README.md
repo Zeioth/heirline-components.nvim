@@ -18,25 +18,24 @@ Add it as a dependency of heirline
 
 | Component | Description |
 |-----------|-------------|
-| fill   |  |
-| file_info |  |
-| file_encoding |  |
-| tabline_file_info |  |
-| nav |  |
-| cmd_info |  |
-| mode |  |
-| breadcrumbs |  |
-| separated_path |  |
-| git_branch |  |
-| git_diff |  |
-| diagnostics |  |
-| treesitter |  |
-| lsp |  |
-| virtualenv |  |
-| foldcolumn |  |
-| signcolumn |  |
-| compiler_state |  |
-| builder |  |
+| fill | A Heirline component for filling in the empty space of the bar. |
+| file_info | A function to build a set of children components for an entire file information section. |
+| file_encoding | Displays operative system and file encoding. |
+| tabline_file_info | A function with different file_info defaults specifically for use in the tabline |
+| nav | A function to build a set of children components for an entire navigation section |
+| cmd_info | A function to build a set of children components for information shown in the cmdline. |
+| mode | A function to build a set of children components for a mode section. |
+| breadcrumbs | A function to build a set of children components for an LSP breadcrumbs section. |
+| separated_path | A function to build a set of children components for the current file path. |
+| git_branch | A function to build a set of children components for a git branch section. |
+| git_diff | A function to build a set of children components for a git difference section. |
+| diagnostics | A function to build a set of children components for a diagnostics section. |
+| treesitter | A function to build a set of children components for a Treesitter section. |
+| lsp | A function to build a set of children components for an LSP section. |
+| virtualenv | A function to get the current python virtual env |
+| foldcolumn | A function to build a set of components for a foldcolumn section in a statuscolumn. |
+| signcolumn | A function to build a set of components for a signcolumn section in statuscolumn. |
+| compiler_state | Display an spinner while compiler.nvim is compiling. |
 
 ## Example config
 This is a example heirline config that uses heirline-components (WIP).
