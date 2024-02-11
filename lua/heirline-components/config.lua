@@ -3,8 +3,10 @@
 local M = {}
 
 ---Parse user options, or set the defaults
----@param opts table A table with options to set.
+---@param opts table|nil A table with options to set.
 function M.set(opts)
+  if opts == nil then opts = {} end
+
   M.icons = opts.icons or {
     ActiveLSP = "",
     ActiveTS = "",
