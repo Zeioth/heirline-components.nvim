@@ -75,6 +75,5 @@ Currently, most of the GPL3 lua components this plugin use come from AstroNvim a
 
 
 ## Roadmap
-* Ensure all components are agnostic → Let's ensure there are no external dependencies left.
 * Implement an aditional component for overseer.
 * On the compiler.nvim component (which we may rebrand, or copy as overseer component), try to remove the hotfix condition that prevents overseer from displaying a error on new buffers. They might have fixed that.
