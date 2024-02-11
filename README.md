@@ -28,7 +28,6 @@ Add it as a dependency of heirline
 | nav | A function to build a set of children components for an entire navigation section |
 | cmd_info | A function to build a set of children components for information shown in the cmdline. |
 | mode | A function to build a set of children components for a mode section. |
-| breadcrumbs | A function to build a set of children components for an LSP breadcrumbs section. |
 | separated_path | A function to build a set of children components for the current file path. |
 | git_branch | A function to build a set of children components for a git branch section. |
 | git_diff | A function to build a set of children components for a git difference section. |
