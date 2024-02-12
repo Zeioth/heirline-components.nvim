@@ -6,6 +6,12 @@ Distro agnostic components you can use in your Neovim heirline config.
 This is how those heirline components look on the statusline.
 ![screenshot_2024-02-11_20-55-55_224394701](https://github.com/Zeioth/heirline-components.nvim/assets/3357792/3ce6a449-4a9e-4e20-bb00-51df8e25a616)
 
+<div align="center">
+  <a href="https://discord.gg/ymcMaSnq7d" rel="nofollow">
+      <img src="https://img.shields.io/discord/1121138836525813760?color=azure&labelColor=6DC2A4&logo=discord&logoColor=black&label=Join the discord server&style=for-the-badge" data-canonical-src="https://img.shields.io/discord/1121138836525813760">
+    </a>
+</div>
+
 ## How to install
 Add it as a dependency of heirline
 
