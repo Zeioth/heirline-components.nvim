@@ -19,7 +19,18 @@ Add it as a dependency of heirline
 {
   "rebelot/heirline.nvim",
   dependencies = { "Zeioth/heirline-components.nvim" },
-  opts = {}
+  opts = {},
+    config = function(_, opts)
+      local heirline = require "heirline"
+      local lib = require "heirline-components.all"
+
+      -- Heirline-componets events
+      lib.init.subscribe_to_events()
+
+      -- Heirline colors
+      heirline.load_colors(lib.hl.get_colors())
+      heirline.setup(opts)
+    end,
 }
 ```
 
@@ -49,6 +60,7 @@ Add it as a dependency of heirline
 
 | Component | Description |
 |-----------|-------------|
+| breadcrumbs_when_inactive | A function to build an alternative breadcrumbs component when the window is inactive. |
 | breadcrumbs | A function to build a set of children components for an LSP breadcrumbs section. |
 
 ## Available components (tabline)
