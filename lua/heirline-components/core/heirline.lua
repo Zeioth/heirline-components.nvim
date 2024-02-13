@@ -26,7 +26,7 @@ function M.tab_type(self, prefix)
   return (prefix or "buffer") .. tab_type
 end
 
---- Make a list of buffers, rendering each buffer with the provided component.
+--- Make a list of buffers, and create a component per buffer.
 ---@param component table
 ---@return table
 M.make_buflist = function(component)
@@ -82,7 +82,7 @@ M.make_buflist = function(component)
     function()
       vim.t.bufs = vim.tbl_filter(utils.is_buf_valid, vim.t.bufs or {})
       return vim.t.bufs
-    end, -- use astronvim bufs variable
+    end,
     false -- disable internal caching
   )
 end

@@ -212,4 +212,61 @@ function M.update_events(opts)
   end
 end
 
+--- An `init` function to be called in the 'config' section of heirline
+--- to subscribe to the events necessary for our components to work as expected.
+-- @usage local heirline_component = { init = require("heirline-components.core").init.subscribe_to_events()
+function M.subscribe_to_events()
+  -- 1. Apply colors defined above to heirline after applying a theme
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    desc = "Refresh heirline colors",
+    callback = function()
+      require("heirline.utils").on_colorscheme(lib.hl.get_colors())
+    end,
+  })
+
+  -- 2. Update tabs when adding new buffers
+  vim.api.nvim_create_autocmd({ "BufAdd", "BufEnter", "TabNewEntered" }, {
+    desc = "Update buffers when adding new buffers",
+    callback = function(args)
+      if not vim.t.bufs then vim.t.bufs = {} end
+      if not utils.is_buf_valid(args.buf) then return end
+      if args.buf ~= utils.current_buf then
+        utils.last_buf = utils.current_buf
+        utils.current_buf = args.buf
+      end
+      local bufs = vim.t.bufs
+      if not vim.tbl_contains(bufs, args.buf) then
+        table.insert(bufs, args.buf)
+        vim.t.bufs = bufs
+      end
+      vim.t.bufs = vim.tbl_filter(utils.is_buf_valid, vim.t.bufs)
+      utils.trigger_event "BufsUpdated"
+    end,
+  })
+
+  -- 3. Update tabs when deleting buffers
+  vim.api.nvim_create_autocmd("BufDelete", {
+    desc = "Update buffers when deleting buffers",
+    callback = function(args)
+      local removed
+      for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
+        local bufs = vim.t[tab].bufs
+        if bufs then
+          for i, bufnr in ipairs(bufs) do
+            if bufnr == args.buf then
+              removed = true
+              table.remove(bufs, i)
+              vim.t[tab].bufs = bufs
+              break
+            end
+          end
+        end
+      end
+      vim.t.bufs = vim.tbl_filter(require("base.utils.buffer").is_buf_valid, vim.t.bufs)
+      if removed then utils.trigger_event "BufsUpdated" end
+      vim.cmd.redrawtabline()
+    end,
+  })
+end
+
 return M

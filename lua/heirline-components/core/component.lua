@@ -24,11 +24,14 @@
 --      -> fill
 --      -> file_info
 --      -> file_encoding
+--      -> tabline_conditional_padding
 --      -> tabline_file_info
+--      -> tabline_tabpages
 --      -> nav
 --      -> cmd_info
 --      -> mode
 --      -> breadcrumbs
+--      -> breadcrumbs_when_inactive
 --      -> separated_path
 --      -> git_branch
 --      -> git_diff
@@ -49,6 +52,7 @@ local env = require "heirline-components.core.env"
 local hl = require "heirline-components.core.hl"
 local init = require "heirline-components.core.init"
 local provider = require "heirline-components.core.provider"
+local heirline = require "heirline-components.core.heirline"
 local core_utils = require "heirline-components.core.utils"
 
 local utils = require "heirline-components.utils"
@@ -126,6 +130,34 @@ function M.file_encoding(opts)
   }))
 end
 
+--- A function to add padding to the tabine under certain conditions.
+--- The amount of padding is defined by the provider, which by default
+--- is self-caltulated based on the opened panel.
+---@param opts? table Such as: `{ pattern = { filetype = { "", ... }, buftype = { "", ... } } }`
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.tabline_conditional_padding()
+function M.tabline_conditional_padding(opts)
+  return extend_tbl({
+    -- If it returns 1 or more, add padding. If return false, don't.
+    condition = function(self)
+      self.winid = vim.api.nvim_tabpage_list_wins(0)[1]
+      local pattern = (opts and opts.pattern) or {
+        filetype = { "aerial", "dapui_.", "dap%-repl", "neo%-tree", "NvimTree", "edgy" },
+        buftype = {}
+      }
+      return condition.buffer_matches(
+        pattern,
+        vim.api.nvim_win_get_buf(self.winid)
+      )
+    end,
+    -- Amount of padding is self-caltulated based on the opened panel.
+    provider = function(self)
+      return string.rep(" ", vim.api.nvim_win_get_width(self.winid) + 1)
+    end,
+    hl = { bg = "tabline_bg" },
+  }, opts)
+end
+
 --- A function with different file_info defaults specifically for use in the tabline
 ---@param opts? table options for configuring file_icon, filename, filetype,
 ---                   file_modified, file_read_only, and the overall padding.
@@ -150,7 +182,7 @@ function M.tabline_file_info(opts)
       hl = function(self) return hl.get_attributes(self.tab_type .. "_close") end,
       padding = { left = 1, right = 1 },
       on_click = {
-        callback = function(_, minwid) utils.close(minwid) end,
+        callback = function(_, minwid) utils.close_buf(minwid) end,
         minwid = function(self) return self.bufnr end,
         name = "heirline_tabline_close_buffer_callback",
       },
@@ -165,6 +197,35 @@ function M.tabline_file_info(opts)
     end,
     surround = false,
   }, opts))
+end
+
+--- A function to build a visual component to display the available tabpages.
+---@param opts? table Options for configuring the component.
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.tabline_tabpages()
+function M.tabline_tabpages(opts)
+  return extend_tbl({      -- tab list
+    condition = function() -- display if more than 1 tab.
+      return #vim.api.nvim_list_tabpages() > 1
+    end,
+    heirline.make_tablist { -- create 1 component per tab.
+      provider = provider.tabnr(),
+      hl = function(self)
+        return hl.get_attributes(heirline.tab_type(self, "tab"), true)
+      end,
+    },
+    { -- close button for current tab
+      provider = provider.close_button {
+        kind = "TabClose",
+        padding = { left = 1, right = 1 },
+      },
+      hl = hl.get_attributes("tab_close", true),
+      on_click = {
+        callback = function() require("base.utils.buffer").close_tab() end,
+        name = "heirline_tabline_close_tab_callback",
+      },
+    },
+  }, opts)
 end
 
 --- A function to build a set of children components for an entire navigation section
@@ -274,6 +335,31 @@ function M.breadcrumbs(opts)
     update = "CursorMoved",
   }, opts)
   opts.init = init.breadcrumbs(opts)
+  return opts
+end
+
+--- This is a alternative version of the breadcrumbs component to show when the window is inactive.
+--- In order to work it must be the first component passed to `opts.winbar`.
+---@param opts? table options for configuring breadcrumbs and the overall padding.
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.breadcrumbs_when_inactive()
+function M.breadcrumbs_when_inactive(opts)
+  opts = extend_tbl(          {
+    condition = function()
+      -- don't show on inactive windows.
+      local is_win_not_currently_active = not condition.is_active()
+      return is_win_not_currently_active
+    end,
+    M.separated_path(),
+    M.file_info {
+      file_icon = { hl = hl.file_icon "winbar", padding = { left = 0 } },
+      file_modified = false,
+      file_read_only = false,
+      hl = hl.get_attributes("winbarnc", true),
+      surround = false,
+      update = "BufEnter",
+    },
+  }, opts)
   return opts
 end
 
