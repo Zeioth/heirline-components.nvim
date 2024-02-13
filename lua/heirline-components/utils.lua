@@ -8,6 +8,7 @@
 --      -> event                 → Triggers the specified user event.
 --      -> is_buf_valid          → Check if a buffer is valid.
 --      -> close_buf             → Closes the specified buffer.
+--      -> close_buf             → Closes the current tab.
 
 local M = {}
 
@@ -111,6 +112,15 @@ function M.close_buf(bufnr, force)
   else
     local buftype = vim.api.nvim_get_option_value("buftype", { buf = bufnr })
     vim.cmd(("silent! %s %d"):format((force or buftype == "terminal") and "bdelete!" or "confirm bdelete", bufnr))
+  end
+end
+
+--- Close the current tab.
+function M.close_tab()
+  if #vim.api.nvim_list_tabpages() > 1 then
+    vim.t.bufs = nil
+    M.trigger_event "BufsUpdated"
+    vim.cmd.tabclose()
   end
 end
 

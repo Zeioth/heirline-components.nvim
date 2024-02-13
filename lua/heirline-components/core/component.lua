@@ -221,7 +221,7 @@ function M.tabline_tabpages(opts)
       },
       hl = hl.get_attributes("tab_close", true),
       on_click = {
-        callback = function() require("base.utils.buffer").close_tab() end,
+        callback = function() utils.close_tab() end,
         name = "heirline_tabline_close_tab_callback",
       },
     },

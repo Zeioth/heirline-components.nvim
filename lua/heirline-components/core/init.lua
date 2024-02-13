@@ -40,7 +40,7 @@ function M.breadcrumbs(opts)
         table.insert(
           children,
           {
-            provider = require("base.utils").get_icon "Ellipsis"
+            provider = utils.get_icon "Ellipsis"
                 .. opts.separator,
           }
         )
@@ -140,7 +140,7 @@ function M.separated_path(opts)
         table.insert(
           children,
           {
-            provider = require("base.utils").get_icon "Ellipsis"
+            provider = utils.get_icon "Ellipsis"
                 .. opts.separator,
           }
         )
@@ -262,7 +262,7 @@ function M.subscribe_to_events()
           end
         end
       end
-      vim.t.bufs = vim.tbl_filter(require("base.utils.buffer").is_buf_valid, vim.t.bufs)
+      vim.t.bufs = vim.tbl_filter(utils.is_buf_valid, vim.t.bufs)
       if removed then utils.trigger_event "BufsUpdated" end
       vim.cmd.redrawtabline()
     end,
