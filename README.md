@@ -118,6 +118,6 @@ If you want to help me, please star this repository to increase the visibility o
 ## Roadmap
 * wip for `v0.3.0`: new component `tabline_buffers` so we can use it directly.
 * wip `v0.3.0`: new option `opts.colors` to pass the colors used by the components.
-* idea: Maybe there is some way we can automatically define events and colors when loading heirline-components, so the user is not obligated to define `config` in lazy.
+* idea: Maybe there is some way we can automatically do the things we are currently doing in `config` in lazy, so users can further simplify their configs.
 * idea: Consider making every component a different file. → Every file is loaded by core.component so we don't get breaking changes.
 * idea: Consider adding hyperlinks to the readme, so users can quickly navigate the code of every component, as we did in compiler.nivm → This should greatly increate user participation.
