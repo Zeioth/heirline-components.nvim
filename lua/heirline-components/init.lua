@@ -9,8 +9,6 @@ local config = require "heirline-components.config"
 
 M.setup = function(opts)
   config.set(opts)
-  require("heirline-components.all").init.subscribe_to_events()
-
 end
 
 return M
