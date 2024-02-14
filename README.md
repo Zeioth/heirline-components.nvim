@@ -116,7 +116,7 @@ If you want to help me, please star this repository to increase the visibility o
 [![Stargazers over time](https://starchart.cc/Zeioth/heirline-components.nvim.svg)](https://starchart.cc/Zeioth/heirline-components.nvim)
 
 ## Roadmap
-* wip: new component `tabline_buffers` so we can use it directly.
-* wip: new option `opts.colors` to pass the colors used by the components.
+* wip for `v0.3.0`: new component `tabline_buffers` so we can use it directly.
+* wip `v0.3.0`: new option `opts.colors` to pass the colors used by the components.
 * idea: Consider making every component a different file. → Every file is loaded by core.component so we don't get breaking changes.
 * idea: Consider adding hyperlinks to the readme, so users can quickly navigate the code of every component, as we did in compiler.nivm → This should greatly increate user participation.
