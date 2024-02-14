@@ -123,4 +123,4 @@ If you want to help me, please star this repository to increase the visibility o
 
 ## Known Bugs
 * lsp progress indicator still depend on NormalNvim. → Look for base.
-* The git branch component don't automatically update at startup for the filetype `.ld` (why?).
+* The git branch component don't automatically update at startup for undetected filetypes when opened through Telescope recent files until the cursor moves (why?).
