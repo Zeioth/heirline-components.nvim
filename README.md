@@ -107,3 +107,15 @@ Currently, most of the GPL3 lua components this plugin use come from AstroNvim a
 * **How can I avoid breaking changes?** Always use the components by importing `heirline-components.all`. That way internal changes won't affect you. If you wanna be extra sure, you can also lock the plugin version in your package manager to avoid getting updates.
 * **Icons look weird:** Make sure you are using nerd fonts. Otherwise you can set the option `icons` to pass a table with your own icons. Chech [here](https://github.com/Zeioth/heirline-components.nvim/blob/main/lua/heirline-components/config.lua).
 * **I've found a bug!** Please [report it](https://github.com/Zeioth/heirline-components.nvim/issues) so I can fix it, and make sure you send a screenshot. 
+
+## 🌟 Support the project
+If you want to help me, please star this repository to increase the visibility of the project.
+
+[![Stargazers over time](https://starchart.cc/Zeioth/Compiler.nvim.svg)](https://starchart.cc/Zeioth/heirline-components.nvim)
+
+
+## Thanks to all contributors
+
+<a href="https://github.com/zeioth/heirline-components.nvim/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=zeioth/heirline-components.nvim" />
+</a>
