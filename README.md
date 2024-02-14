@@ -35,7 +35,7 @@ Add it as a dependency of heirline
 }
 ```
 
-## Available components (statusline)
+## Statusline components
 
 | Component | Description |
 |-----------|-------------|
@@ -54,14 +54,14 @@ Add it as a dependency of heirline
 | virtualenv | A function to get the current python virtual env |
 | compiler_state | Display a spinner while [compiler.nvim](https://github.com/Zeioth/compiler.nvim) is running. This component is also compatible with [overseer](https://github.com/stevearc/overseer.nvim). |
 
-## Available components (winbar)
+## Winbar components
 
 | Component | Description |
 |-----------|-------------|
 | breadcrumbs_when_inactive | A function to build an alternative breadcrumbs component when the window is inactive. |
 | breadcrumbs | A function to build a set of children components for an LSP breadcrumbs section. |
 
-## Available components (tabline)
+## Tabline components
 
 | Component | Description |
 |-----------|-------------|
@@ -69,7 +69,7 @@ Add it as a dependency of heirline
 | tabline_buffers | A function to build a visual component to display the available listed buffers of the current tab. |
 | tabline_tabpages | A function to build a visual component to display the available tabpages. |
 
-## Available components (statuscolumn)
+## Statuscolumn components
 
 | Component | Description |
 |-----------|-------------|
