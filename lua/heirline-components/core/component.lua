@@ -133,7 +133,7 @@ end
 --- A function to add padding to the tabine under certain conditions.
 --- The amount of padding is defined by the provider, which by default
 --- is self-caltulated based on the opened panel.
----@param opts? table Such as: `{ pattern = { filetype = { "", ... }, buftype = { "", ... } } }`
+---@param opts? table Condition to apply padding. Such as: `{ pattern = { filetype = { "", ... }, buftype = { "", ... } } }`
 ---@return table # The Heirline component table.
 -- @usage local heirline_component = require("heirline-components.core").component.tabline_conditional_padding()
 function M.tabline_conditional_padding(opts)
@@ -293,10 +293,13 @@ function M.cmd_info(opts)
   )
 end
 
---- A function to build a set of children components for a mode section.
+---A function to build a set of children components for a mode section.
+---
+---HINT: You can enable text as in classic vim with the usage example below:
 ---@param opts? table options for configuring mode_text, paste, spell, and the overall padding.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.core").component.mode { mode_text = true }
+-- @usage local heirline_component = require("heirline-components.core").component.mode() -- color only
+-- @usage local heirline_component = require("heirline-components.core").component.mode({ mode_text = { "center" } }) -- color + text enabled
 function M.mode(opts)
   opts = extend_tbl({
     mode_text = false,
