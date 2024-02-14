@@ -5,6 +5,7 @@
 
 local M = {}
 local env = require "heirline-components.core.env"
+local config = vim.g.heirline_components_config
 
 --- Get the highlight background color of the lualine theme for the current colorscheme.
 ---@param mode string the neovim mode to get the color of.
@@ -101,7 +102,16 @@ end
 
 --- This function return a list of colors that can be passed to `heirline.load_colors()`
 function M.get_colors()
-  local C = require("heirline-components.core.env").fallback_colors
+
+  -- priority: config.colors > current colorscheme > env.fallback_colors
+  local override_colors = false
+  local C = nil
+  if config.colors then
+    C = config.colors
+    override_colors = true
+  else
+    C = env.fallback_colors
+  end
 
   -- Get hlgroups
   local Normal = M.get_hlgroup("Normal", { fg = C.fg, bg = C.bg })
@@ -224,10 +234,10 @@ function M.get_colors()
     "nav",
     "virtual_env",
   } do
-    if not colors[section .. "_bg"] then
+    if override_colors or not colors[section .. "_bg"] then
       colors[section .. "_bg"] = colors["section_bg"]
     end
-    if not colors[section .. "_fg"] then
+    if override_colors or not colors[section .. "_fg"] then
       colors[section .. "_fg"] = colors["section_fg"]
     end
   end

@@ -1,13 +1,16 @@
 --- ### Heirline-components plugin options.
 
 local M = {}
+local extend_tbl = require("heirline-components.utils").extend_tbl
 
 ---Parse user options, or set the defaults
 ---@param opts table|nil A table with options to set.
 function M.set(opts)
   if opts == nil then opts = {} end
 
-  M.icons = opts.icons or {
+  --- By default we use nerd icons. But you can specify your own icons.
+  --- If you only define one icon, defaults will be used for the rest.
+  M.icons =  extend_tbl({
     ActiveLSP = "",
     ActiveTS = "",
     ArrowLeft = "",
@@ -70,27 +73,15 @@ function M.set(opts)
     WordFile = "󰈭",
     Test = "󰙨",
     Docs = "",
-  }
+  }, opts.icons)
 
-  M.colors = opts.colors or {
-    none = "NONE",
-    fg = "#abb2bf",
-    bg = "#1e222a",
-    dark_bg = "#2c323c",
-    blue = "#61afef",
-    green = "#98c379",
-    grey = "#5c6370",
-    bright_grey = "#777d86",
-    dark_grey = "#5c5c5c",
-    orange = "#ff9640",
-    purple = "#c678dd",
-    bright_purple = "#a9a1e1",
-    red = "#e06c75",
-    bright_red = "#ec5f67",
-    white = "#c9c9c9",
-    yellow = "#e5c07b",
-    bright_yellow = "#ebae34",
-  }
+
+  --- Table of colors that will be used as defaults for all components.
+  --- Be aware if you define one, you must specify all of them.
+  ---
+  --- Priority:
+  --- user defined > colorscheme → fallback_colors
+  M.colors = opts.colors or nil
 
   -- expose the config as global
   vim.g.heirline_components_config = M
