@@ -12,6 +12,9 @@ This is how the components above look on the statusline.
     </a>
 </div>
 
+## Why
+Heirline is a engine to create your own Neovim user interface. This comes at a price though: increased complexity. To avoid that problem, I've decided to compile this collection of components you can fork and modify. That way you have a safe and well tested starting point to hopefuly save you a lot of time.
+
 ## How to install
 Add it as a dependency of heirline
 
