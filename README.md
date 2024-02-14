@@ -112,10 +112,3 @@ Currently, most of the GPL3 lua components this plugin use come from AstroNvim a
 If you want to help me, please star this repository to increase the visibility of the project.
 
 [![Stargazers over time](https://starchart.cc/Zeioth/Compiler.nvim.svg)](https://starchart.cc/Zeioth/heirline-components.nvim)
-
-
-## Thanks to all contributors
-
-<a href="https://github.com/zeioth/heirline-components.nvim/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=zeioth/heirline-components.nvim" />
-</a>
