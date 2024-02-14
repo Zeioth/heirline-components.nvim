@@ -4,7 +4,7 @@ Distro agnostic components you can use in your Neovim heirline config.
 ![screenshot_2024-02-14_00-54-13_735661835](https://github.com/Zeioth/heirline-components.nvim/assets/3357792/f6d732f9-48b4-46e7-a15d-9fc03c68d434)
 
 This is how the components above look on the statusline.
-![screenshot_2024-02-14_00-54-54_383307921](https://github.com/Zeioth/heirline-components.nvim/assets/3357792/5f61572f-4f92-418e-8d67-cb5d7937b388)
+![screenshot_2024-02-14_20-37-46_332356599](https://github.com/Zeioth/heirline-components.nvim/assets/3357792/c478a48a-bfb8-4fa4-8d6e-2dedaeb8190e)
 
 <div align="center">
   <a href="https://discord.gg/ymcMaSnq7d" rel="nofollow">
