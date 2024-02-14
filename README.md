@@ -49,7 +49,7 @@ Add it as a dependency of heirline
 | treesitter | A function to build a set of children components for a Treesitter section. |
 | lsp | A function to build a set of children components for an LSP section. `Warning`: This component only works out of the box on NormalNvim because it requires you add some logic to `lsp` and `lspconfig`. Click the component name to learn how to do it, or add the plugin [noice.nvim](https://github.com/folke/noice.nvim) as drop-in replacement for this component. |
 | virtualenv | A function to get the current python virtual env |
-| compiler_state | Display a spinner while [compiler.nvim](https://github.com/Zeioth/compiler.nvim) is running ([overseer](https://github.com/stevearc/overseer.nvim), actually) . |
+| compiler_state | Display a spinner while [compiler.nvim](https://github.com/Zeioth/compiler.nvim) is running. This component is also compatible with [overseer](https://github.com/stevearc/overseer.nvim). |
 
 ## Available components (winbar)
 
