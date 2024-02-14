@@ -25,7 +25,7 @@
 --      -> file_info
 --      -> file_encoding
 --      -> tabline_conditional_padding
---      -> tabline_file_info
+--      -> tabline_buffers
 --      -> tabline_tabpages
 --      -> nav
 --      -> cmd_info
@@ -158,13 +158,42 @@ function M.tabline_conditional_padding(opts)
   }, opts)
 end
 
---- A function with different file_info defaults specifically for use in the tabline
----@param opts? table options for configuring file_icon, filename, filetype,
----                   file_modified, file_read_only, and the overall padding.
+--- A function to build a visual component to display the available tabpages.
+---@param opts? table Options for configuring the component.
 ---@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.core").component.tabline_file_info()
-function M.tabline_file_info(opts)
-  return M.file_info(extend_tbl({
+-- @usage local heirline_component = require("heirline-components.core").component.tabline_tabpages()
+function M.tabline_tabpages(opts)
+  return extend_tbl({      -- tab list
+    condition = function() -- display if more than 1 tab.
+      return #vim.api.nvim_list_tabpages() > 1
+    end,
+    heirline.make_tablist { -- create 1 component per tab.
+      provider = provider.tabnr(),
+      hl = function(self)
+        return hl.get_attributes(heirline.tab_type(self, "tab"), true)
+      end,
+    },
+    { -- close button for current tab
+      provider = provider.close_button {
+        kind = "TabClose",
+        padding = { left = 1, right = 1 },
+      },
+      hl = hl.get_attributes("tab_close", true),
+      on_click = {
+        callback = function() utils.close_tab() end,
+        name = "heirline_tabline_close_tab_callback",
+      },
+    },
+  }, opts)
+end
+
+--- A function to build a visual component to display
+--- the available listed buffers of the current tab.
+---@param opts? table Options for configuring every individual tabline_file_info() component that form part of this component.
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.tabline_buffers()
+function M.tabline_buffers(opts)
+  return heirline.make_buflist(M.file_info(extend_tbl({
     file_icon = {
       condition = function(self) return not self._show_picker end,
       hl = hl.file_icon "tabline",
@@ -196,36 +225,7 @@ function M.tabline_file_info(opts)
       return hl.get_attributes(tab_type)
     end,
     surround = false,
-  }, opts))
-end
-
---- A function to build a visual component to display the available tabpages.
----@param opts? table Options for configuring the component.
----@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.core").component.tabline_tabpages()
-function M.tabline_tabpages(opts)
-  return extend_tbl({      -- tab list
-    condition = function() -- display if more than 1 tab.
-      return #vim.api.nvim_list_tabpages() > 1
-    end,
-    heirline.make_tablist { -- create 1 component per tab.
-      provider = provider.tabnr(),
-      hl = function(self)
-        return hl.get_attributes(heirline.tab_type(self, "tab"), true)
-      end,
-    },
-    { -- close button for current tab
-      provider = provider.close_button {
-        kind = "TabClose",
-        padding = { left = 1, right = 1 },
-      },
-      hl = hl.get_attributes("tab_close", true),
-      on_click = {
-        callback = function() utils.close_tab() end,
-        name = "heirline_tabline_close_tab_callback",
-      },
-    },
-  }, opts)
+  }, opts)))
 end
 
 --- A function to build a set of children components for an entire navigation section
@@ -655,7 +655,7 @@ function M.signcolumn(opts)
         then
           env.sign_handlers[args.sign.name](args)
         end
-        vim.cmd(":Gitsigns preview_hunk") -- Show hunk on click
+          vim.cmd(":silent! Gitsigns preview_hunk") -- Show hunk on click
       end,
     },
   }, opts)
