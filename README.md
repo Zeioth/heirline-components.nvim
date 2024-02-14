@@ -78,7 +78,7 @@ Add it as a dependency of heirline
 You can find the example config we use for NormalNvim [here](https://github.com/NormalNvim/NormalNvim/blob/75cb58366cc7b143ee0a0ed15499feff44c4555a/lua/plugins/2-ui.lua#L276).
 
 ## (Optional) Available options
-This is not necessary, but if you want you can customize the icons used by heirline-components
+Be aware this opts are for `heirline-components`, not for `heirline`.
 
 | Option | Description | Accepted values |
 |--------|-------------|-----------------|
