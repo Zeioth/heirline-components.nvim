@@ -77,7 +77,8 @@ function M.set(opts)
 
 
   --- Table of colors that will be used as defaults for all components.
-  --- Be aware if you define one, you must specify all of them.
+  --- Be aware if you define the table, you must specify all colors.
+  --- Otherwise ugly fallback colors  will be used instead.
   ---
   --- Priority:
   --- user defined > colorscheme → fallback_colors

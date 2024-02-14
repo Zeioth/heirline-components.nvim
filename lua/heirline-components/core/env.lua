@@ -5,8 +5,9 @@
 
 local M = {}
 local config = vim.g.heirline_components_config
+local extend_tbl = require "heirline-components.utils".extend_tbl
 
-M.fallback_colors = config.colors or {
+M.fallback_colors = extend_tbl({
   none = "NONE",
   fg = "#abb2bf",
   bg = "#1e222a",
@@ -24,7 +25,7 @@ M.fallback_colors = config.colors or {
   white = "#c9c9c9",
   yellow = "#e5c07b",
   bright_yellow = "#ebae34",
-}
+}, config.colors)
 
 M.modes = {
   ["n"] = { "NORMAL", "normal" },
