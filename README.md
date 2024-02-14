@@ -47,7 +47,7 @@ Add it as a dependency of heirline
 | git_diff | A function to build a set of children components for a git difference section. |
 | diagnostics | A function to build a set of children components for a diagnostics section. |
 | treesitter | A function to build a set of children components for a Treesitter section. |
-| lsp | A function to build a set of children components for an LSP section. `Warning`: This component only works out of the box for NormalNvim, as it requires some logic to be added to `lspconfig`. Click the component name to learn how to do it (which is difficult), or add the plugin [noice.nvim](https://github.com/folke/noice.nvim) as drop-in replacement for this. |
+| lsp | A function to build a set of children components for an LSP section. `Warning`: This component only works out of the box for NormalNvim, as it requires some logic to be added to `lspconfig`. Click the component name to learn how to do it (which is difficult), or add the plugin [noice.nvim](https://github.com/folke/noice.nvim) as drop-in replacement for this component. |
 | virtualenv | A function to get the current python virtual env |
 | compiler_state | Display a spinner while [compiler.nvim](https://github.com/Zeioth/compiler.nvim) is running ([overseer](https://github.com/stevearc/overseer.nvim), actually) . |
 
