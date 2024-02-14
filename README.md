@@ -82,8 +82,8 @@ This is not necessary, but if you want you can customize the icons used by heirl
 
 | Option | Description | Accepted values |
 |--------|-------------|-----------------|
-| icons  | To use instead of the default nerd fonts we use. Useful in case your icons don't render correctly. | A table like in [this example](https://github.com/Zeioth/heirline-components.nvim/blob/main/lua/heirline-components/config.lua) |
-| colors  | To use instead of the default colors of your Neovim colorscheme. | A table of colors. Be aware if you define the table, you must specify all colors. Otherwise ugly fallback colors will be used instead. |
+| icons  | To use instead of the default nerd fonts we use. Useful in case your icons don't render correctly. | A table of icons [like this](https://github.com/Zeioth/heirline-components.nvim/wiki/icons). |
+| colors  | To use instead of the default colors of your Neovim colorscheme. | A table of colors [like in this](https://github.com/Zeioth/heirline-components.nvim/wiki/icons). Be aware if you define the table, you must specify all colors. Otherwise ugly fallback colors will be used instead. |
 
 For example:
 ```lua
