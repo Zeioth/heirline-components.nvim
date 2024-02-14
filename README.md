@@ -22,13 +22,11 @@ Add it as a dependency of heirline
   opts = {},
     config = function(_, opts)
       local heirline = require "heirline"
-      local lib = require "heirline-components.all"
+      local heirline_components = require "heirline-components.all"
 
-      -- Heirline-componets events
-      lib.init.subscribe_to_events()
-
-      -- Heirline colors
-      heirline.load_colors(lib.hl.get_colors())
+      -- Setup
+      heirline_components.init.subscribe_to_events()
+      heirline.load_colors(heirline_components.hl.get_colors())
       heirline.setup(opts)
     end,
 }
