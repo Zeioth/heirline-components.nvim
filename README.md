@@ -47,7 +47,7 @@ Add it as a dependency of heirline
 | git_diff | A function to build a set of children components for a git difference section. |
 | diagnostics | A function to build a set of children components for a diagnostics section. |
 | treesitter | A function to build a set of children components for a Treesitter section. |
-| lsp | A function to build a set of children components for an LSP section. |
+| lsp | A function to build a set of children components for an LSP section. `Warning`: This component only works out of the box for NormalNvim, as it requires some logic to be added to `lspconfig`. Click the component name to learn how to do it (which is difficult), or add the plugin [noice.nvim](https://github.com/folke/noice.nvim) as drop-in replacement for this. |
 | virtualenv | A function to get the current python virtual env |
 | compiler_state | Display a spinner while [compiler.nvim](https://github.com/Zeioth/compiler.nvim) is running ([overseer](https://github.com/stevearc/overseer.nvim), actually) . |
 
@@ -119,8 +119,3 @@ If you want to help me, please star this repository to increase the visibility o
 * ~~wip `v0.3.0`: new option `opts.colors` to pass the colors used by the components.~~
 * idea: Consider making every component a different file. → Every file is loaded by core.component so we don't get breaking changes.
 * idea: Consider adding hyperlinks to the readme, so users can quickly navigate the code of every component, as we did in compiler.nivm → This should greatly increate user participation.
-
-
-## Known Bugs
-* lsp progress indicator still depend on NormalNvim. → Look for base.
-* The git branch component don't automatically update at startup for undetected filetypes when opened through Telescope recent files until the cursor moves (why?).
