@@ -119,3 +119,8 @@ If you want to help me, please star this repository to increase the visibility o
 * ~~wip `v0.3.0`: new option `opts.colors` to pass the colors used by the components.~~
 * idea: Consider making every component a different file. → Every file is loaded by core.component so we don't get breaking changes.
 * idea: Consider adding hyperlinks to the readme, so users can quickly navigate the code of every component, as we did in compiler.nivm → This should greatly increate user participation.
+
+
+## Known Bugs
+* lsp progress indicator still depend on NormalNvim. → Look for base.
+* The git branch component don't automatically update at startup for the filetype `.ld` (why?).
