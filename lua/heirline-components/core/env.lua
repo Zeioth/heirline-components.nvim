@@ -24,7 +24,7 @@ M.fallback_colors = extend_tbl({
   bright_red = "#ec5f67",
   white = "#c9c9c9",
   yellow = "#e5c07b",
-  bright_yellow = "#ebae34",
+  bright_yellow = "#ebae34"
 }, config.colors)
 
 M.modes = {
