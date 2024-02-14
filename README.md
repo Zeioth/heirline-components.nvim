@@ -82,9 +82,10 @@ You can find the example config we use for NormalNvim [here](https://github.com/
 ## (Optional) Available options
 This is not necessary, but if you want you can customize the icons used by heirline-components
 
-| Option | Accepted values |
-|--------|-------------|
-| icons  | A table like in [this example](https://github.com/Zeioth/heirline-components.nvim/blob/main/lua/heirline-components/config.lua) |
+| Option | Description | Accepted values |
+|--------|-------------|-----------------|
+| icons  | To use instead of the default nerd fonts we use. Useful in case your icons don't render correctly. | A table like in [this example](https://github.com/Zeioth/heirline-components.nvim/blob/main/lua/heirline-components/config.lua) |
+| colors  | To use instead of the default colors of your Neovim colorscheme. | A table of colors. Be aware if you define the table, you must specify all colors. Otherwise ugly fallback colors will be used instead. |
 
 For example:
 ```lua
@@ -94,6 +95,7 @@ dependencies = {
     "Zeioth/heirline-components.nvim",
     opts = {
       icons = { DiagnosticError = ";D" }
+      colors = nil
     }
   }
 }
@@ -117,7 +119,6 @@ If you want to help me, please star this repository to increase the visibility o
 ## Roadmap
 * ~~wip for `v0.3.0`: new component `tabline_buffers` so we can use it directly.~~
 * ~~wip `v0.3.0`: new option `opts.colors` to pass the colors used by the components.~~
-* idea: Maybe there is some way we can automatically do the things we are currently doing in `config` in lazy, so users can further simplify their configs.
 * idea: wiki where we explain the most common things people actually care about.
 * idea: Consider making every component a different file. → Every file is loaded by core.component so we don't get breaking changes.
 * idea: Consider adding hyperlinks to the readme, so users can quickly navigate the code of every component, as we did in compiler.nivm → This should greatly increate user participation.
