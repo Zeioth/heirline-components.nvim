@@ -41,9 +41,6 @@ Add it as a dependency of heirline
 | fill | A Heirline component for filling in the empty space of the bar. |
 | file_info | A function to build a set of children components for an entire file information section. |
 | file_encoding | Displays operative system and file encoding. |
-| tabline_conditional_padding | A function to add padding to the tabine under certain conditions. The amount of padding is defined by the provider, which by default is self-caltulated based on the opened panel. |
-| tabline_file_info | A function with different file_info defaults specifically for use in the tabline |
-| tabline_tabpages | A function to build a visual component to display the available tabpages. |
 | nav | A function to build a set of children components for an entire navigation section |
 | cmd_info | A function to build a set of children components for information shown in the cmdline. |
 | mode | A function to build a set of children components for a mode section. |
@@ -64,7 +61,12 @@ Add it as a dependency of heirline
 | breadcrumbs | A function to build a set of children components for an LSP breadcrumbs section. |
 
 ## Available components (tabline)
-We don't have components for the tabline, but you can use `heirline-components.heirline` that contain helpers for this section.
+
+| Component | Description |
+|-----------|-------------|
+| tabline_conditional_padding | A function to add padding to the tabine under certain conditions. The amount of padding is defined by the provider, which by default is self-caltulated based on the opened panel. |
+| tabline_buffers | A function to build a visual component to display the available listed buffers of the current tab. |
+| tabline_tabpages | A function to build a visual component to display the available tabpages. |
 
 ## Available components (statuscolumn)
 
