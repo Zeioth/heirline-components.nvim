@@ -81,8 +81,8 @@ Add it as a dependency of heirline
 ## Heirline-componenets options
 You can customize icons and colors in a easy way.
 
-| Option | Description |
-|--------|-------------|
+| Option |
+|--------|
 | [icons](https://github.com/Zeioth/heirline-components.nvim/wiki/icons) |
 | [colors](https://github.com/Zeioth/heirline-components.nvim/wiki/colors) |
 
