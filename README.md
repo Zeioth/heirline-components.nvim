@@ -17,7 +17,7 @@ This is how the components above look on the statusline.
 - [Why](#why)
 - [How to install](#how-to-install)
 - [Components](#components)
-- [Global options](#global-options)
+- [Available options](#available-options)
 - [Example config](#example-config)
 - [FAQ](#faq)
 
@@ -87,7 +87,7 @@ Add it as a dependency of heirline
 | numbercolumn | A function to build a set of components for a numbercolumn section in statuscolumn. |
 | signcolumn | A function to build a set of components for a signcolumn section in statuscolumn. |
 
-## Heirline-componenets options
+## Available options
 You can customize icons and colors in a easy way.
 
 | Option |
