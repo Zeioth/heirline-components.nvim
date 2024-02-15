@@ -117,3 +117,4 @@ If you want to help me, please star this repository to increase the visibility o
 
 ## Roadmap
 * We are in process of documenting the components in the wiki and readme, this should take a few days, so please be patient.
+* Since we are giving users the ability to customize icons, we should remove the icons we are not actually using, to make it less confusing.
