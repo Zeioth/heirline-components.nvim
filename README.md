@@ -35,7 +35,8 @@ Add it as a dependency of heirline
 }
 ```
 
-## Statusline components
+## Components
+### Statusline components
 
 | Component | Description |
 |-----------|-------------|
@@ -54,14 +55,14 @@ Add it as a dependency of heirline
 | virtualenv | A function to get the current python virtual env |
 | compiler_state | Display a spinner while [compiler.nvim](https://github.com/Zeioth/compiler.nvim) is running. This component is also compatible with [overseer](https://github.com/stevearc/overseer.nvim). |
 
-## Winbar components
+### Winbar components
 
 | Component | Description |
 |-----------|-------------|
 | breadcrumbs_when_inactive | A function to build an alternative breadcrumbs component when the window is inactive. |
 | breadcrumbs | A function to build a set of children components for an LSP breadcrumbs section. |
 
-## Tabline components
+### Tabline components
 
 | Component | Description |
 |-----------|-------------|
@@ -69,7 +70,7 @@ Add it as a dependency of heirline
 | tabline_buffers | A function to build a visual component to display the available listed buffers of the current tab. |
 | tabline_tabpages | A function to build a visual component to display the available tabpages. |
 
-## Statuscolumn components
+### Statuscolumn components
 
 | Component | Description |
 |-----------|-------------|
@@ -77,13 +78,13 @@ Add it as a dependency of heirline
 | numbercolumn | A function to build a set of components for a numbercolumn section in statuscolumn. |
 | signcolumn | A function to build a set of components for a signcolumn section in statuscolumn. |
 
-## (Optional) Available options
-Be aware this opts are for `heirline-components`, not for `heirline`.
+## Heirline-componenets options
+You can customize icons and colors in a easy way.
 
-| Option | Description | Accepted values |
-|--------|-------------|-----------------|
-| icons  | To use instead of the default [nerd fonts](https://github.com/ryanoasis/nerd-fonts) we use. Useful in case your icons don't render correctly. | A table of icons [like this](https://github.com/Zeioth/heirline-components.nvim/wiki/icons). |
-| colors  | To use instead of the default colors of your Neovim colorscheme. | A table of colors [like this](https://github.com/Zeioth/heirline-components.nvim/wiki/icons). Be aware if you define the table, you must specify all colors. Otherwise ugly fallback colors will be used instead. |
+| Option | Description |
+|--------|-------------|
+| [icons](https://github.com/Zeioth/heirline-components.nvim/wiki/icons) |
+| [colors](https://github.com/Zeioth/heirline-components.nvim/wiki/colors) |
 
 For example:
 ```lua
