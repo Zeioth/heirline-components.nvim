@@ -52,7 +52,7 @@ Add it as a dependency of heirline
 | fill | A Heirline component for filling in the empty space of the bar. |
 | file_info | A function to build a set of children components for an entire file information section. |
 | file_encoding | Displays operative system and file encoding. |
-| nav | A function to build a set of children components, like line number, or the current navimation %. |
+| nav | A function to build a set of children components, like line number, or the current navigation %. |
 | cmd_info | A function to build a set of children components for information shown in the cmdline, like a macro recording indicator, or the search results. |
 | mode | A function to build a set of children components for a mode section. By default it only show colors, but it can be configured to show NORMAL, INSERT... etc like in classic vim. |
 | git_branch | A function to build a set of children components for a git branch section. |
