@@ -52,7 +52,7 @@ Add it as a dependency of heirline
 | fill | A Heirline component for filling in the empty space of the bar. |
 | file_info | A function to build a set of children components for an entire file information section. |
 | file_encoding | Displays operative system and file encoding. |
-| nav | A function to build a set of children components for an entire navigation section |
+| nav | A function to build a component that show the current navigation %. |
 | cmd_info | A function to build a set of children components for information shown in the cmdline. |
 | mode | A function to build a set of children components for a mode section. |
 | separated_path | A function to build a set of children components for the current file path. |
