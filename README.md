@@ -49,7 +49,7 @@ Add it as a dependency of heirline
 
 | Component | Description |
 |-----------|-------------|
-| fill | A Heirline component for filling in the empty space of the bar. |
+| [fill](https://github.com/Zeioth/heirline-components.nvim/wiki/fill) | A Heirline component for filling in the empty space of the bar. |
 | file_info | A function to build a set of children components for an entire file information section. |
 | file_encoding | Displays operative system and file encoding. |
 | nav | A function to build a set of children components, like line number, or the current navigation %. |
