@@ -1,5 +1,5 @@
 # [heirline-components.nvim](https://github.com/Zeioth/heirline-components.nvim)
-Distro agnostic components you can use in your Neovim heirline config.
+Distro agnostic components for your Neovim heirline config.
 
 ![screenshot_2024-02-14_00-54-13_735661835](https://github.com/Zeioth/heirline-components.nvim/assets/3357792/f6d732f9-48b4-46e7-a15d-9fc03c68d434)
 
