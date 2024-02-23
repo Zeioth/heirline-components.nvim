@@ -124,8 +124,3 @@ Currently, most of the GPL3 lua components this plugin use come from AstroNvim a
 If you want to help me, please star this repository to increase the visibility of the project.
 
 [![Stargazers over time](https://starchart.cc/Zeioth/heirline-components.nvim.svg)](https://starchart.cc/Zeioth/heirline-components.nvim)
-
-## Roadmap
-* We are in process of documenting the components in the wiki and readme, this should take a few days, so please be patient. → 9/17 cleared → only 3 days if we document 5 per day.
-* Adding images would make easier to understand what every component does.
-* Document better how to change the colors of aprovider → In the opts `colors` and then in every component. → As this is one of the main customizations people expect.
