@@ -55,9 +55,9 @@ Add it as a dependency of heirline
 | [nav](https://github.com/Zeioth/heirline-components.nvim/wiki/nav) | A function to build a set of children components, like line number, or the current navigation %. |
 | [cmd_info](https://github.com/Zeioth/heirline-components.nvim/wiki/cmd_info-component) | A function to build a set of children components for information shown in the cmdline, like a macro recording indicator, or the search results. |
 | [mode](https://github.com/Zeioth/heirline-components.nvim/wiki/mode-component) | A function to build a set of children components for a mode section. By default it only show colors, but it can be configured to show NORMAL, INSERT... etc like in classic vim. |
-| git_branch | A function to build a set of children components for a git branch section. |
-| git_diff | A function to build a set of children components for a git difference section. |
-| diagnostics | A function to build a set of children components for a diagnostics section. |
+| [git_branch](https://github.com/Zeioth/heirline-components.nvim/wiki/git-branch) | A function to build a set of children components for a git branch section. |
+| [git_diff](https://github.com/Zeioth/heirline-components.nvim/wiki/git-diff) | A function to build a set of children components for a git difference section. |
+| [diagnostics](https://github.com/Zeioth/heirline-components.nvim/wiki/diagnostics) | A function to build a set of children components for a diagnostics section. |
 | treesitter | A function to build a set of children components for a Treesitter section. |
 | [lsp](https://github.com/Zeioth/heirline-components.nvim/wiki/lsp%E2%80%90component) | A function to build a set of children components for an LSP section. `Warning`: This component only works out of the box on NormalNvim because it requires you add some logic to `lsp` and `lspconfig`. Click the component name to learn how to do it, or add the plugin [noice.nvim](https://github.com/folke/noice.nvim) as drop-in replacement for this component. |
 | virtualenv | A function to build a component that show the current python virtual env |
