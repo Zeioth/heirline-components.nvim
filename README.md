@@ -67,8 +67,8 @@ Add it as a dependency of heirline
 
 | Component | Description |
 |-----------|-------------|
-| breadcrumbs_when_inactive | A function to build an alternative breadcrumbs component when the window is inactive. |
-| breadcrumbs | A function to build a set of children components for an LSP breadcrumbs section. |
+| [breadcrumbs_when_inactive](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs_when_inactive) | A function to build an alternative breadcrumbs component when the window is inactive. |
+| [breadcrumbs](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs) | A function to build a set of children components for an LSP breadcrumbs section. |
 
 ### Tabline components
 
