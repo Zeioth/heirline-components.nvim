@@ -49,7 +49,11 @@ Add it as a dependency of heirline
 ```
 
 ## How to use
-You can use a component like `require("heirline-components.all).component.some_component"` in your heirline config.
+You can add a component to your heirline config as
+```lua
+require("heirline-components.all).component.some_component()"`
+```
+Normally you will use components directly like in this example. But in some cases you can customize a component. Refer to every specific component for more info.
 
 ## Example config
 You can find the example config we use for NormalNvim [here](https://github.com/NormalNvim/NormalNvim/blob/ae2248a7ce7f410649fc4b173b2f662a1b666718/lua/plugins/2-ui.lua#L293).
