@@ -5,10 +5,10 @@
 --      -> get_icon              → Return an icon from the icons directory.
 --      -> get_spinner           → Like the former but for animated iconns.
 --      -> is_available          → Return true if the plugin is available.
---      -> event                 → Triggers the specified user event.
+--      -> trigger_event         → Triggers the specified user event.
 --      -> is_buf_valid          → Check if a buffer is valid.
 --      -> close_buf             → Closes the specified buffer.
---      -> close_buf             → Closes the current tab.
+--      -> close_tab             → Closes the current tab.
 
 local M = {}
 
