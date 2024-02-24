@@ -30,7 +30,10 @@ Add it as a dependency of heirline
 ```lua
 {
   "rebelot/heirline.nvim",
-  dependencies = { "Zeioth/heirline-components.nvim" },
+  dependencies = {
+    "Zeioth/heirline-components.nvim",
+    "lewis6991/gitsigns.nvim"
+  },
   opts = {},
     config = function(_, opts)
       local heirline = require "heirline"
@@ -74,17 +77,17 @@ Add it as a dependency of heirline
 
 | Component | Description |
 |-----------|-------------|
-| tabline_conditional_padding | A function to add padding to the tabine under certain conditions. The amount of padding is defined by the provider, which by default is self-caltulated based on the opened panel. |
-| tabline_buffers | A function to build a visual component to display the available listed buffers of the current tab. |
-| tabline_tabpages | A function to build a visual component to display the available tabpages. |
+| [tabline_conditional_padding](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_conditional_padding) | A function to add padding to the tabine under certain conditions. The amount of padding is defined by the provider, which by default is self-caltulated based on the opened panel. |
+| [tabline_buffers](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_buffers) | A function to build a visual component to display the available listed buffers of the current tab. |
+| [tabline_tabpages](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_tabpages) | A function to build a visual component to display the available tabpages. |
 
 ### Statuscolumn components
 
 | Component | Description |
 |-----------|-------------|
-| foldcolumn | A function to build a set of components for a foldcolumn section in a statuscolumn. |
-| numbercolumn | A function to build a set of components for a numbercolumn section in statuscolumn. |
-| signcolumn | A function to build a set of components for a signcolumn section in statuscolumn. |
+| [foldcolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/foldcolumn) | A function to build a set of components for a foldcolumn section in a statuscolumn. |
+| [numbercolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/numbercolumn) | A function to build a set of components for a numbercolumn section in statuscolumn. |
+| [signcolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/signcolumn) | A function to build a set of components for a signcolumn section in statuscolumn. |
 
 ## Available options
 You can customize icons and colors in a easy way.
