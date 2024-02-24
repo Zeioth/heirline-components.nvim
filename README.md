@@ -112,7 +112,7 @@ dependencies = {
 ```
 
 ## Example config
-You can find the example config we use for NormalNvim [here](https://github.com/NormalNvim/NormalNvim/blob/98be877c6bac59dff495f5c6aabe4e20832bdb90/lua/plugins/2-ui.lua#L282).
+You can find the example config we use for NormalNvim [here](https://github.com/NormalNvim/NormalNvim/blob/ae2248a7ce7f410649fc4b173b2f662a1b666718/lua/plugins/2-ui.lua#L293).
 
 ## Credits
 Currently, most of the GPL3 lua components this plugin use come from AstroNvim and NormalNvim. So please support both projects if you enjoy this plugin.
