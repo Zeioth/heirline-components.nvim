@@ -51,7 +51,7 @@ Add it as a dependency of heirline
 ## How to use
 You can add a component to your heirline config as
 ```lua
-require("heirline-components.all).component.some_component()"`
+require("heirline-components.all").component.some_component()
 ```
 Normally you will use components directly like in this example. But in some cases you can customize a component. Refer to every specific component for more info.
 
