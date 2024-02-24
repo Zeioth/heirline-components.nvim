@@ -164,16 +164,13 @@ end
 -- @usage local heirline_component = require("heirline-components.core").component.tabline_tabpages()
 function M.tabline_tabpages(opts)
   return extend_tbl({      -- tab list
-    condition = function() -- display if more than 1 tab.
-      return #vim.api.nvim_list_tabpages() > 1
-    end,
-    heirline.make_tablist { -- create 1 component per tab.
+    tabpages = heirline.make_tablist {
       provider = provider.tabnr(),
       hl = function(self)
         return hl.get_attributes(heirline.tab_type(self, "tab"), true)
       end,
     },
-    { -- close button for current tab
+    close_button = {
       provider = provider.close_button {
         kind = "TabClose",
         padding = { left = 1, right = 1 },
@@ -184,6 +181,9 @@ function M.tabline_tabpages(opts)
         name = "heirline_tabline_close_tab_callback",
       },
     },
+    condition = function() -- display if more than 1 tab.
+      return #vim.api.nvim_list_tabpages() > 1
+    end,
   }, opts)
 end
 
@@ -333,6 +333,7 @@ end
 -- @usage local heirline_component = require("heirline-components.core").component.breadcumbs()
 function M.breadcrumbs(opts)
   opts = extend_tbl({
+    hl = hl.get_attributes("winbar", true),
     padding = { left = 1 },
     condition = condition.aerial_available,
     update = "CursorMoved",
