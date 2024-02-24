@@ -16,9 +16,10 @@ This is how the components above look on the statusline.
 
 - [Why](#why)
 - [How to install](#how-to-install)
+- [How to use](#how-to-use)
+- [Example config](#example-config)
 - [Components](#components)
 - [Available options](#available-options)
-- [Example config](#example-config)
 - [FAQ](#faq)
 
 ## Why
@@ -46,6 +47,12 @@ Add it as a dependency of heirline
     end,
 }
 ```
+
+## How to use
+You can use a component like `require("heirline-components.all).component.some_component"` in your heirline config.
+
+## Example config
+You can find the example config we use for NormalNvim [here](https://github.com/NormalNvim/NormalNvim/blob/ae2248a7ce7f410649fc4b173b2f662a1b666718/lua/plugins/2-ui.lua#L293).
 
 ## Components
 ### Statusline components
@@ -110,9 +117,6 @@ dependencies = {
   }
 }
 ```
-
-## Example config
-You can find the example config we use for NormalNvim [here](https://github.com/NormalNvim/NormalNvim/blob/ae2248a7ce7f410649fc4b173b2f662a1b666718/lua/plugins/2-ui.lua#L293).
 
 ## Credits
 Currently, most of the GPL3 lua components this plugin use come from AstroNvim and NormalNvim. So please support both projects if you enjoy this plugin.
