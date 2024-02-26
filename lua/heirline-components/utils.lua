@@ -56,19 +56,23 @@ function M.is_available(plugin)
   return lazy_config_avail and lazy_config.spec.plugins[plugin] ~= nil
 end
 
---- Trigger a user event.
----@param event string The event name to be appended to HeirlineComponents.
--- @usage If you pass the event 'Foo' to this method, it will trigger.
---        the autocmds including the pattern 'HeirineComponentsFoo'.
+--- Convenient wapper to save code when we Trigger events.
+---@param event string Name of the event.
+-- @usage To run a User event:   `trigger_event("User MyUserEvent")`
+-- @usage To run a Neovim event: `trigger_event("BufEnter")`
 function M.trigger_event(event)
-  vim.schedule(
-    function()
-      vim.api.nvim_exec_autocmds(
-        "User",
-        { pattern = "HeirlineComponents" .. event, modeline = false }
-      )
+  -- detect if event start with the substring "User "
+  local is_user_event = string.match(event, "^User ") ~= nil
+
+  vim.schedule(function()
+    if is_user_event then
+      -- Substract the substring "User " from the beginning of the event.
+      event = event:gsub("^User ", "")
+      vim.api.nvim_exec_autocmds("User", { pattern = event, modeline = false })
+    else
+      vim.api.nvim_exec_autocmds(event, { modeline = false })
     end
-  )
+  end)
 end
 
 --- Check if a buffer is valid.
@@ -119,7 +123,7 @@ end
 function M.close_tab()
   if #vim.api.nvim_list_tabpages() > 1 then
     vim.t.bufs = nil
-    M.trigger_event "BufsUpdated"
+    M.trigger_event("User HeirlineComponentsUpdateTabline")
     vim.cmd.tabclose()
   end
 end

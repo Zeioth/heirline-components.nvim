@@ -220,7 +220,8 @@ function M.subscribe_to_events()
   vim.api.nvim_create_autocmd("ColorScheme", {
     desc = "Refresh heirline colors",
     callback = function()
-      require("heirline.utils").on_colorscheme(lib.hl.get_colors())
+      local hl = require "heirline-components.core.hl"
+      require("heirline.utils").on_colorscheme(hl.get_colors())
     end,
   })
 
@@ -240,7 +241,7 @@ function M.subscribe_to_events()
         vim.t.bufs = bufs
       end
       vim.t.bufs = vim.tbl_filter(utils.is_buf_valid, vim.t.bufs)
-      utils.trigger_event "BufsUpdated"
+      utils.trigger_event("User HeirlineComponentsUpdateTabline")
     end,
   })
 
@@ -263,7 +264,7 @@ function M.subscribe_to_events()
         end
       end
       vim.t.bufs = vim.tbl_filter(utils.is_buf_valid, vim.t.bufs)
-      if removed then utils.trigger_event "BufsUpdated" end
+      if removed then utils.trigger_event("User HeirlineComponentsUpdateTabline") end
       vim.cmd.redrawtabline()
     end,
   })
