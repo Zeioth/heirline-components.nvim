@@ -20,6 +20,7 @@ This is how the components above look on the statusline.
 - [Example config](#example-config)
 - [Components](#components)
 - [Available options](#available-options)
+- [Events (opitonal)](https://github.com/Zeioth/heirline-components.nvim?tab=readme-ov-file#events-optional)
 - [FAQ](#faq)
 
 ## Why
