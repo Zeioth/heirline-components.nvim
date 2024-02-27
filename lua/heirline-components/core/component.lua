@@ -538,6 +538,7 @@ function M.lsp(opts)
         pattern = { "HeirlineComponentsUpdateLspProgress" },
         callback = vim.schedule_wrap(function() vim.cmd.redrawstatus() end),
       },
+      init = require("heirline-components.core.init").lsp_progress()
     },
     lsp_client_names = {
       str = "LSP",

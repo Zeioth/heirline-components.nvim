@@ -271,9 +271,10 @@ function M.subscribe_to_events()
 end
 
 --- An `init` function for the lsp_progress provider.
----@return function # The lsp clients progress like  { progres = {} }
+---@return table lsp # A table like  { progres = {} }
+-- @usage lsp = require("heirline-components.core.init").lsp_progress()
 function M.lsp_progress()
-  local lsp = { progress = {} } -- table to return
+  local lsp = { progress = {} }
 
   -- clear lingering progress messages
   for id, _ in pairs(lsp.progress) do
