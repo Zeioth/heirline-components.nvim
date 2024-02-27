@@ -60,8 +60,35 @@ Normally you will use components directly like in this example. But in some case
 You can find the example config we use for NormalNvim [here](https://github.com/NormalNvim/NormalNvim/blob/ae2248a7ce7f410649fc4b173b2f662a1b666718/lua/plugins/2-ui.lua#L293).
 
 ## Components
+
+### Tabline components
+This is the heirline line you see at the top of the screen.
+
+| Component | Description |
+|-----------|-------------|
+| [tabline_conditional_padding](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_conditional_padding) | Tabine component to add padding under certain conditions. By default it adds padding when you open a side panel like neotree, or aerial, according to the panel width. |
+| [tabline_buffers](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_buffers) | Tabline component to display the available listed buffers of the current tab. |
+| [tabline_tabpages](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_tabpages) | Tabline component to display the available tabpages. |
+
+### Winbar components
+This is the heirline line you see under the tabline.
+
+| Component | Description |
+|-----------|-------------|
+| [breadcrumbs_when_inactive](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs_when_inactive) | An alternative breadcrumbs component when the window is inactive. |
+| [breadcrumbs](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs) | Winbar component function to display a LSP based breadcrumbs section. |
+
+### Statuscolumn components
+This is the heirline column you see at the left of the screen.
+
+| Component | Description |
+|-----------|-------------|
+| [foldcolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/foldcolumn) | Statuscolumn component to fold/unfold lines. |
+| [numbercolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/numbercolumn) | Statuscolumn component to display the line numbers. |
+| [signcolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/signcolumn) | Statuscolumn component to indicate the lines that have been changed since the last commit (gitsigns hunks). |
+
 ### Statusline components
-This is the line you see at the bottom of the screen.
+This is the heirline line you see at the bottom of the screen.
 
 | Component | Description |
 |-----------|-------------|
@@ -78,32 +105,6 @@ This is the line you see at the bottom of the screen.
 | [lsp](https://github.com/Zeioth/heirline-components.nvim/wiki/lsp%E2%80%90component) | Statusline component to display the loaded Mason items (lsp servers, linters and formatters), or their current load % if they didn't load yet. `Warning`: This component only works out of the box on NormalNvim because it requires you add some logic to `lsp` and `lspconfig`. Click the component name to learn how to do it, or add the plugin [noice.nvim](https://github.com/folke/noice.nvim) as drop-in replacement for this component. |
 | [virtual_env](https://github.com/Zeioth/heirline-components.nvim/wiki/virtual_env) | Statusline component to display the current python virtual env. |
 | [compiler_state](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_state) | Statusline component to display a spinner while [compiler.nvim](https://github.com/Zeioth/compiler.nvim) is running. This component is also compatible with [overseer](https://github.com/stevearc/overseer.nvim). |
-
-### Tabline components
-This is the line you see at the top of the screen.
-
-| Component | Description |
-|-----------|-------------|
-| [tabline_conditional_padding](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_conditional_padding) | Tabine component to add padding under certain conditions. By default it adds padding when you open a side panel like neotree, or aerial, according to the panel width. |
-| [tabline_buffers](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_buffers) | Tabline component to display the available listed buffers of the current tab. |
-| [tabline_tabpages](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_tabpages) | Tabline component to display the available tabpages. |
-
-### Winbar components
-This is the line you see under the tabline.
-
-| Component | Description |
-|-----------|-------------|
-| [breadcrumbs_when_inactive](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs_when_inactive) | An alternative breadcrumbs component when the window is inactive. |
-| [breadcrumbs](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs) | Winbar component function to display a LSP based breadcrumbs section. |
-
-### Statuscolumn components
-This is the line you see at the left of the screen.
-
-| Component | Description |
-|-----------|-------------|
-| [foldcolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/foldcolumn) | Statuscolumn component to fold/unfold lines. |
-| [numbercolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/numbercolumn) | Statuscolumn component to display the line numbers. |
-| [signcolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/signcolumn) | Statuscolumn component to indicate the lines that have been changed since the last commit (gitsigns hunks). |
 
 ## Available options
 You can customize icons and colors in a easy way.
