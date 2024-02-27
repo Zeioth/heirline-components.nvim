@@ -535,7 +535,7 @@ function M.lsp(opts)
       padding = { right = 1 },
       update = {
         "User",
-        pattern = { "BaseLspProgress" },
+        pattern = { "HeirlineComponentsUpdateLspProgress" },
         callback = vim.schedule_wrap(function() vim.cmd.redrawstatus() end),
       },
     },

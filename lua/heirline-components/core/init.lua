@@ -270,4 +270,36 @@ function M.subscribe_to_events()
   })
 end
 
+--- An `init` function for the lsp_progress provider.
+---@return function # The lsp clients progress like  { progres = {} }
+function M.lsp_progress()
+  local lsp = { progress = {} } -- table to return
+
+  -- clear lingering progress messages
+  for id, _ in pairs(lsp.progress) do
+    if
+      not next(vim.lsp.get_active_clients { id = tonumber(id:match "^%d+") })
+    then
+      lsp.progress[id] = nil
+    end
+  end
+
+  -- update lsp progress
+  local orig_handler = vim.lsp.handlers["$/progress"]
+  vim.lsp.handlers["$/progress"] = function(_, msg, info)
+    local progress, id = lsp.progress, ("%s.%s"):format(info.client_id, msg.token)
+    progress[id] = progress[id] and utils.extend_tbl(progress[id], msg.value) or msg.value
+    if progress[id].kind == "end" then
+      vim.defer_fn(function()
+        progress[id] = nil
+        utils.trigger_event("User HeirlineComponentsUpdateLspProgress")
+      end, 100)
+    end
+    utils.trigger_event("User HeirlineComponentsUpdateLspProgress")
+    orig_handler(_, msg, info)
+  end
+
+  return lsp
+end
+
 return M

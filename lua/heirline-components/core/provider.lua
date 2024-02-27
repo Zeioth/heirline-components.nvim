@@ -603,9 +603,10 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.lsp_progress() }
 -- @see heirline-components.core.utils.stylize
 function M.lsp_progress(opts)
+  local lsp = require("heirline-components.core.init").lsp_progress()
   local spinner = utils.get_spinner("LSPLoading", 1) or { "" }
   return function()
-    local _, Lsp = next(base.lsp.progress)
+    local _, Lsp = next(lsp.progress)
     return core_utils.stylize(
       Lsp
       and (
