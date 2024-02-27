@@ -272,7 +272,7 @@ end
 
 --- An `init` function for the lsp_progress provider.
 ---@return table lsp # A table like  { progres = {} }
--- @usage lsp = require("heirline-components.core.init").lsp_progress()
+-- @usage local lsp = require("heirline-components.core.init").lsp_progress()
 function M.lsp_progress()
   local lsp = { progress = {} }
 
