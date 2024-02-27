@@ -61,45 +61,49 @@ You can find the example config we use for NormalNvim [here](https://github.com/
 
 ## Components
 ### Statusline components
+This is the line you see at the bottom of the screen.
 
 | Component | Description |
 |-----------|-------------|
-| [fill](https://github.com/Zeioth/heirline-components.nvim/wiki/fill) | A Heirline component for filling in the empty space of the bar. |
-| [file_info](https://github.com/Zeioth/heirline-components.nvim/wiki/file_info) | A function to build a set of children components for an entire file information section. |
-| [file_encoding](https://github.com/Zeioth/heirline-components.nvim/wiki/file_encoding) | Displays operative system and file encoding. |
-| [nav](https://github.com/Zeioth/heirline-components.nvim/wiki/nav) | A function to build a set of children components, like line number, or the current navigation %. |
-| [cmd_info](https://github.com/Zeioth/heirline-components.nvim/wiki/cmd_info-component) | A function to build a set of children components for information shown in the cmdline, like a macro recording indicator, or the search results. |
-| [mode](https://github.com/Zeioth/heirline-components.nvim/wiki/mode-component) | A function to build a set of children components for a mode section. By default it only show colors, but it can be configured to show NORMAL, INSERT... etc like in classic vim. |
-| [git_branch](https://github.com/Zeioth/heirline-components.nvim/wiki/git-branch) | A function to build a set of children components for a git branch section. |
-| [git_diff](https://github.com/Zeioth/heirline-components.nvim/wiki/git-diff) | A function to build a set of children components for a git difference section. |
-| [diagnostics](https://github.com/Zeioth/heirline-components.nvim/wiki/diagnostics) | A function to build a set of children components for a diagnostics section. |
-| [treesitter](https://github.com/Zeioth/heirline-components.nvim/wiki/treesitter) | A function to build a set of children components for a Treesitter section. |
-| [lsp](https://github.com/Zeioth/heirline-components.nvim/wiki/lsp%E2%80%90component) | A function to build a set of children components for an LSP section. `Warning`: This component only works out of the box on NormalNvim because it requires you add some logic to `lsp` and `lspconfig`. Click the component name to learn how to do it, or add the plugin [noice.nvim](https://github.com/folke/noice.nvim) as drop-in replacement for this component. |
-| [virtual_env](https://github.com/Zeioth/heirline-components.nvim/wiki/virtual_env) | A function to build a component that show the current python virtual env. |
-| [compiler_state](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_state) | Display a spinner while [compiler.nvim](https://github.com/Zeioth/compiler.nvim) is running. This component is also compatible with [overseer](https://github.com/stevearc/overseer.nvim). |
-
-### Winbar components
-
-| Component | Description |
-|-----------|-------------|
-| [breadcrumbs_when_inactive](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs_when_inactive) | A function to build an alternative breadcrumbs component when the window is inactive. |
-| [breadcrumbs](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs) | A function to build a set of children components for an LSP breadcrumbs section. |
+| [fill](https://github.com/Zeioth/heirline-components.nvim/wiki/fill) | Statusline component to fill the empty space of the bar. |
+| [file_info](https://github.com/Zeioth/heirline-components.nvim/wiki/file_info) | Statusline component to show the filetype of the current buffer. |
+| [file_encoding](https://github.com/Zeioth/heirline-components.nvim/wiki/file_encoding) | Statusline component to display operative system and file encoding. |
+| [nav](https://github.com/Zeioth/heirline-components.nvim/wiki/nav) | Statusline component to display a nativation area, with line number, and the current navigation %. |
+| [cmd_info](https://github.com/Zeioth/heirline-components.nvim/wiki/cmd_info-component) | Statusline component to display information about some commands, like a macro recording indicator, or the search results. |
+| [mode](https://github.com/Zeioth/heirline-components.nvim/wiki/mode-component) | Statusline component for a mode chage. By default it only show colors, but it can be configured to show NORMAL, INSERT... etc like in classic vim. |
+| [git_branch](https://github.com/Zeioth/heirline-components.nvim/wiki/git-branch) | Statusline component to display the current git branch. |
+| [git_diff](https://github.com/Zeioth/heirline-components.nvim/wiki/git-diff) | Statusline component to display the current git diff (added, removed, changed). |
+| [diagnostics](https://github.com/Zeioth/heirline-components.nvim/wiki/diagnostics) | Statusline component to display a diagnostics section (errors, warnings, info). |
+| [treesitter](https://github.com/Zeioth/heirline-components.nvim/wiki/treesitter) | Statusline component to display a indicator when Treesitter is enabled. |
+| [lsp](https://github.com/Zeioth/heirline-components.nvim/wiki/lsp%E2%80%90component) | Statusline component to display the loaded Mason items (lsp servers, linters and formatters), or their current load % if they didn't load yet. `Warning`: This component only works out of the box on NormalNvim because it requires you add some logic to `lsp` and `lspconfig`. Click the component name to learn how to do it, or add the plugin [noice.nvim](https://github.com/folke/noice.nvim) as drop-in replacement for this component. |
+| [virtual_env](https://github.com/Zeioth/heirline-components.nvim/wiki/virtual_env) | Statusline component to display the current python virtual env. |
+| [compiler_state](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_state) | Statusline component to display a spinner while [compiler.nvim](https://github.com/Zeioth/compiler.nvim) is running. This component is also compatible with [overseer](https://github.com/stevearc/overseer.nvim). |
 
 ### Tabline components
+This is the line you see at the top of the screen.
 
 | Component | Description |
 |-----------|-------------|
-| [tabline_conditional_padding](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_conditional_padding) | A function to add padding to the tabine under certain conditions. The amount of padding is defined by the provider, which by default is self-caltulated based on the opened panel. |
-| [tabline_buffers](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_buffers) | A function to build a visual component to display the available listed buffers of the current tab. |
-| [tabline_tabpages](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_tabpages) | A function to build a visual component to display the available tabpages. |
+| [tabline_conditional_padding](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_conditional_padding) | Tabine component to add padding under certain conditions. The amount of padding is defined by the provider, which by default is self-caltulated based on the opened panel. |
+| [tabline_buffers](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_buffers) | Tabline component to display the available listed buffers of the current tab. |
+| [tabline_tabpages](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_tabpages) | Tabline component to display the available tabpages. |
+
+### Winbar components
+This is the line you see under the tabline.
+
+| Component | Description |
+|-----------|-------------|
+| [breadcrumbs_when_inactive](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs_when_inactive) | An alternative breadcrumbs component when the window is inactive. |
+| [breadcrumbs](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs) | Winbar component function to display a LSP based breadcrumbs section. |
 
 ### Statuscolumn components
+This is the line you see at the left of the screen.
 
 | Component | Description |
 |-----------|-------------|
-| [foldcolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/foldcolumn) | A function to build a set of components for a foldcolumn section in a statuscolumn. |
-| [numbercolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/numbercolumn) | A function to build a set of components for a numbercolumn section in statuscolumn. |
-| [signcolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/signcolumn) | A function to build a set of components for a signcolumn section in statuscolumn. |
+| [foldcolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/foldcolumn) | Statuscolumn component to fold/unfold lines. |
+| [numbercolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/numbercolumn) | Statuscolumn component to display the line numbers. |
+| [signcolumn](https://github.com/Zeioth/heirline-components.nvim/wiki/signcolumn) | Statuscolumn component to indicate the lines that have been changed since the last commit (gitsigns hunks). |
 
 ## Available options
 You can customize icons and colors in a easy way.
