@@ -115,16 +115,6 @@ You can customize icons and colors in a easy way.
 | [icons](https://github.com/Zeioth/heirline-components.nvim/wiki/icons) |
 | [colors](https://github.com/Zeioth/heirline-components.nvim/wiki/colors) |
 
-## Events (Optional)
-Heirline-components listen for two different events:
-
-| Event | Description |
-|--------|------------|
-| [ColorScheme](https://neovim.io/doc/user/autocmd.html#ColorScheme) | When you trigger this event, Heirline-components will reload its colors. |
-| `User HeirlineComponentsUpdateTabline` | When you trigger this event the tabline components `tabline_buffers` and `tabline_tabpages` will reload to reflect recent changes. |
-
-So if you experience issues with colors or outdated tabline info, trigger these events with `:doautocmd`.
-
 For example:
 ```lua
 "rebelot/heirline.nvim",
@@ -138,6 +128,16 @@ dependencies = {
   }
 }
 ```
+
+## Events (Optional)
+Heirline-components listen for two different events:
+
+| Event | Description |
+|--------|------------|
+| [ColorScheme](https://neovim.io/doc/user/autocmd.html#ColorScheme) | When you trigger this event, Heirline-components will reload its colors. |
+| `User HeirlineComponentsUpdateTabline` | When you trigger this event the tabline components `tabline_buffers` and `tabline_tabpages` will reload to reflect recent changes. |
+
+So if you experience issues with colors or outdated tabline info, trigger these events with `:doautocmd`.
 
 ## Credits
 Currently, most of the GPL3 lua components this plugin use come from AstroNvim and NormalNvim. So please support both projects if you enjoy this plugin.
