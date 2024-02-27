@@ -66,7 +66,7 @@ This is the heirline line you see at the top of the screen.
 
 | Component | Description |
 |-----------|-------------|
-| [tabline_buffers](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_buffers) | Tabline component to display the available listed buffers of the current tabpage. |
+| [tabline_buffers](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_buffers) | Tabline component to display the listed buffers of the current tabpage. |
 | [tabline_tabpages](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_tabpages) | Tabline component to display the available tabpages. |
 | [tabline_conditional_padding](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_conditional_padding) | Tabine component to add padding under certain conditions. By default it adds padding when you open a side panel like neotree, or aerial, according to the panel width. |
 
