@@ -94,7 +94,7 @@ This is the heirline line you see at the bottom of the screen.
 | Component | Description |
 |-----------|-------------|
 | [fill](https://github.com/Zeioth/heirline-components.nvim/wiki/fill) | Statusline component to fill the empty space of the bar. |
-| [file_info](https://github.com/Zeioth/heirline-components.nvim/wiki/file_info) | Statusline component to show the filetype of the current buffer. |
+| [file_info](https://github.com/Zeioth/heirline-components.nvim/wiki/file_info) | Statusline component to display the filetype of the current buffer. |
 | [file_encoding](https://github.com/Zeioth/heirline-components.nvim/wiki/file_encoding) | Statusline component to display operative system and file encoding. |
 | [nav](https://github.com/Zeioth/heirline-components.nvim/wiki/nav) | Statusline component to display a nativation area, with line number, and the current navigation %. |
 | [cmd_info](https://github.com/Zeioth/heirline-components.nvim/wiki/cmd_info-component) | Statusline component to display information about some commands, like a macro recording indicator, or the search results. |
