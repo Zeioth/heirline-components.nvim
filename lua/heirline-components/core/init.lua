@@ -10,6 +10,7 @@ local provider = require "heirline-components.core.provider"
 local core_utils = require "heirline-components.core.utils"
 
 local utils = require "heirline-components.utils"
+local buf_utils = require "heirline-components.buffer"
 local extend_tbl = utils.extend_tbl
 
 --- An `init` function to build a set of children components for LSP breadcrumbs.
@@ -230,7 +231,7 @@ function M.subscribe_to_events()
     desc = "Update buffers when adding new buffers",
     callback = function(args)
       if not vim.t.bufs then vim.t.bufs = {} end
-      if not utils.is_buf_valid(args.buf) then return end
+      if not buf_utils.is_valid(args.buf) then return end
       if args.buf ~= utils.current_buf then
         utils.last_buf = utils.current_buf
         utils.current_buf = args.buf
@@ -240,7 +241,7 @@ function M.subscribe_to_events()
         table.insert(bufs, args.buf)
         vim.t.bufs = bufs
       end
-      vim.t.bufs = vim.tbl_filter(utils.is_buf_valid, vim.t.bufs)
+      vim.t.bufs = vim.tbl_filter(buf_utils.is_valid, vim.t.bufs)
       utils.trigger_event("User HeirlineComponentsUpdateTabline")
     end,
   })
@@ -263,7 +264,7 @@ function M.subscribe_to_events()
           end
         end
       end
-      vim.t.bufs = vim.tbl_filter(utils.is_buf_valid, vim.t.bufs)
+      vim.t.bufs = vim.tbl_filter(buf_utils.is_valid, vim.t.bufs)
       if removed then utils.trigger_event("User HeirlineComponentsUpdateTabline") end
       vim.cmd.redrawtabline()
     end,
@@ -272,7 +273,6 @@ end
 
 --- An `init` function for the lsp_progress provider.
 ---@return table lsp # A table like  { progres = {} }
--- @usage local lsp = require("heirline-components.core.init").lsp_progress()
 function M.lsp_progress()
   local lsp = { progress = {} }
 

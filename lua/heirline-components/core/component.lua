@@ -56,6 +56,7 @@ local heirline = require "heirline-components.core.heirline"
 local core_utils = require "heirline-components.core.utils"
 
 local utils = require "heirline-components.utils"
+local buf_utils = require "heirline-components.buffer"
 local extend_tbl = utils.extend_tbl
 local get_icon = utils.get_icon
 local is_available = utils.is_available
@@ -177,7 +178,7 @@ function M.tabline_tabpages(opts)
       },
       hl = hl.get_attributes("tab_close", true),
       on_click = {
-        callback = function() utils.close_tab() end,
+        callback = function() buf_utils.close_tab() end,
         name = "heirline_tabline_close_tab_callback",
       },
     },
@@ -211,7 +212,7 @@ function M.tabline_buffers(opts)
       hl = function(self) return hl.get_attributes(self.tab_type .. "_close") end,
       padding = { left = 1, right = 1 },
       on_click = {
-        callback = function(_, minwid) utils.close_buf(minwid) end,
+        callback = function(_, minwid) buf_utils.close_buf(minwid) end,
         minwid = function(self) return self.bufnr end,
         name = "heirline_tabline_close_buffer_callback",
       },
@@ -675,7 +676,7 @@ function M.compiler_state(opts)
   opts = extend_tbl({
     compiler_state = {
       condition = function()
-        return is_available "compiler.nvim"
+        return is_available "compiler.nvim" or is_available "overseer.nvim"
       end,
       padding = { left = 1, right = 0 },
     },

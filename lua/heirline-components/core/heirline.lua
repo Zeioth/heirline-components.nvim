@@ -10,6 +10,7 @@ local provider = require "heirline-components.core.provider"
 local core_utils = require "heirline-components.core.utils"
 
 local utils = require "heirline-components.utils"
+local buf_utils = require "heirline-components.buffer"
 local get_icon = utils.get_icon
 
 --- A helper function to get the type a tab or buffer is.
@@ -75,12 +76,12 @@ M.make_buflist = function(component)
         },
         component, -- create buffer component
       },
-      function(self) return utils.is_buf_valid(self.bufnr) end -- disable surrounding
+      function(self) return buf_utils.is_valid(self.bufnr) end -- disable surrounding
     ),
     { provider = get_icon "ArrowLeft" .. " ", hl = overflow_hl },
     { provider = get_icon "ArrowRight" .. " ", hl = overflow_hl },
     function()
-      vim.t.bufs = vim.tbl_filter(utils.is_buf_valid, vim.t.bufs or {})
+      vim.t.bufs = vim.tbl_filter(buf_utils.is_valid, vim.t.bufs or {})
       return vim.t.bufs
     end,
     false -- disable internal caching
