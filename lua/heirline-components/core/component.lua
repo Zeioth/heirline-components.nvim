@@ -631,11 +631,8 @@ function M.numbercolumn(opts)
     condition = condition.numbercolumn_enabled,
     on_click = {
       name = "line_click",
-      callback = function(...)
-        local args = core_utils.statuscolumn_clickargs(...)
-        if args.mods:find "c" then
-          if is_available "nvim-dap" then require("dap").toggle_breakpoint() end
-        end
+      callback = function()
+        pcall(function() require("dap").toggle_breakpoint() end)
       end,
     },
   }, opts)
