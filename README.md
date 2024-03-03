@@ -32,10 +32,7 @@ Add it as a dependency of heirline
 ```lua
 {
   "rebelot/heirline.nvim",
-  dependencies = {
-    "Zeioth/heirline-components.nvim",
-    "lewis6991/gitsigns.nvim"
-  },
+  dependencies = { "Zeioth/heirline-components.nvim" }
   opts = {},
     config = function(_, opts)
       local heirline = require "heirline"
@@ -48,6 +45,12 @@ Add it as a dependency of heirline
     end,
 }
 ```
+
+Some extra features will only be available if you have the next plugins installed:
+
+* `lewis6991/gitsigns.nvim`
+* `nvim-telescope/telescope.nvim`
+* `mfussenegger/nvim-dap`
 
 ## How to use
 You can add a component to your heirline config as
