@@ -165,14 +165,14 @@ end
 -- @usage local heirline_component = require("heirline-components.core").component.tabline_tabpages()
 function M.tabline_tabpages(opts)
   return extend_tbl({
-    heirline.make_tablist { -- tabpages
+    heirline.make_tablist({ -- tabpages
       provider = provider.tabnr(),
       hl = function(self)
         return hl.get_attributes(heirline.tab_type(self, "tab"), true)
       end,
-    },
+    }),
     { -- close button
-        provider = provider.close_button {
+      provider = provider.close_button {
         kind = "TabClose",
         padding = { left = 1, right = 1 },
       },
