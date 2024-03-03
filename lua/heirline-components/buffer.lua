@@ -139,7 +139,7 @@ function M.nav_to(tabnr)
   end
 end
 
---- Close a given buffer
+--- Close a given buffer.
 ---@param bufnr? number The buffer to close or the current buffer
 ---                     if not provided.
 ---@param force? boolean Whether or not to foce close the buffers,
