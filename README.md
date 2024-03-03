@@ -70,6 +70,7 @@ This is the heirline line you see at the top of the screen.
 | [tabline_tabpages](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_tabpages) | Tabline component to display the available tabpages. |
 | [tabline_conditional_padding](https://github.com/Zeioth/heirline-components.nvim/wiki/tabline_conditional_padding) | Tabine component to add padding under certain conditions. By default it adds padding when you open a side panel like neotree, or aerial, according to the panel width. |
 
+You can control the tabline from your keymappings with [heirline-components.buffer](https://github.com/Zeioth/heirline-components.nvim/wiki/buffer).
 
 ### Winbar components
 This is the heirline line you see under the tabline.
