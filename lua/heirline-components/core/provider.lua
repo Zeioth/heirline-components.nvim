@@ -154,7 +154,7 @@ function M.foldcolumn(opts)
   end
 end
 
---- A provider function for the current tab numbre.
+--- A provider function for the current tab number.
 ---@return function # the statusline function to return a string for a tab number.
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.tabnr() }
 function M.tabnr()

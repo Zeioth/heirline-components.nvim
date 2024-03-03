@@ -164,15 +164,15 @@ end
 ---@return table # The Heirline component table.
 -- @usage local heirline_component = require("heirline-components.core").component.tabline_tabpages()
 function M.tabline_tabpages(opts)
-  return extend_tbl({      -- tab list
-    tabpages = heirline.make_tablist {
+  return extend_tbl({
+    heirline.make_tablist { -- tabpages
       provider = provider.tabnr(),
       hl = function(self)
         return hl.get_attributes(heirline.tab_type(self, "tab"), true)
       end,
     },
-    close_button = {
-      provider = provider.close_button {
+    { -- close button
+        provider = provider.close_button {
         kind = "TabClose",
         padding = { left = 1, right = 1 },
       },
@@ -212,7 +212,7 @@ function M.tabline_buffers(opts)
       hl = function(self) return hl.get_attributes(self.tab_type .. "_close") end,
       padding = { left = 1, right = 1 },
       on_click = {
-        callback = function(_, minwid) buf_utils.close_buf(minwid) end,
+        callback = function(_, minwid) buf_utils.close(minwid) end,
         minwid = function(self) return self.bufnr end,
         name = "heirline_tabline_close_buffer_callback",
       },
