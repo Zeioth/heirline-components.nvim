@@ -662,7 +662,8 @@ function M.signcolumn(opts)
         then
           env.sign_handlers[args.sign.name](args)
         end
-          vim.cmd(":silent! Gitsigns preview_hunk") -- Show hunk on click
+        -- Disabled: Click on the component dit_diff instead of using this.
+        -- vim.cmd(":silent! Gitsigns preview_hunk")
       end,
     },
   }, opts)
