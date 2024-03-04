@@ -631,8 +631,10 @@ function M.numbercolumn(opts)
     condition = condition.numbercolumn_enabled,
     on_click = {
       name = "line_click",
-      callback = function()
-        pcall(function() require("dap").toggle_breakpoint() end)
+      callback = function(...)
+        local args = core_utils.statuscolumn_clickargs(...)
+        vim.cmd(tostring(args.mousepos.line)) -- support travel to line
+        if is_available "nvim-dap" then require("dap").toggle_breakpoint() end
       end,
     },
   }, opts)
