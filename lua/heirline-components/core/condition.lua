@@ -169,4 +169,16 @@ end
 ---@return boolean # false if vim.opt.signcolumn == "no", true otherwise
 function M.signcolumn_enabled() return vim.opt.signcolumn:get() ~= "no" end
 
+--- A condition function if the dap ui is opened.
+---@return boolean # true if there is a visible buf with the filetype "dapui_breakpoints"
+function M.is_dap_ui_visible()
+  for _, winid in ipairs(vim.api.nvim_list_wins()) do
+    local bufnr = vim.api.nvim_win_get_buf(winid)
+    local bufname = vim.api.nvim_buf_get_name(bufnr)
+    local buf_ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+    if bufname ~= "" and buf_ft == "dapui_breakpoints" then return true end
+  end
+  return false
+end
+
 return M
