@@ -69,11 +69,6 @@ local is_available = utils.is_available
 function M.fill(opts)
   return extend_tbl({
     provider = provider.fill(),
-    -- Due to a bug in heirline, using update = function on a component present
-    -- in "heirline > tabline > statuscolumn" will cause a error.
-    -- uncomment the next line once this is fixed (nvim 0.10?).
-    -- This is a minor optimization and it is not really important.
-    -- update = function() return false end
   },
   opts)
 end
