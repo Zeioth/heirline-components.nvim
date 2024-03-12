@@ -30,19 +30,28 @@
 --      -> nav
 --      -> cmd_info
 --      -> mode
+--      -> winbar_when_inactive
 --      -> breadcrumbs
---      -> breadcrumbs_when_inactive
 --      -> separated_path
 --      -> git_branch
 --      -> git_diff
 --      -> diagnostics
 --      -> treesitter
 --      -> lsp
---      -> virtualenv
+--      -> virtual_env
 --      -> foldcolumn
 --      -> numbercolumn
 --      -> signcolumn
 --      -> compiler_state
+--      -> compiler_play
+--      -> compiler_stop
+--      -> compiler_redo
+--      -> compiler_build_type
+--      -> neotree
+--      -> aerial
+--      -> zen_mode
+--      -> write_buffers
+--      -> write_all_buffers
 --      -> builder
 
 local M = {}
@@ -323,6 +332,22 @@ function M.mode(opts)
   )
 end
 
+--- This is what the winbar will display when the window is inactive.
+--- In order to work it must be the first component passed to `opts.winbar`.
+---@param opts? table options for configuring breadcrumbs and the overall padding.
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.winbar_when_inactive()
+function M.winbar_when_inactive(opts)
+  opts = extend_tbl({
+    condition = function() -- Don't show when the window loses focus.
+      local is_win_not_currently_active = not condition.is_active()
+      return is_win_not_currently_active
+    end,
+    -- Use any component here. Example:
+  }, opts)
+  return opts
+end
+
 --- A function to build a set of children components for an LSP breadcrumbs section.
 ---@param opts? table options for configuring breadcrumbs and the overall padding.
 ---@return table # The Heirline component table.
@@ -330,36 +355,11 @@ end
 function M.breadcrumbs(opts)
   opts = extend_tbl({
     hl = hl.get_attributes("winbar", true),
-    padding = { left = 1 },
+    padding = { left = 1, right = 1 },
     condition = condition.aerial_available,
     update = "CursorMoved",
   }, opts)
   opts.init = init.breadcrumbs(opts)
-  return opts
-end
-
---- This is a alternative version of the breadcrumbs component to show when the window is inactive.
---- In order to work it must be the first component passed to `opts.winbar`.
----@param opts? table options for configuring breadcrumbs and the overall padding.
----@return table # The Heirline component table.
--- @usage local heirline_component = require("heirline-components.core").component.breadcrumbs_when_inactive()
-function M.breadcrumbs_when_inactive(opts)
-  opts = extend_tbl(          {
-    condition = function()
-      -- don't show on inactive windows.
-      local is_win_not_currently_active = not condition.is_active()
-      return is_win_not_currently_active
-    end,
-    M.separated_path(),
-    M.file_info {
-      file_icon = { hl = hl.file_icon "winbar", padding = { left = 0 } },
-      file_modified = false,
-      file_read_only = false,
-      hl = hl.get_attributes("winbarnc", true),
-      surround = false,
-      update = "BufEnter",
-    },
-  }, opts)
   return opts
 end
 
@@ -675,21 +675,236 @@ function M.compiler_state(opts)
       condition = function()
         return is_available "compiler.nvim" or is_available "overseer.nvim"
       end,
-      padding = { left = 1, right = 0 },
+      padding = { left = 3, right = 0 },
     },
-    hl = hl.get_attributes "treesitter",
+    hl = hl.get_attributes("lsp"),
     on_click = {
       name = "compiler_open",
+      callback = function() vim.cmd("silent! OverseerToggle") end,
+    },
+  }, opts)
+  return M.builder(core_utils.setup_providers(opts, { "compiler_state" }))
+end
+
+--- Display a play icon that executes the cmd :CompilerOpen on click.
+---@param opts? table options for configuring compiler_play and the overall padding.
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.compiler_play()
+function M.compiler_play(opts)
+  opts = extend_tbl({
+    compiler_play = {
+      condition = function() return is_available("compiler.nvim") end,
+      padding = { left = 2, right = 2 }
+    },
+    hl = hl.get_attributes("winbar"),
+    on_click = {
+      name = "compiler_play",
       callback = function()
-        if is_available "compiler.nvim" then
-          vim.defer_fn(function() vim.cmd("CompilerToggleResults") end, 100)
+        vim.cmd("silent! CompilerOpen")
+      end
+    },
+  }, opts)
+  return M.builder(core_utils.setup_providers(opts, { "compiler_play" }))
+end
+
+--- Display a play icon that executes the cmd :CompilerStop on click.
+---@param opts? table options for configuring compiler_stop and the overall padding.
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.compiler_stop()
+function M.compiler_stop(opts)
+  opts = extend_tbl({
+    compiler_stop = {
+      condition = function() return is_available("compiler.nvim") end,
+      padding = { left = 2, right = 2 }
+    },
+    hl = hl.get_attributes("tab_close"),
+    on_click = {
+      name = "compiler_stop",
+      callback = function() vim.cmd("silent! CompilerStop") end,
+    },
+  }, opts)
+  return M.builder(core_utils.setup_providers(opts, { "compiler_stop" }))
+end
+
+--- Display a play icon that executes the cmd :CompilerOpen on click.
+---@param opts? table options for configuring compiler_play and the overall padding.
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.compiler_play()
+function M.compiler_redo(opts)
+  opts = extend_tbl({
+    compiler_redo = {
+      condition = function() return is_available("compiler.nvim") end,
+      padding = { left = 2, right = 2 }
+    },
+    hl = hl.get_attributes("winbar"),
+    on_click = {
+      name = "compiler_redo",
+      callback = function()
+        vim.cmd("silent! CompilerRedo")
+      end
+    },
+  }, opts)
+  return M.builder(core_utils.setup_providers(opts, { "compiler_redo" }))
+end
+
+--- Display a toogleabe label with the currently used build type.
+--- Compatible with c (cmake) and java (gradle).
+---@param opts? table options for configuring compiler_state and the overall padding.
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.compiler_build_type()
+function M.compiler_build_type(opts)
+  opts = extend_tbl({
+    compiler_build_type = {
+      condition = function()
+        local filetype = vim.bo.filetype
+        if is_available("compiler.nvim")
+          and filetype == "c"
+          or filetype == "java"
+        then
+          return true
+        else
+          return false
         end
+      end,
+      padding = { left = 2, right = 2 }
+    },
+    hl = hl.get_attributes("winbar"),
+    on_click = {
+      name = "compiler_build_type_toggle",
+      callback = function()
+        local build_type = ""
+        local ft = vim.bo.filetype
+
+        -- get state
+        if ft == "c" then
+          build_type = vim.g.CMAKE_BUILD_TYPE
+        elseif ft == "java" then
+          build_type = vim.g.GRADLE_BUILD_TYPE
+        end
+
+        -- toggle state
+        if     build_type == "release" then build_type = "debug"
+        elseif build_type == "Release" then build_type = "Debug"
+        elseif build_type == "debug"   then build_type = "release"
+        elseif build_type == "Debug"   then build_type = "Release" end
+
+        -- update state
+        if build_type ~= "" then
+          if ft == "c" then
+            vim.g.CMAKE_BUILD_TYPE = build_type
+          elseif ft == "java" then
+            vim.g.GRADLE_BUILD_TYPE = build_type
+          end
+          utils.trigger_event("ColorScheme") -- manually update heirline
+        end
+
       end,
     },
   }, opts)
-  return M.builder(core_utils.setup_providers(opts, {
-    "compiler_state",
-  }))
+  return M.builder(core_utils.setup_providers(opts, { "compiler_build_type" }))
+end
+
+--- Display a neotree icon that executes the cmd ':Neotree toggle' on click.
+---@param opts? table options for configuring compiler_play and the overall padding.
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.neotree()
+function M.neotree(opts)
+  opts = extend_tbl({
+    neotree = {
+      condition = function() return is_available("neo-tree.nvim") end,
+      padding = { left = 2, right = 2 }
+    },
+    hl = hl.get_attributes("winbar"),
+    on_click = {
+      name = "neotree",
+      callback = function()
+        vim.cmd("silent! Neotree toggle")
+      end
+    },
+  }, opts)
+  return M.builder(core_utils.setup_providers(opts, { "neotree" }))
+end
+
+--- Display a aerial icon that executes the cmd :AerialToggle on click.
+---@param opts? table options for configuring compiler_play and the overall padding.
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.aerial()
+function M.aerial(opts)
+  opts = extend_tbl({
+    aerial = {
+      condition = function() return is_available("aerial.nvim") end,
+      padding = { left = 2, right = 2 }
+    },
+    hl = hl.get_attributes("winbar"),
+    on_click = {
+      name = "aerial_toggle",
+      callback = function()
+        vim.cmd("silent! AerialToggle")
+      end
+    },
+  }, opts)
+  return M.builder(core_utils.setup_providers(opts, { "aerial" }))
+end
+
+--- Display a zen_mode icon that executes the cmd :ZenMode on click.
+---@param opts? table options for configuring zen_mode and the overall padding.
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.zen_mode()
+function M.zen_mode(opts)
+  opts = extend_tbl({
+    zen_mode = {
+      condition = function() return is_available("zen-mode.nvim") end,
+      padding = { left = 2, right = 2 }
+    },
+    hl = hl.get_attributes("winbar"),
+    on_click = {
+      name = "zen_toggle",
+      callback = function()
+        vim.cmd("silent! ZenMode")
+      end
+    },
+  }, opts)
+  return M.builder(core_utils.setup_providers(opts, { "zen_mode" }))
+end
+
+--- Display a write buffers icon that executes the cmd :w on click.
+---@param opts? table options for configuring write_buffe and the overall padding.
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.write_buffer()
+function M.write_buffer(opts)
+  opts = extend_tbl({
+    write_buffer = {
+      padding = { left = 2, right = 2 }
+    },
+    hl = hl.get_attributes("winbar"),
+    on_click = {
+      name = "write_buffer",
+      callback = function()
+        vim.cmd("w")
+      end
+    },
+  }, opts)
+  return M.builder(core_utils.setup_providers(opts, { "write_buffer" }))
+end
+
+--- Display a write all buffers icon that executes the cmd :wa on click.
+---@param opts? table options for configuring compiler_play and the overall padding.
+---@return table # The Heirline component table.
+-- @usage local heirline_component = require("heirline-components.core").component.write_all_buffers()
+function M.write_all_buffers(opts)
+  opts = extend_tbl({
+    write_all_buffers = {
+      padding = { left = 2, right = 2 }
+    },
+    hl = hl.get_attributes("winbar"),
+    on_click = {
+      name = "write_all_buffers",
+      callback = function()
+        vim.cmd("wa")
+      end
+    },
+  }, opts)
+  return M.builder(core_utils.setup_providers(opts, { "write_all_buffers" }))
 end
 
 --- A general function to build a section of Heirline providers with highlights,

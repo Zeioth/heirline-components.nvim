@@ -773,13 +773,102 @@ function M.compiler_state(opts)
     if tasks_by_status["RUNNING"] then state = "RUNNING"
     else state = "INACTIVE" end
 
-    return core_utils.stylize(state == "RUNNING" and (table.concat({
-          " ",
+    -- calcula aqui el icono a devolver, y simplemente devuelvelo.
+    local str
+    if tasks_by_status["RUNNING"] then
+      str = (table.concat({
+          "",
           spinner[math.floor(luv.hrtime() / 12e7) % #spinner + 1] or "",
           "compiling" or "",
-        }, "")
-      ), opts)
+        }, ""))
+    else
+      str = "󰑮"
+    end
 
+
+    return core_utils.stylize(str, opts)
+  end
+end
+
+--- A provider function for displaying the compiler play button.
+---@return string # the play button.
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.compiler_play() }
+-- @see heirline-components.core.utils.stylize
+function M.compiler_play(opts)
+  return core_utils.stylize(table.concat({""}, ""), opts)
+end
+
+--- A provider function for displaying the compiler stop button.
+---@return string # the stop button.
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.compiler_stop() }
+-- @see heirline-components.core.utils.stylize
+function M.compiler_stop(opts)
+  return core_utils.stylize(table.concat({""}, ""), opts)
+end
+
+--- A provider function for displaying the compiler redo button.
+---@return string # the redo button.
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.compiler_redo() }
+-- @see heirline-components.core.utils.stylize
+function M.compiler_redo(opts)
+  return core_utils.stylize(table.concat({""}, ""), opts)
+end
+
+--- A provider function for displaying the compiler redo button.
+---@return string # the redo button.
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.neotree() }
+-- @see heirline-components.core.utils.stylize
+function M.neotree(opts)
+  return core_utils.stylize(table.concat({""}, ""), opts)
+end
+
+--- A provider function for displaying the compiler redo button.
+---@return string # the redo button.
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.aerial() }
+-- @see heirline-components.core.utils.stylize
+function M.aerial(opts)
+  return core_utils.stylize(table.concat({""}, ""), opts)
+end
+
+--- A provider function for displaying the zen_mode button.
+---@return string # the zen_mode button.
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.zen-mode() }
+-- @see heirline-components.core.utils.stylize
+function M.zen_mode(opts)
+  return core_utils.stylize(table.concat({"󰰶"}, ""), opts)
+end
+
+--- A provider function for displaying the write buffer button.
+---@return string # the write buffer button.
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.write_buffer() }
+-- @see heirline-components.core.utils.stylize
+function M.write_buffer(opts)
+  return core_utils.stylize(table.concat({""}, ""), opts)
+end
+
+--- A provider function for displaying the write all buffers button.
+---@return string # the write all buffers button.
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.write_all_buffers() }
+-- @see heirline-components.core.utils.stylize
+function M.write_all_buffers(opts)
+  return core_utils.stylize(table.concat({""}, ""), opts)
+end
+
+--- A provider function for displaying the compiler build type.
+---@return function # the build type label.
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.compiler_build_type() }
+-- @see heirline-components.core.utils.stylize
+function M.compiler_build_type(opts)
+  return function()
+
+    local build_type = ""
+    if vim.bo.filetype == "c" then
+      build_type = vim.g.CMAKE_BUILD_TYPE
+    elseif vim.g.heirline_components_build_type == "java" then
+      build_type = vim.g.GRADLE_BUILD_TYPE
+    end
+
+    return core_utils.stylize(table.concat({build_type}, ""), opts)
   end
 end
 
