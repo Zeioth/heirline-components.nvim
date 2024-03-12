@@ -86,6 +86,15 @@ This is the heirline line you see under the tabline.
 |-----------|-------------|
 | [winbar_when_inactive](https://github.com/Zeioth/heirline-components.nvim/wiki/winbar_when_inactive) | If present, it will empty the winbar while the buffer doesn't have the focus (like in the terminal, neotree, etc). |
 | [breadcrumbs](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs) | Winbar component to display a LSP based breadcrumbs section. |
+| [compiler_play](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_play) ||
+| [compiler_stop](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_stop) ||
+| [compiler_redo](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_redo) ||
+| [compiler_build_type](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_build_type) ||
+| [neotree](https://github.com/Zeioth/heirline-components.nvim/wiki/neotree) ||
+| [aerial](https://github.com/Zeioth/heirline-components.nvim/wiki/aerial) ||
+| [zen_mode](https://github.com/Zeioth/heirline-components.nvim/wiki/zen_mode) ||
+| [write_buffer](https://github.com/Zeioth/heirline-components.nvim/wiki/write_buffer) ||
+| [write_all_buffers](https://github.com/Zeioth/heirline-components.nvim/wiki/write_all_buffers) ||
 
 ### Statuscolumn components
 This is the heirline column you see at the left of the screen.
