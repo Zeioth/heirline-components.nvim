@@ -52,9 +52,9 @@ Some extra features will only be available if you have the next plugins installe
 * `nvim-telescope/telescope.nvim`
 * `zeioth/compiler.nvim`
 * `mfussenegger/nvim-dap`
-* `folke/zen-mode.nvim`
 * `nvim-neo-tree/neo-tree.nvim`
 * `stevearc/aerial.nvim`
+* `folke/zen-mode.nvim`
 
 ## How to use
 You can add a component to your heirline config as
