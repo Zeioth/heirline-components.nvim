@@ -88,7 +88,7 @@ This is the heirline line you see under the tabline.
 | [breadcrumbs](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs) | Winbar component to display a LSP based breadcrumbs section. |
 | [compiler_play](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_play) | Winbar component to display a button to open `compiler.nvim`. |
 | [compiler_stop](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_stop) | Winbar component to display a button to dispose all `compiler.nvim` tasks. |
-| [compiler_redo](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_redo) | Winbar component to display a button to redo the last selected compilation in `compiler.nvim`. |
+| [compiler_redo](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_redo) | Winbar component to display a button to redo the last selected `compiler.nvim` action. |
 | [compiler_build_type](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_build_type) | Winbar component to toggle the current build type of your cmake or gradle project on `compiler.nvim`. |
 | [neotree](https://github.com/Zeioth/heirline-components.nvim/wiki/neotree) | Winbar component to display a button to toggle `neotree`. |
 | [aerial](https://github.com/Zeioth/heirline-components.nvim/wiki/aerial) | Winbar component to display a button to toggle `aerial`. |
