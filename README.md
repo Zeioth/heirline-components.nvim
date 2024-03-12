@@ -86,15 +86,15 @@ This is the heirline line you see under the tabline.
 |-----------|-------------|
 | [winbar_when_inactive](https://github.com/Zeioth/heirline-components.nvim/wiki/winbar_when_inactive) | If present, it will empty the winbar while the buffer doesn't have the focus (like in the terminal, neotree, etc). |
 | [breadcrumbs](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs) | Winbar component to display a LSP based breadcrumbs section. |
-| [compiler_play](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_play) ||
-| [compiler_stop](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_stop) ||
-| [compiler_redo](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_redo) ||
-| [compiler_build_type](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_build_type) ||
-| [neotree](https://github.com/Zeioth/heirline-components.nvim/wiki/neotree) ||
-| [aerial](https://github.com/Zeioth/heirline-components.nvim/wiki/aerial) ||
-| [zen_mode](https://github.com/Zeioth/heirline-components.nvim/wiki/zen_mode) ||
-| [write_buffer](https://github.com/Zeioth/heirline-components.nvim/wiki/write_buffer) ||
-| [write_all_buffers](https://github.com/Zeioth/heirline-components.nvim/wiki/write_all_buffers) ||
+| [compiler_play](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_play) | Winbar component to display a button to open `compiler.nvim`. |
+| [compiler_stop](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_stop) | Winbar component to display a button to dispose all `compiler.nvim` tasks. |
+| [compiler_redo](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_redo) | Winbar component to display a button to redo the last selected compilation in `compiler.nvim`. |
+| [compiler_build_type](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_build_type) | Winbar component to toggle the current build type of your cmake or gradle project on `compiler.nvim`. |
+| [neotree](https://github.com/Zeioth/heirline-components.nvim/wiki/neotree) | Winbar component to display a button to toggle `neotree`. |
+| [aerial](https://github.com/Zeioth/heirline-components.nvim/wiki/aerial) | Winbar component to display a button to toggle aerial. |
+| [zen_mode](https://github.com/Zeioth/heirline-components.nvim/wiki/zen_mode) | Winbar component to display a button to toggle `zen-mode`. |
+| [write_buffer](https://github.com/Zeioth/heirline-components.nvim/wiki/write_buffer) | Winbar component to display a button to write the current buffer. |
+| [write_all_buffers](https://github.com/Zeioth/heirline-components.nvim/wiki/write_all_buffers) | Winbar component to display a button to write all loaded buffers. |
 
 ### Statuscolumn components
 This is the heirline column you see at the left of the screen.
