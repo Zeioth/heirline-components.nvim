@@ -91,7 +91,7 @@ This is the heirline line you see under the tabline.
 | [compiler_redo](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_redo) | Winbar component to display a button to redo the last selected compilation in `compiler.nvim`. |
 | [compiler_build_type](https://github.com/Zeioth/heirline-components.nvim/wiki/compiler_build_type) | Winbar component to toggle the current build type of your cmake or gradle project on `compiler.nvim`. |
 | [neotree](https://github.com/Zeioth/heirline-components.nvim/wiki/neotree) | Winbar component to display a button to toggle `neotree`. |
-| [aerial](https://github.com/Zeioth/heirline-components.nvim/wiki/aerial) | Winbar component to display a button to toggle aerial. |
+| [aerial](https://github.com/Zeioth/heirline-components.nvim/wiki/aerial) | Winbar component to display a button to toggle `aerial`. |
 | [zen_mode](https://github.com/Zeioth/heirline-components.nvim/wiki/zen_mode) | Winbar component to display a button to toggle `zen-mode`. |
 | [write_buffer](https://github.com/Zeioth/heirline-components.nvim/wiki/write_buffer) | Winbar component to display a button to write the current buffer. |
 | [write_all_buffers](https://github.com/Zeioth/heirline-components.nvim/wiki/write_all_buffers) | Winbar component to display a button to write all loaded buffers. |
