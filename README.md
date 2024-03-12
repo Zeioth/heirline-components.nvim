@@ -84,7 +84,7 @@ This is the heirline line you see under the tabline.
 
 | Component | Description |
 |-----------|-------------|
-| [breadcrumbs_when_inactive](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs_when_inactive) | An alternative breadcrumbs component when the window is inactive. |
+| [winbar_when_inactive](https://github.com/Zeioth/heirline-components.nvim/wiki/winbar_when_inactive) | If present, it will empty the winbar while the buffer doesn't have the focus (like in the terminal, neotree, etc). |
 | [breadcrumbs](https://github.com/Zeioth/heirline-components.nvim/wiki/breadcrumbs) | Winbar component to display a LSP based breadcrumbs section. |
 
 ### Statuscolumn components
