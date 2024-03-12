@@ -717,7 +717,7 @@ function M.compiler_stop(opts)
       condition = function() return is_available("compiler.nvim") end,
       padding = { left = 2, right = 2 }
     },
-    hl = hl.get_attributes("tab_close"),
+    hl = hl.get_attributes("winbar"),
     on_click = {
       name = "compiler_stop",
       callback = function() vim.cmd("silent! CompilerStop") end,
