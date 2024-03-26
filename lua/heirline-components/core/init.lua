@@ -238,7 +238,7 @@ function M.subscribe_to_events()
         vim.t.bufs = bufs
       end
       vim.t.bufs = vim.tbl_filter(buf_utils.is_valid, vim.t.bufs)
-      utils.trigger_event("User HeirlineComponentsUpdateTabline")
+      utils.trigger_event("User HeirlineComponentsTablineBuffersUpdated")
     end,
   })
 
@@ -261,7 +261,7 @@ function M.subscribe_to_events()
         end
       end
       vim.t.bufs = vim.tbl_filter(buf_utils.is_valid, vim.t.bufs)
-      if removed then utils.trigger_event("User HeirlineComponentsUpdateTabline") end
+      if removed then utils.trigger_event("User HeirlineComponentsTablineBuffersUpdated") end
       vim.cmd.redrawtabline()
     end,
   })
