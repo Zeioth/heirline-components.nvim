@@ -232,10 +232,6 @@ function M.subscribe_to_events()
     callback = function(args)
       if not vim.t.bufs then vim.t.bufs = {} end
       if not buf_utils.is_valid(args.buf) then return end
-      if args.buf ~= utils.current_buf then
-        utils.last_buf = utils.current_buf
-        utils.current_buf = args.buf
-      end
       local bufs = vim.t.bufs
       if not vim.tbl_contains(bufs, args.buf) then
         table.insert(bufs, args.buf)
