@@ -72,9 +72,9 @@ end
 ---@return boolean comparison true if A is sorted before B, false if B should be sorted before A
 function M.comparator.unique_path(bufnr_a, bufnr_b)
   local unique_path_bufnr_a = require("heirline-components.core.provider").unique_path() { bufnr = bufnr_a }
-    .. fnamemodify(bufinfo(bufnr_a).name, ":t")
+      .. fnamemodify(bufinfo(bufnr_a).name, ":t")
   local unique_path_bufnr_b = require("heirline-components.core.provider").unique_path() { bufnr = bufnr_b }
-    .. fnamemodify(bufinfo(bufnr_b).name, ":t")
+      .. fnamemodify(bufinfo(bufnr_b).name, ":t")
 
   return unique_path_bufnr_a < unique_path_bufnr_b
 end

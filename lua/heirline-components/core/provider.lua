@@ -51,7 +51,9 @@ local function resolve_sign(bufnr, lnum)
   for _, extmark in pairs(extmarks) do
     local sign_def = extmark[4]
     if sign_def.sign_text and (
-      not ret or (ret.priority < sign_def.priority)) then ret = sign_def end
+          not ret or (ret.priority < sign_def.priority)) then
+      ret = sign_def
+    end
   end
   if ret then return { text = ret.sign_text, texthl = ret.sign_hl_group } end
 end
@@ -81,10 +83,10 @@ function M.numbercolumn(opts)
       local cur = relnum and (rnum > 0 and rnum or (num and lnum or 0)) or lnum
       if opts.thousands and cur > 999 then
         cur = cur
-          :reverse()
-          :gsub("%d%d%d", "%1" .. opts.thousands)
-          :reverse()
-          :gsub("^%" .. opts.thousands, "")
+            :reverse()
+            :gsub("%d%d%d", "%1" .. opts.thousands)
+            :reverse()
+            :gsub("^%" .. opts.thousands, "")
       end
       str = (rnum == 0 and not opts.culright and relnum) and cur .. "%=" or "%=" .. cur
     end
@@ -586,7 +588,7 @@ function M.diagnostics(opts)
     local count
     if vim.diagnostic.count then
       count = vim.diagnostic.count(bufnr)[vim.diagnostic.severity[opts.severity]]
-        or 0
+          or 0
     else -- TODO: remove when dropping support for neovim 0.9
       count = #vim.diagnostic.get(
         bufnr,
@@ -685,7 +687,6 @@ function M.lsp_client_names(opts)
   end
 end
 
-
 --- A provider function for showing the current virtual environment name
 ---@param opts table options passed to the stylize function
 ---@return function # the function for outputting the virtual environment
@@ -770,17 +771,20 @@ function M.compiler_state(opts)
     tasks = ovs.list_tasks({ unique = false })
     tasks_by_status = ovs.util.tbl_group_by(tasks, "status")
 
-    if tasks_by_status["RUNNING"] then state = "RUNNING"
-    else state = "INACTIVE" end
+    if tasks_by_status["RUNNING"] then
+      state = "RUNNING"
+    else
+      state = "INACTIVE"
+    end
 
     -- calcula aqui el icono a devolver, y simplemente devuelvelo.
     local str
     if tasks_by_status["RUNNING"] then
       str = (table.concat({
-          "",
-          spinner[math.floor(luv.hrtime() / 12e7) % #spinner + 1] or "",
-          "compiling" or "",
-        }, ""))
+        "",
+        spinner[math.floor(luv.hrtime() / 12e7) % #spinner + 1] or "",
+        "compiling" or "",
+      }, ""))
     else
       str = "󰑮"
     end
@@ -795,7 +799,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.compiler_play() }
 -- @see heirline-components.core.utils.stylize
 function M.compiler_play(opts)
-  return core_utils.stylize(table.concat({""}, ""), opts)
+  return core_utils.stylize(table.concat({ "" }, ""), opts)
 end
 
 --- A provider function for displaying the compiler stop button.
@@ -803,7 +807,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.compiler_stop() }
 -- @see heirline-components.core.utils.stylize
 function M.compiler_stop(opts)
-  return core_utils.stylize(table.concat({""}, ""), opts)
+  return core_utils.stylize(table.concat({ "" }, ""), opts)
 end
 
 --- A provider function for displaying the compiler redo button.
@@ -811,7 +815,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.compiler_redo() }
 -- @see heirline-components.core.utils.stylize
 function M.compiler_redo(opts)
-  return core_utils.stylize(table.concat({""}, ""), opts)
+  return core_utils.stylize(table.concat({ "" }, ""), opts)
 end
 
 --- A provider function for displaying the compiler redo button.
@@ -819,7 +823,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.neotree() }
 -- @see heirline-components.core.utils.stylize
 function M.neotree(opts)
-  return core_utils.stylize(table.concat({""}, ""), opts)
+  return core_utils.stylize(table.concat({ "" }, ""), opts)
 end
 
 --- A provider function for displaying the compiler redo button.
@@ -827,7 +831,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.aerial() }
 -- @see heirline-components.core.utils.stylize
 function M.aerial(opts)
-  return core_utils.stylize(table.concat({""}, ""), opts)
+  return core_utils.stylize(table.concat({ "" }, ""), opts)
 end
 
 --- A provider function for displaying the zen_mode button.
@@ -835,7 +839,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.zen-mode() }
 -- @see heirline-components.core.utils.stylize
 function M.zen_mode(opts)
-  return core_utils.stylize(table.concat({"󰰶"}, ""), opts)
+  return core_utils.stylize(table.concat({ "󰰶" }, ""), opts)
 end
 
 --- A provider function for displaying the write buffer button.
@@ -843,7 +847,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.write_buffer() }
 -- @see heirline-components.core.utils.stylize
 function M.write_buffer(opts)
-  return core_utils.stylize(table.concat({""}, ""), opts)
+  return core_utils.stylize(table.concat({ "" }, ""), opts)
 end
 
 --- A provider function for displaying the write all buffers button.
@@ -851,7 +855,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.write_all_buffers() }
 -- @see heirline-components.core.utils.stylize
 function M.write_all_buffers(opts)
-  return core_utils.stylize(table.concat({""}, ""), opts)
+  return core_utils.stylize(table.concat({ "" }, ""), opts)
 end
 
 --- A provider function for displaying the compiler build type.
@@ -860,7 +864,6 @@ end
 -- @see heirline-components.core.utils.stylize
 function M.compiler_build_type(opts)
   return function()
-
     local build_type = ""
     if vim.bo.filetype == "c" then
       build_type = vim.g.CMAKE_BUILD_TYPE
@@ -868,7 +871,7 @@ function M.compiler_build_type(opts)
       build_type = vim.g.GRADLE_BUILD_TYPE
     end
 
-    return core_utils.stylize(table.concat({build_type}, ""), opts)
+    return core_utils.stylize(table.concat({ build_type }, ""), opts)
   end
 end
 

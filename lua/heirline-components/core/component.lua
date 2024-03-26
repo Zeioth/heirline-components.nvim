@@ -77,9 +77,9 @@ local is_available = utils.is_available
 -- @usage local heirline_component = require("heirline-components.core").component.fill()
 function M.fill(opts)
   return extend_tbl({
-    provider = provider.fill(),
-  },
-  opts)
+      provider = provider.fill(),
+    },
+    opts)
 end
 
 --- A function to build a set of children components
@@ -283,8 +283,8 @@ function M.cmd_info(opts)
       color = "cmd_info_bg",
       condition = function()
         return condition.is_hlsearch()
-          or condition.is_macro_recording()
-          or condition.is_statusline_showcmd()
+            or condition.is_macro_recording()
+            or condition.is_statusline_showcmd()
       end,
     },
     condition = function() return vim.opt.cmdheight:get() == 0 end,
@@ -313,8 +313,10 @@ function M.mode(opts)
     surround = {
       separator = "left",
       color = hl.mode_bg,
-      update = { "ModeChanged",
-        pattern = "*:*" }
+      update = {
+        "ModeChanged",
+        pattern = "*:*"
+      }
     },
     hl = hl.get_attributes "mode",
     update = {
@@ -569,7 +571,7 @@ function M.lsp(opts)
               core_utils.build_provider(p_opts, provider[p](p_opts)),
               core_utils.build_provider(p_opts, provider.str(p_opts)),
             }
-          or false
+            or false
       end
     )
   )
@@ -651,9 +653,9 @@ function M.signcolumn(opts)
       callback = function(...)
         local args = core_utils.statuscolumn_clickargs(...)
         if
-          args.sign
-          and args.sign.name
-          and env.sign_handlers[args.sign.name]
+            args.sign
+            and args.sign.name
+            and env.sign_handlers[args.sign.name]
         then
           env.sign_handlers[args.sign.name](args)
         end
@@ -758,8 +760,8 @@ function M.compiler_build_type(opts)
       condition = function()
         local filetype = vim.bo.filetype
         if is_available("compiler.nvim")
-          and filetype == "c"
-          or filetype == "java"
+            and filetype == "c"
+            or filetype == "java"
         then
           return true
         else
@@ -783,10 +785,15 @@ function M.compiler_build_type(opts)
         end
 
         -- toggle state
-        if     build_type == "release" then build_type = "debug"
-        elseif build_type == "Release" then build_type = "Debug"
-        elseif build_type == "debug"   then build_type = "release"
-        elseif build_type == "Debug"   then build_type = "Release" end
+        if build_type == "release" then
+          build_type = "debug"
+        elseif build_type == "Release" then
+          build_type = "Debug"
+        elseif build_type == "debug" then
+          build_type = "release"
+        elseif build_type == "Debug" then
+          build_type = "Release"
+        end
 
         -- update state
         if build_type ~= "" then
@@ -797,7 +804,6 @@ function M.compiler_build_type(opts)
           end
           utils.trigger_event("ColorScheme") -- manually update heirline
         end
-
       end,
     },
   }, opts)
@@ -925,10 +931,10 @@ function M.builder(opts)
   end
   for key, entry in pairs(opts) do
     if
-      type(key) == "number"
-      and type(entry) == "table"
-      and provider[entry.provider]
-      and (entry.opts == nil or type(entry.opts) == "table")
+        type(key) == "number"
+        and type(entry) == "table"
+        and provider[entry.provider]
+        and (entry.opts == nil or type(entry.opts) == "table")
     then
       entry.provider = provider[entry.provider](entry.opts)
     end
@@ -950,7 +956,7 @@ function M.builder(opts)
         opts.surround.condition,
         opts.surround.update
       )
-    or children
+      or children
 end
 
 return M

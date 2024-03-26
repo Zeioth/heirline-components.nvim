@@ -12,4 +12,3 @@ M.setup = function(opts)
 end
 
 return M
-

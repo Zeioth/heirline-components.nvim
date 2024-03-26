@@ -10,7 +10,7 @@ function M.set(opts)
 
   --- By default we use nerd icons. But you can specify your own icons.
   --- If you only define one icon, defaults will be used for the rest.
-  M.icons =  extend_tbl({
+  M.icons = extend_tbl({
     ActiveLSP = "",
     ActiveTS = "",
     ArrowLeft = "",

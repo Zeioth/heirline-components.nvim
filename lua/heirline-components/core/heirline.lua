@@ -42,7 +42,7 @@ M.make_buflist = function(component)
           right = "tabline_bg",
         }
       end,
-      { -- bufferlist
+      {              -- bufferlist
         init = function(self) self.tab_type = M.tab_type(self) end,
         on_click = { -- add clickable component to each buffer
           callback = function(_, minwid) vim.api.nvim_win_set_buf(0, minwid) end,
@@ -74,7 +74,7 @@ M.make_buflist = function(component)
           end,
           hl = hl.get_attributes "buffer_picker",
         },
-        component, -- create buffer component
+        component,                                             -- create buffer component
       },
       function(self) return buf_utils.is_valid(self.bufnr) end -- disable surrounding
     ),

@@ -102,7 +102,6 @@ end
 
 --- This function return a list of colors that can be passed to `heirline.load_colors()`
 function M.get_colors()
-
   local override_colors = false
   local C = nil
   if config.colors then
