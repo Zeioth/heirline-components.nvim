@@ -171,4 +171,4 @@ If you want to help me, please star this repository to increase the visibility o
 [![Stargazers over time](https://starchart.cc/Zeioth/heirline-components.nvim.svg)](https://starchart.cc/Zeioth/heirline-components.nvim)
 
 ## Known bugs (PRs are welcome)
-* `tabline_buffers` Opening nvim with multiple files as arguments, provoke that only the first file is displayed in the component.
+* `tabline_buffers` Opening nvim with multiple files as arguments, provoke that only the first file is displayed in the component. See [here](https://github.com/Zeioth/heirline-components.nvim/blob/3f031cd825d9e7a4f3081cbc7cbb07dd43902d3f/lua/heirline-components/core/init.lua#L230). When sending the PR, make sure `:tabnew` is working correctly.
