@@ -153,7 +153,7 @@ Heirline-components listen for two different events:
 | Event | Description |
 |--------|------------|
 | [ColorScheme](https://neovim.io/doc/user/autocmd.html#ColorScheme) | When you trigger this event, Heirline-components will reload its colors. |
-| `User HeirlineComponentsTablineBuffersUpdated` | This event is automatically triggered when a buffer is added or removed from the tabline_buffers component. |
+| `User HeirlineComponentsUpdateTabline` | When you trigger this event the tabline components tabline_buffers and tabline_tabpages will reload to reflect recent changes. |
 
 So if you experience issues with colors or outdated tabline info, trigger these events with `:doautocmd`.
 
