@@ -113,7 +113,7 @@ function M.move(n)
     end
   end
   vim.t.bufs = bufs       -- set buffers
-  require("heirline-components.utils").trigger_event("User HeirlineComponentsUpdateTabline")
+  require("heirline-components.utils").trigger_event("User HeirlineComponentsTablineBuffersUpdated")
   vim.cmd.redrawtabline() -- redraw tabline
 end
 
@@ -243,7 +243,7 @@ function M.sort(compare_func, skip_autocmd)
     local bufs = vim.t.bufs
     table.sort(bufs, compare_func)
     vim.t.bufs = bufs
-    if not skip_autocmd then require("heirline-components.utils").trigger_event("User HeirlineComponentsUpdateTabline") end
+    if not skip_autocmd then require("heirline-components.utils").trigger_event("User HeirlineComponentsTablineBuffersUpdated") end
     vim.cmd.redrawtabline()
     return true
   end
@@ -254,7 +254,7 @@ end
 function M.close_tab()
   if #vim.api.nvim_list_tabpages() > 1 then
     vim.t.bufs = nil
-    require("heirline-components.utils").trigger_event("User HeirlineComponentsUpdateTabline")
+    require("heirline-components.utils").trigger_event("User HeirlineComponentsTablineBuffersUpdated")
     vim.cmd.tabclose()
   end
 end
