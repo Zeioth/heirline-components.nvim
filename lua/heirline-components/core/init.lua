@@ -238,7 +238,32 @@ function M.subscribe_to_events()
         vim.t.bufs = bufs
       end
       vim.t.bufs = vim.tbl_filter(buf_utils.is_valid, vim.t.bufs)
-      utils.trigger_event("User HeirlineComponentsUpdateTabline")
+      utils.trigger_event("User HeirlineComponentsTablineBuffersUpdated")
+    end,
+  })
+  -- 2. Same, but only when nvim is opened (in case it has files as args).
+  vim.api.nvim_create_autocmd({ "UIEnter" }, {
+    desc = "Update buffers when adding new buffers",
+    callback = function()
+      -- get all buffers
+      local current_tab_bufs = vim.tbl_filter(function()
+        local win = vim.api.nvim_get_current_win()
+        return vim.api.nvim_win_get_tabpage(win)
+      end, vim.api.nvim_list_bufs())
+
+      -- add them to vim.t.bufs so tabline_buffers update.
+      for _, buf in ipairs(current_tab_bufs) do
+        if not vim.t.bufs then vim.t.bufs = {} end
+        if not buf_utils.is_valid(buf) then goto continue end
+        local bufs = vim.t.bufs
+        if not vim.tbl_contains(bufs, buf) then
+          table.insert(bufs, buf)
+          vim.t.bufs = bufs
+        end
+        vim.t.bufs = vim.tbl_filter(buf_utils.is_valid, vim.t.bufs)
+        utils.trigger_event("User HeirlineComponentsTablineBuffersUpdated")
+        ::continue::
+      end
     end,
   })
 
@@ -261,7 +286,7 @@ function M.subscribe_to_events()
         end
       end
       vim.t.bufs = vim.tbl_filter(buf_utils.is_valid, vim.t.bufs)
-      if removed then utils.trigger_event("User HeirlineComponentsUpdateTabline") end
+      if removed then utils.trigger_event("User HeirlineComponentsTablineBuffersUpdated") end
       vim.cmd.redrawtabline()
     end,
   })
