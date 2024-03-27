@@ -65,7 +65,7 @@ require("heirline-components.all").component.some_component()
 Normally you will use components directly like in this example. But in some cases you can customize a component. Refer to every specific component for more info.
 
 ## Example config
-You can find the example config we use for NormalNvim [here](https://github.com/NormalNvim/NormalNvim/blob/5d300efbf1d9a06edd3bf6e492e3f8178958edf6/lua/plugins/2-ui.lua#L309).
+You can find the example config we use for NormalNvim [here](https://github.com/NormalNvim/NormalNvim/blob/69e334c1f10554ba03b07193b4d4aad5c71c021a/lua/plugins/2-ui.lua#L320).
 
 ## Components
 
