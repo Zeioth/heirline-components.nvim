@@ -252,10 +252,11 @@ function M.subscribe_to_events()
       end, vim.api.nvim_list_bufs())
 
       -- add them to vim.t.bufs so tabline_buffers update.
+      local bufs
       for _, buf in ipairs(current_tab_bufs) do
         if not vim.t.bufs then vim.t.bufs = {} end
         if not buf_utils.is_valid(buf) then goto continue end
-        local bufs = vim.t.bufs
+        bufs = vim.t.bufs
         if not vim.tbl_contains(bufs, buf) then
           table.insert(bufs, buf)
           vim.t.bufs = bufs
