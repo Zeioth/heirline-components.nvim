@@ -153,7 +153,7 @@ Heirline-components listen for two different events:
 | Event | Description |
 |--------|------------|
 | [ColorScheme](https://neovim.io/doc/user/autocmd.html#ColorScheme) | When you trigger this event, Heirline-components will reload its colors. |
-| `User HeirlineComponentsTablineBuffersUpdated` | This event is automatically triggered every time a buffer is added or deleted from the component tabline_buffers (which is ruled by vim.t.bufs). This is useful if you only want to show the tabline when more that 1 buffer is opened. To do so, you can create a autocmd to listen to this event. Then make it set the `vim.opt.showtabline = 2` when `#vim.t.bufs > 1`. |
+| `User HeirlineComponentsTablineBuffersUpdated` | This event is automatically triggered every time a buffer is added or deleted from the component `tabline_buffers` (which is ruled by vim.t.bufs). This is useful if you only want to show the tabline when more that 1 buffer is opened. To do so, you can create a autocmd to listen to this event. Then make it set the `vim.opt.showtabline = 2` when `#vim.t.bufs > 1`. |
 
 So if you experience issues with colors or outdated tabline info, trigger these events with `:doautocmd`.
 
