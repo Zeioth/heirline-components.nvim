@@ -148,7 +148,7 @@ function M.tabline_conditional_padding(opts)
       self.winid = vim.api.nvim_tabpage_list_wins(0)[1]
       local pattern = (opts and opts.pattern) or {
         filetype = { "aerial", "dapui_.", "dap%-repl", "neo%-tree", "NvimTree", "edgy", "calltree" },
-        buftype = {}
+        buftype = { "nofile" }
       }
       return condition.buffer_matches(
         pattern,
