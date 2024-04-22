@@ -921,33 +921,36 @@ end
 function M.builder(opts)
   opts = extend_tbl({ padding = { left = 0, right = 0 } }, opts)
   local children = {}
+  local offset = 0
+
   if opts.padding.left > 0 then -- add left padding
     table.insert(children, {
       provider = core_utils.pad_string(
-        " ",
-        { left = opts.padding.left - 1 }
-      ),
+        " ", { left = opts.padding.left - 1 })
     })
+    offset = offset + 1
   end
+
+  -- build component
   for key, entry in pairs(opts) do
-    if
-        type(key) == "number"
+    if type(key) == "number"
         and type(entry) == "table"
         and provider[entry.provider]
         and (entry.opts == nil or type(entry.opts) == "table")
     then
       entry.provider = provider[entry.provider](entry.opts)
     end
+    if type(key) == "number" then key = key + offset end
     children[key] = entry
   end
+
   if opts.padding.right > 0 then -- add right padding
     table.insert(children, {
-      provider = core_utils.pad_string(
-        " ",
-        { right = opts.padding.right - 1 }
-      ),
+      provider = core_utils.pad_string(" ", {
+        right = opts.padding.right - 1 })
     })
   end
+
   return opts.surround
       and core_utils.surround(
         opts.surround.separator,

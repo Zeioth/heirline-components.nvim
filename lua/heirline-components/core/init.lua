@@ -110,13 +110,14 @@ function M.breadcrumbs(opts)
 end
 
 --- An `init` function to build a set of children components for a separated path to file.
----@param opts? table options for configuring the breadcrumbs (default: `{ max_depth = 3, path_func = provider.unique_path(), separator = "  ", suffix = true, padding = { left = 0, right = 0 } }`)
+---@param opts? table options for configuring the breadcrumbs (default: `{ max_depth = 3, path_func = provider.unique_path(), delimiter = "/", separator = "  ", suffix = true, padding = { left = 0, right = 0 } }`)
 ---@return function # The Heirline init function.
 -- @usage local heirline_component = { init = require("heirline-components.core").init.separated_path { padding = { left = 1 } } }
 function M.separated_path(opts)
   opts = extend_tbl({
     max_depth = 3,
     path_func = provider.unique_path(),
+    delimiter = vim.fn.has "win32" == 1 and "\\" or "/",
     separator = env.separators.path or "  ",
     suffix = true,
     padding = { left = 0, right = 0 },
@@ -125,7 +126,7 @@ function M.separated_path(opts)
   return function(self)
     local path = opts.path_func(self)
     if path == "." then path = "" end -- if there is no path, just replace with empty string.
-    local data = vim.fn.split(path, "/")
+    local data = vim.fn.split(path, opts.delimiter)
     local children = {}
     -- add prefix if needed, use the separator if true, or use the provided character.
     if opts.prefix and not vim.tbl_isempty(data) then
