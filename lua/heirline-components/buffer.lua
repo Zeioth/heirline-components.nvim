@@ -180,6 +180,34 @@ end
 ---@param force? boolean Whether or not to force close the buffers,
 ---                      or confirm changes (default: false).
 function M.wipe(bufnr, force)
+
+  -- Helper function
+  local function is_last_valid_window()
+    local nwins = 0
+    for _, window in ipairs(vim.api.nvim_list_wins()) do
+      local buffer = vim.api.nvim_win_get_buf(window)
+      if vim.api.nvim_buf_get_option(buffer, 'buftype') ~= "nofile" then
+        nwins = nwins + 1
+      end
+    end
+
+    local result = nwins <= 1
+    return result
+  end
+
+  -- Helper function
+  local function close_all_nofile_bufs()
+    for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.api.nvim_buf_get_option(buffer, 'buftype') == "nofile" then
+        vim.api.nvim_buf_delete(buffer, { force = true })
+      end
+    end
+  end
+
+  -- This line prevents sidebars from overtaking the visual space when the last
+  -- window is closed.
+  if is_last_valid_window() then close_all_nofile_bufs() end
+
   if force == nil then force = false end
   if require("heirline-components.utils").is_available "mini.bufremove" then
     M.close(bufnr, force)   -- close buffer(s)
