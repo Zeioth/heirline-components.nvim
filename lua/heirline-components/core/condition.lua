@@ -139,7 +139,8 @@ function M.aerial_available() return package.loaded["aerial"] end
 -- @usage local heirline_component = { provider = "Example Provider", condition = require("heirline-components.core").condition.lsp_attached }
 function M.lsp_attached(bufnr)
   if type(bufnr) == "table" then bufnr = bufnr.bufnr end
-  return next(vim.lsp.get_active_clients { bufnr = bufnr or 0 }) ~= nil
+-- TODO: remove get_active_clients when dropping support for Neovim 0.9
+  return next((vim.lsp.get_clients or vim.lsp.get_active_clients) { bufnr = bufnr or 0 }) ~= nil
 end
 
 --- A condition function if treesitter is in use.
