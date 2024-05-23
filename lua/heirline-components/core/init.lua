@@ -190,7 +190,8 @@ end
 ---@return function # The Heirline init function.
 -- @usage local heirline_component = { init = require("heirline-components.core").init.update_events { "BufEnter", { "User", pattern = "LspProgressUpdate" } } }
 function M.update_events(opts)
-  if not vim.tbl_islist(opts) then opts = { opts } end
+  -- TODO: remove tbl_islist when dropping support for Neovim 0.9
+  if not (vim.islist or vim.tbl_islist)(opts) then opts = { opts } end
   return function(self)
     if not rawget(self, "once") then
       local clear_cache = function() self._win_cache = nil end
@@ -302,7 +303,8 @@ function M.lsp_progress()
   -- clear lingering progress messages
   for id, _ in pairs(lsp.progress) do
     if
-        not next(vim.lsp.get_active_clients({ id = tonumber(id:match "^%d+") }))
+    -- TODO: remove get_active_clients when dropping support for Neovim 0.9
+        not next((vim.lsp.get_clients or vim.lsp.get_active_clients)({ id = tonumber(id:match "^%d+") }))
     then
       lsp.progress[id] = nil
     end
