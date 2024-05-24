@@ -14,7 +14,6 @@ local core_utils = require "heirline-components.core.utils"
 local utils = require "heirline-components.utils"
 local extend_tbl = utils.extend_tbl
 local get_icon = utils.get_icon
-local luv = vim.uv or vim.loop -- TODO: REMOVE WHEN DROPPING SUPPORT FOR Neovim v0.9
 local is_available = utils.is_available
 
 
@@ -612,7 +611,7 @@ function M.lsp_progress(opts)
     return core_utils.stylize(
       Lsp
       and (
-        spinner[math.floor(luv.hrtime() / 12e7) % #spinner + 1]
+        spinner[math.floor(vim.uv.hrtime() / 12e7) % #spinner + 1]
         .. table.concat({
           Lsp.title or "",
           Lsp.message or "",
@@ -640,11 +639,8 @@ function M.lsp_client_names(opts)
   return function(self)
     local bufnr = self and self.bufnr or 0
     local buf_client_names = {}
-    -- TODO: remove get_active_clients when dropping support for Neovim 0.9
     for _, client in
-    pairs(
-      (vim.lsp.get_clients or vim.lsp.get_active_clients) { bufnr = bufnr }
-    )
+    pairs(vim.lsp.get_clients({ bufnr = bufnr }))
     do
       if client.name == "null-ls" and opts.integrations.null_ls then
         local null_ls_sources = {}
@@ -782,7 +778,7 @@ function M.compiler_state(opts)
     if tasks_by_status["RUNNING"] then
       str = (table.concat({
         "",
-        spinner[math.floor(luv.hrtime() / 12e7) % #spinner + 1] or "",
+        spinner[math.floor(vim.uv.hrtime() / 12e7) % #spinner + 1] or "",
         "compiling" or "",
       }, ""))
     else

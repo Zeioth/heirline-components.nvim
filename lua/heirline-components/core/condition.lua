@@ -139,7 +139,7 @@ function M.aerial_available() return package.loaded["aerial"] end
 -- @usage local heirline_component = { provider = "Example Provider", condition = require("heirline-components.core").condition.lsp_attached }
 function M.lsp_attached(bufnr)
   if type(bufnr) == "table" then bufnr = bufnr.bufnr end
-  return next(vim.lsp.get_active_clients { bufnr = bufnr or 0 }) ~= nil
+  return next(vim.lsp.get_clients { bufnr = bufnr or 0 }) ~= nil
 end
 
 --- A condition function if treesitter is in use.
@@ -175,7 +175,7 @@ function M.is_dap_ui_visible()
   for _, winid in ipairs(vim.api.nvim_list_wins()) do
     local bufnr = vim.api.nvim_win_get_buf(winid)
     local bufname = vim.api.nvim_buf_get_name(bufnr)
-    local buf_ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+    local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
     if bufname ~= "" and buf_ft == "dapui_breakpoints" then return true end
   end
   return false

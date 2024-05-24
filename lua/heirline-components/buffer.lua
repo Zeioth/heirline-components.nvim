@@ -186,7 +186,7 @@ function M.wipe(bufnr, force)
     local nwins = 0
     for _, window in ipairs(vim.api.nvim_list_wins()) do
       local buffer = vim.api.nvim_win_get_buf(window)
-      if vim.api.nvim_buf_get_option(buffer, 'buftype') ~= "nofile" then
+      if vim.api.nvim_get_option_value('buftype', { buf = buffer }) ~= "nofile" then
         nwins = nwins + 1
       end
     end
@@ -198,7 +198,7 @@ function M.wipe(bufnr, force)
   -- Helper function
   local function close_all_nofile_bufs()
     for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
-      if vim.api.nvim_buf_get_option(buffer, 'buftype') == "nofile" then
+      if vim.api.nvim_get_option_value('buftype', { buf = buffer }) == "nofile" then
         vim.api.nvim_buf_delete(buffer, { force = true })
       end
     end
