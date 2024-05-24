@@ -301,8 +301,7 @@ function M.lsp_progress()
 
   -- clear lingering progress messages
   for id, _ in pairs(lsp.progress) do
-    if
-        not next(vim.lsp.get_clients({ id = tonumber(id:match "^%d+") }))
+    if not next(vim.lsp.get_clients({ id = tonumber(id:match "^%d+") }))
     then
       lsp.progress[id] = nil
     end
