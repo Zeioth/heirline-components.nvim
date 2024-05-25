@@ -56,6 +56,7 @@ Some extra features will only be available if you have the next plugins installe
 * `nvim-neo-tree/neo-tree.nvim`
 * `stevearc/aerial.nvim`
 * `folke/zen-mode.nvim`
+* `linux-cultist/venv-selector.nvim`
 
 ## How to use
 You can add a component to your heirline config as
