@@ -590,6 +590,14 @@ function M.virtual_env(opts)
       condition = condition.has_virtual_env,
     },
     hl = hl.get_attributes "virtual_env",
+    on_click = {
+      name = "heirline_virtual_env",
+      callback = function()
+        if is_available("venv-selector.nvim") then
+          vim.schedule(vim.cmd.VenvSelect)
+        end
+      end,
+    },
   }, opts)
   return M.builder(core_utils.setup_providers(opts, { "virtual_env" }))
 end
