@@ -631,7 +631,11 @@ end
 function M.lsp_client_names(opts)
   opts = extend_tbl(
     {
-      integrations = { null_ls = true, conform = true, lint = true },
+      integrations = {
+        null_ls = is_available("none-ls.nvim"),
+        conform = is_available("conform.nvim"),
+        ["nvim-lint"] = is_available("nvim-lint"),
+      },
       truncate = 0.25,
     },
     opts
@@ -639,15 +643,11 @@ function M.lsp_client_names(opts)
   return function(self)
     local bufnr = self and self.bufnr or 0
     local buf_client_names = {}
-    for _, client in
-    pairs(vim.lsp.get_clients({ bufnr = bufnr }))
-    do
+    for _, client in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
       if client.name == "null-ls" and opts.integrations.null_ls then
         local null_ls_sources = {}
         for _, type in ipairs { "FORMATTING", "DIAGNOSTICS" } do
-          for _, source in
-          ipairs(core_utils.null_ls_sources(vim.bo.filetype, type))
-          do
+          for _, source in ipairs(core_utils.null_ls_sources(vim.bo.filetype, type)) do
             null_ls_sources[source] = true
           end
         end
@@ -656,23 +656,14 @@ function M.lsp_client_names(opts)
         table.insert(buf_client_names, client.name)
       end
     end
-    if opts.integrations.lint then -- nvim-lint integration
-      local lint_avail, lint = pcall(require, "lint")
-      if lint_avail then
-        vim.list_extend(buf_client_names, lint.get_running(bufnr))
+    if opts.integrations.conform and package.loaded["conform"] then -- conform integration
+      local conform = require "conform"
+      if not conform.will_fallback_lsp { bufnr = bufnr } then
+        vim.list_extend(buf_client_names, conform.list_formatters_for_buffer(bufnr))
       end
     end
-    if opts.integrations.conform then -- conform integration
-      local conform_avail, conform = pcall(require, "conform")
-      if conform_avail then
-        vim.list_extend(
-          buf_client_names,
-          vim.tbl_map(
-            function(c) return c.name end,
-            conform.list_formatters(bufnr)
-          )
-        )
-      end
+    if opts.integrations["nvim-lint"] and package.loaded["lint"] then -- nvim-lint integration
+      vim.list_extend(buf_client_names, require("lint")._resolve_linter_by_ft(vim.bo[bufnr].filetype))
     end
     local str = table.concat(buf_client_names, ", ")
     if type(opts.truncate) == "number" then
