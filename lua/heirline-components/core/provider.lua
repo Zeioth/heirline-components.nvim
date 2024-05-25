@@ -629,8 +629,7 @@ end
 -- @usage local heirline_component = { provider = require("astroui.status").provider.lsp_client_names({ integrations = { null_ls = true, conform = true, lint = true }, truncate = 0.25 }) }
 -- @see astroui.status.utils.stylize
 function M.lsp_client_names(opts)
-  opts = extend_tbl(
-    {
+  opts = extend_tbl({
       integrations = {
         null_ls = is_available("none-ls.nvim"),
         conform = is_available("conform.nvim"),
@@ -646,8 +645,12 @@ function M.lsp_client_names(opts)
     for _, client in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
       if client.name == "null-ls" and opts.integrations.null_ls then
         local null_ls_sources = {}
+        local ft = vim.bo[bufnr].filetype
+        local params =
+          { client_id = client.id, bufname = vim.api.nvim_buf_get_name(bufnr), bufnr = bufnr, filetype = ft, ft = ft }
         for _, type in ipairs { "FORMATTING", "DIAGNOSTICS" } do
-          for _, source in ipairs(core_utils.null_ls_sources(vim.bo.filetype, type)) do
+          params.method = type
+          for _, source in ipairs(core_utils.null_ls_sources(params)) do
             null_ls_sources[source] = true
           end
         end
