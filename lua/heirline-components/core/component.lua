@@ -544,7 +544,6 @@ function M.lsp(opts)
         "LspAttach",
         "LspDetach",
         "BufEnter",
-        "FileType",
         "VimResized",
         callback = vim.schedule_wrap(function() vim.cmd.redrawstatus() end),
       },
@@ -738,7 +737,7 @@ function M.compiler_stop(opts)
 end
 
 --- Display a play icon that executes the cmd :CompilerOpen on click.
----@param opts? table options for configuring compiler_play and the overall padding.
+---@param opts? table options for configuring compiler_redo and the overall padding.
 ---@return table # The Heirline component table.
 -- @usage local heirline_component = require("heirline-components.core").component.compiler_play()
 function M.compiler_redo(opts)
@@ -760,7 +759,7 @@ end
 
 --- Display a toogleabe label with the currently used build type.
 --- Compatible with c (cmake) and java (gradle).
----@param opts? table options for configuring compiler_state and the overall padding.
+---@param opts? table options for configuring compiler_built_type and the overall padding.
 ---@return table # The Heirline component table.
 -- @usage local heirline_component = require("heirline-components.core").component.compiler_build_type()
 function M.compiler_build_type(opts)
@@ -820,7 +819,7 @@ function M.compiler_build_type(opts)
 end
 
 --- Display a neotree icon that executes the cmd ':Neotree toggle' on click.
----@param opts? table options for configuring compiler_play and the overall padding.
+---@param opts? table options for configuring neotree and the overall padding.
 ---@return table # The Heirline component table.
 -- @usage local heirline_component = require("heirline-components.core").component.neotree()
 function M.neotree(opts)
@@ -841,7 +840,7 @@ function M.neotree(opts)
 end
 
 --- Display a aerial icon that executes the cmd :AerialToggle on click.
----@param opts? table options for configuring compiler_play and the overall padding.
+---@param opts? table options for configuring aerial and the overall padding.
 ---@return table # The Heirline component table.
 -- @usage local heirline_component = require("heirline-components.core").component.aerial()
 function M.aerial(opts)
@@ -883,7 +882,7 @@ function M.zen_mode(opts)
 end
 
 --- Display a write buffers icon that executes the cmd :w on click.
----@param opts? table options for configuring write_buffe and the overall padding.
+---@param opts? table options for configuring write_buffer and the overall padding.
 ---@return table # The Heirline component table.
 -- @usage local heirline_component = require("heirline-components.core").component.write_buffer()
 function M.write_buffer(opts)
@@ -903,7 +902,7 @@ function M.write_buffer(opts)
 end
 
 --- Display a write all buffers icon that executes the cmd :wa on click.
----@param opts? table options for configuring compiler_play and the overall padding.
+---@param opts? table options for configuring write_all_buffers and the overall padding.
 ---@return table # The Heirline component table.
 -- @usage local heirline_component = require("heirline-components.core").component.write_all_buffers()
 function M.write_all_buffers(opts)
