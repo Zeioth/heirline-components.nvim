@@ -762,23 +762,22 @@ function M.compiler_state(opts)
     tasks_by_status = ovs.util.tbl_group_by(tasks, "status")
 
     if tasks_by_status["RUNNING"] then
-      state = "RUNNING"
+      state = "compiling"
     else
-      state = "INACTIVE"
+      state = ""
     end
 
-    -- calcula aqui el icono a devolver, y simplemente devuelvelo.
+    -- calculate string to return
     local str
     if tasks_by_status["RUNNING"] then
       str = (table.concat({
         "",
         spinner[math.floor(vim.uv.hrtime() / 12e7) % #spinner + 1] or "",
-        "compiling" or "",
+        state,
       }, ""))
     else
       str = "󰑮"
     end
-
 
     return core_utils.stylize(str, opts)
   end
