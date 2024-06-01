@@ -101,7 +101,11 @@ end
 -- @see heirline-components.core.utils.stylize
 function M.foldcolumn(opts)
   opts = extend_tbl({ escape = false }, opts)
+	
+  -- Nvim C Extensions
   local ffi = require "ffi"
+	
+  -- Custom C extension to get direct fold information from Neovim
   ffi.cdef [[
 	  typedef struct {} Error;
 	  typedef struct {} win_T;
@@ -115,10 +119,12 @@ function M.foldcolumn(opts)
 	  win_T *find_window_by_handle(int Window, Error *err);
 	  int compute_foldcolumn(win_T *wp, int col);
   ]]
+	
   local fillchars = vim.opt.fillchars:get()
   local foldopen = fillchars.foldopen or get_icon "FoldOpened"
   local foldclosed = fillchars.foldclose or get_icon "FoldClosed"
   local foldsep = fillchars.foldsep or get_icon "FoldSeparator"
+	
   return function()                                            -- move to M.fold_indicator
     local wp = ffi.C.find_window_by_handle(0, ffi.new "Error") -- get window handler
     local width = ffi.C.compute_foldcolumn(wp, 0)              -- get foldcolumn width
