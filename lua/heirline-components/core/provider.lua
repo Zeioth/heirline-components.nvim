@@ -128,6 +128,7 @@ function M.foldcolumn(opts)
   return function()                                            -- move to M.fold_indicator
     local wp = ffi.C.find_window_by_handle(0, ffi.new "Error") -- get window handler
     local width = ffi.C.compute_foldcolumn(wp, 0)              -- get foldcolumn width
+    
     -- get fold info of current line
     local foldinfo = width > 0 and ffi.C.fold_info(wp, vim.v.lnum)
         or { start = 0, level = 0, llevel = 0, lines = 0 }
