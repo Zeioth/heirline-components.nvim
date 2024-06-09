@@ -647,8 +647,11 @@ function M.lsp_client_names(opts)
     opts
   )
   return function(self)
+    local str
     local bufnr = self and self.bufnr or 0
     local buf_client_names = {}
+
+    -- none-ls integration
     for _, client in pairs(vim.lsp.get_clients({ bufnr = bufnr })) do
       if client.name == "null-ls" and opts.integrations.null_ls then
         local null_ls_sources = {}
@@ -666,20 +669,41 @@ function M.lsp_client_names(opts)
         table.insert(buf_client_names, client.name)
       end
     end
-    if opts.integrations.conform and package.loaded["conform"] then -- conform integration
+
+    -- conform integration
+    if opts.integrations.conform and package.loaded["conform"] then
       local conform = require "conform"
       if not conform.will_fallback_lsp { bufnr = bufnr } then
-        vim.list_extend(buf_client_names, vim.tbl_map(function(c) return c.name end, conform.list_formatters(bufnr)))
+        vim.list_extend(buf_client_names, conform.list_formatters_for_buffer(bufnr))
       end
     end
-    if opts.integrations["nvim-lint"] and package.loaded["lint"] then -- nvim-lint integration
+
+    -- nvim-lint integration
+    if opts.integrations["nvim-lint"] and package.loaded["lint"] then
       vim.list_extend(buf_client_names, require("lint")._resolve_linter_by_ft(vim.bo[bufnr].filetype))
     end
-    local str = table.concat(buf_client_names, ", ")
+
+    -- filter duplicate names
+    local filter_duplicates = false
+    if filter_duplicates then
+      local buf_client_names_set, client_name_lookup = {}, {}
+      for _, client in ipairs(buf_client_names) do
+        if not client_name_lookup[client] then
+          client_name_lookup[client] = true
+          table.insert(buf_client_names_set, client)
+        end
+      end
+      str = table.concat(buf_client_names_set, ", ")
+    else
+      str = table.concat(buf_client_names, ", ")
+    end
+
+    -- truncate
     if type(opts.truncate) == "number" then
       local max_width = math.floor(core_utils.width() * opts.truncate)
       if #str > max_width then str = string.sub(str, 0, max_width) .. "…" end
     end
+
     return core_utils.stylize(str, opts)
   end
 end
