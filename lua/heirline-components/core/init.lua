@@ -232,6 +232,7 @@ function M.subscribe_to_events()
     desc = "Update buffers when adding new buffers",
     callback = function(args)
       if not vim.t.bufs then vim.t.bufs = {} end
+
       if not buf_utils.is_valid(args.buf) then return end
       local bufs = vim.t.bufs
       if not vim.tbl_contains(bufs, args.buf) then
@@ -246,6 +247,8 @@ function M.subscribe_to_events()
   vim.api.nvim_create_autocmd({ "UIEnter" }, {
     desc = "Update buffers when adding new buffers",
     callback = function()
+      if not vim.t.bufs then vim.t.bufs = {} end
+
       -- get all buffers
       local current_tab_bufs = vim.tbl_filter(function()
         local win = vim.api.nvim_get_current_win()
@@ -255,7 +258,6 @@ function M.subscribe_to_events()
       -- add them to vim.t.bufs so tabline_buffers update.
       local bufs
       for _, buf in ipairs(current_tab_bufs) do
-        if not vim.t.bufs then vim.t.bufs = {} end
         if not buf_utils.is_valid(buf) then goto continue end
         bufs = vim.t.bufs
         if not vim.tbl_contains(bufs, buf) then
@@ -273,6 +275,8 @@ function M.subscribe_to_events()
   vim.api.nvim_create_autocmd("BufDelete", {
     desc = "Update buffers when deleting buffers",
     callback = function(args)
+      if not vim.t.bufs then vim.t.bufs = {} end
+
       local removed
       for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
         local bufs = vim.t[tab].bufs
