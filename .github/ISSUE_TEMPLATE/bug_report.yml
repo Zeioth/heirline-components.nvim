@@ -53,12 +53,6 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: Minimal example file
-      description: A small example file you are editing that produces the issue
-    validations:
-      required: false
-  - type: textarea
-    attributes:
       label: Minimal init.lua
       description:
         Minimal `init.lua` to reproduce this issue. Save as `repro.lua` and run with `nvim -u repro.lua`
