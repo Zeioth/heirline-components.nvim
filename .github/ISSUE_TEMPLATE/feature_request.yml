@@ -37,8 +37,8 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: Additional details
-      description: Any additional information you would like to provide. Things you've tried, alternatives considered, examples from other plugins, etc.
+      label: Additional info
+      description: Any additional context you would like to provide. Things you've tried, alternatives considered, examples from other plugins, etc.
     validations:
       required: false
 
