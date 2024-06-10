@@ -54,7 +54,7 @@ body:
   - type: textarea
     attributes:
       label: Current Behavior
-      description: A concise description of what currently happening.
+      description: A concise description of what's currently happening instead.
     validations:
       required: true
   - type: textarea
