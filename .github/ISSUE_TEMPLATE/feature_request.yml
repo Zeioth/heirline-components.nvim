@@ -5,12 +5,6 @@ labels: [enhancement]
 body:
   - type: checkboxes
     attributes:
-      label: The feature request doesn't exist already
-      options:
-        - label: I have checked
-          required: true
-  - type: checkboxes
-    attributes:
       label: Did you check existing requests?
       options:
         - label: I have searched the existing issues

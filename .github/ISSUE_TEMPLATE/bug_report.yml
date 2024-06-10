@@ -3,12 +3,6 @@ description: File a bug/issue
 title: "🐛bug: "
 labels: [bug]
 body:
-  - type: checkboxes
-    attributes:
-      label: The issue hasn't been reported already
-      options:
-        - label: I have checked
-          required: true
   - type: input
     attributes:
       label: "Neovim version (nvim -v)"
