@@ -37,7 +37,7 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: Additional info
+      label: More info
       description: Any additional context you would like to provide. Things you've tried, alternatives considered, examples from other plugins, etc.
     validations:
       required: false

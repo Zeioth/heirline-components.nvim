@@ -116,7 +116,7 @@ body:
       required: false
   - type: textarea
     attributes:
-      label: Additional info
+      label: More info
       description: Any additional context or screenshots you would like to provide
     validations:
       required: false
