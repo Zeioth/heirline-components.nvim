@@ -27,15 +27,6 @@ body:
       description: A clear and concise description of what the bug is.
     validations:
       required: true
-  - type: dropdown
-    attributes:
-      label: What is the severity of this bug?
-      options:
-        - minor (It's broken but I can live with it)
-        - major (I can use it, but this requires atention)
-        - critical (I can't use it at all)
-    validations:
-      required: true
   - type: textarea
     attributes:
       label: Steps To Reproduce
