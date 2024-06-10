@@ -53,6 +53,12 @@ body:
       required: true
   - type: textarea
     attributes:
+      label: Current Behavior
+      description: A concise description of what currently happening.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
       label: Minimal init.lua
       description:
         Minimal `init.lua` to reproduce this issue. Save as `repro.lua` and run with `nvim -u repro.lua`
