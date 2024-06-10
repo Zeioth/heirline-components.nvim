@@ -3,10 +3,12 @@ description: File a bug/issue
 title: "🐛bug: "
 labels: [bug]
 body:
-  - type: markdown
+  - type: checkboxes
     attributes:
-      value: |
-        Before reporting a bug, make sure to search [existing issues](https://github.com/Zeioth/heirline-components.nvim/issues)
+      label: Did you check for [existing issues](https://github.com/Zeioth/heirline-components.nvim/issues)?
+      options:
+        - label: I have searched the existing issues
+          required: true
   - type: input
     attributes:
       label: "Neovim version (nvim -v)"
