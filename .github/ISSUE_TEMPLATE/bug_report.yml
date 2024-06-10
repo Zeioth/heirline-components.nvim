@@ -31,10 +31,9 @@ body:
     attributes:
       label: What is the severity of this bug?
       options:
-        - minor (annoyance)
-        - tolerable (can work around it)
-        - breaking (some functionality is broken)
-        - blocking (cannot use plugin)
+        - minor
+        - major
+        - critical
     validations:
       required: true
   - type: textarea
