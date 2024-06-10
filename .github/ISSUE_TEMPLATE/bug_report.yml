@@ -34,13 +34,13 @@ body:
   - type: textarea
     attributes:
       label: Expected Behavior
-      description: A concise description of what you expected to happen.
+      description: Description of what should happen.
     validations:
       required: true
   - type: textarea
     attributes:
       label: Current Behavior
-      description: A concise description of what's currently happening instead.
+      description: Description of what's currently happening instead.
     validations:
       required: true
   - type: textarea
