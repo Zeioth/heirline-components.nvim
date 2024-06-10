@@ -18,7 +18,7 @@ body:
   - type: textarea
     attributes:
       label: Describe the bug
-      description: A clear and concise description of what the bug is.
+      description: Concise description of the bug.
     validations:
       required: true
   - type: textarea
