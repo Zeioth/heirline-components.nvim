@@ -5,7 +5,7 @@ labels: [enhancement]
 body:
   - type: checkboxes
     attributes:
-      label: Please make sure the feature request doesn't exist already
+      label: Make sure the feature request doesn't exist already
       options:
         - label: I have checked
           required: true
