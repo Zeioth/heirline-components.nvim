@@ -3,10 +3,12 @@ description: Submit a feature request
 title: "✨feature request: "
 labels: [enhancement]
 body:
-  - type: markdown
+  - type: checkboxes
     attributes:
-      value: |
-        Before submitting a feature request, make sure to search for [existing requests](https://github.com/stevearc/overseer.nvim/issues)
+      label: Please make sure the feature request doesn't exist already
+      options:
+        - label: I have checked
+          required: true
   - type: checkboxes
     attributes:
       label: Did you check existing requests?
