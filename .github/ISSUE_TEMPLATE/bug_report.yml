@@ -31,9 +31,9 @@ body:
     attributes:
       label: What is the severity of this bug?
       options:
-        - minor
-        - major
-        - critical
+        - minor (It's broken but I can live with it)
+        - major (I can use it, but this requires atention)
+        - critical (I can't use it at all)
     validations:
       required: true
   - type: textarea
