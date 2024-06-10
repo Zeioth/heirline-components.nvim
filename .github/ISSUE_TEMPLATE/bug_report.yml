@@ -7,7 +7,7 @@ body:
     attributes:
       label: Please make sure the issue doesn't exist already
       options:
-        - label: I have searched the existing issues
+        - label: I have checked
           required: true
   - type: input
     attributes:
