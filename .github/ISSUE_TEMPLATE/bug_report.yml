@@ -5,7 +5,7 @@ labels: [bug]
 body:
   - type: checkboxes
     attributes:
-      label: Make sure the issue hasn't been reported already
+      label: The issue hasn't been reported already
       options:
         - label: I have checked
           required: true
