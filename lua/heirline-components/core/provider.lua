@@ -673,7 +673,7 @@ function M.lsp_client_names(opts)
     -- conform integration
     if opts.integrations.conform and package.loaded["conform"] then
       local conform = require "conform"
-      if not conform.will_fallback_lsp { bufnr = bufnr } then
+      if not conform.list_formatters_to_run(bufnr)[2] then
         vim.list_extend(buf_client_names, conform.list_formatters_for_buffer(bufnr))
       end
     end
