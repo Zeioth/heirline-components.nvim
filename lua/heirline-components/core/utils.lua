@@ -4,8 +4,6 @@ local M = {}
 
 local env = require "heirline-components.core.env"
 local utils = require "heirline-components.utils"
-local extend_tbl = utils.extend_tbl
-local get_icon = utils.get_icon
 
 --- Convert a component parameter table to a table
 --- that can be used with the component builder.
@@ -78,14 +76,14 @@ local function escape(str) return str:gsub("%%", "%%%%") end
 ---@return string # the stylized string.
 -- @usage local string = require("heirline-components.core").utils.stylize("Hello", { padding = { left = 1, right = 1 }, icon = { kind = "String" } })
 function M.stylize(str, opts)
-  opts = extend_tbl({
+  opts = utils.extend_tbl({
     padding = { left = 0, right = 0 },
     separator = { left = "", right = "" },
     show_empty = false,
     escape = true,
     icon = { kind = "NONE", padding = { left = 0, right = 0 } },
   }, opts)
-  local icon = M.pad_string(get_icon(opts.icon.kind), opts.icon.padding)
+  local icon = M.pad_string(utils.get_icon(opts.icon.kind), opts.icon.padding)
   return str
       and (str ~= "" or opts.show_empty)
       and opts.separator.left .. M.pad_string(
@@ -118,7 +116,7 @@ function M.surround(separator, color, component, condition, update)
   if separator[1] ~= "" then
     table.insert(
       surrounded,
-      extend_tbl {
+      utils.extend_tbl {
         provider = separator[1], --bind alt-j:down,alt-k:up
         hl = function(self)
           local s_color = surround_color(self)
@@ -139,7 +137,7 @@ function M.surround(separator, color, component, condition, update)
   if separator[2] ~= "" then
     table.insert(
       surrounded,
-      extend_tbl(base_separator, {
+      utils.extend_tbl(base_separator, {
         provider = separator[2],
         hl = function(self)
           local s_color = surround_color(self)
@@ -149,6 +147,52 @@ function M.surround(separator, color, component, condition, update)
     )
   end
   return surrounded
+end
+
+---@type false|fun(bufname: string, filetype: string, buftype: string): string?,string?
+local cached_icon_provider
+--- Resolve the icon and color information for a given buffer
+---@param bufnr integer the buffer number to resolve the icon and color of
+---@return string? icon the icon string
+---@return string? color the hex color of the icon
+function M.icon_provider(bufnr)
+  if not bufnr then bufnr = 0 end
+  local bufname = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t")
+  local filetype = vim.bo[bufnr].filetype
+  local buftype = vim.bo[bufnr].buftype
+  if cached_icon_provider then return cached_icon_provider(bufname, filetype, buftype) end
+  if cached_icon_provider == false then return end
+
+  local _, mini_icons = pcall(require, "mini.icons")
+  -- mini.icons
+  if _G.MiniIcons then
+    cached_icon_provider = function(_bufname, _filetype)
+      local icon, hl, is_default = mini_icons.get("file", _bufname)
+      if is_default then
+        icon, hl, is_default = mini_icons.get("filetype", _filetype)
+      end
+      local color = require("astroui").get_hlgroup(hl).fg
+      if type(color) == "number" then color = string.format("#%06x", color) end
+      return icon, color
+    end
+    return cached_icon_provider(bufname, filetype, bufname)
+  end
+
+  -- nvim-web-devicons
+  local devicons_avail, devicons = pcall(require, "nvim-web-devicons")
+  if devicons_avail then
+    cached_icon_provider = function(_bufname, _filetype, _buftype)
+      local icon, color = devicons.get_icon_color(_bufname)
+      if not color then
+        icon, color = devicons.get_icon_color_by_filetype(_filetype, { default = _buftype == "" })
+      end
+      return icon, color
+    end
+    return cached_icon_provider(bufname, filetype, buftype)
+  end
+
+  -- fallback to no icon provider
+  cached_icon_provider = false
 end
 
 --- Encode a position to a single value that can be decoded later.

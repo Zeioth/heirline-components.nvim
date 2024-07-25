@@ -6,6 +6,7 @@
 local M = {}
 local env = require "heirline-components.core.env"
 local config = vim.g.heirline_components_config
+local core_utils = require "heirline-components.core.utils"
 
 --- Get the highlight background color of the lualine theme for the current colorscheme.
 ---@param mode string the neovim mode to get the color of.
@@ -35,16 +36,7 @@ function M.mode_bg() return env.modes[vim.fn.mode()][2] end
 ---@return table # the highlight group for the current filetype foreground.
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.fileicon(), hl = require("heirline-components.core").hl.filetype_color },
 function M.filetype_color(self)
-  local devicons_avail, devicons = pcall(require, "nvim-web-devicons")
-  if not devicons_avail then return {} end
-  local _, color = devicons.get_icon_color(
-    vim.fn.fnamemodify(
-      vim.api.nvim_buf_get_name(self and self.bufnr or 0),
-      ":t"
-    ),
-    nil,
-    { default = true }
-  )
+  local _, color = core_utils.icon_provider(self and self.bufnr or 0)
   return { fg = color }
 end
 

@@ -530,19 +530,9 @@ end
 -- @see heirline-components.core.utils.stylize
 function M.file_icon(opts)
   return function(self)
-    local devicons_avail, devicons = pcall(require, "nvim-web-devicons")
-    if not devicons_avail then return "" end
-    local bufnr = self and self.bufnr or 0
-    local ft_icon, _ = devicons.get_icon(
-      vim.fn.fnamemodify(vim.api.nvim_buf_get_name(bufnr), ":t")
+    return core_utils.stylize(
+      core_utils.icon_provider(self and self.bufnr or 0), opts
     )
-    if not ft_icon then
-      ft_icon, _ = devicons.get_icon_by_filetype(
-        vim.bo[bufnr].filetype,
-        { default = true }
-      )
-    end
-    return core_utils.stylize(ft_icon, opts)
   end
 end
 
