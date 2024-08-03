@@ -60,8 +60,8 @@ end
 --- A provider function for the numbercolumn string
 ---@param opts? table options passed to the stylize function
 ---@return function # the statuscolumn string for adding the numbercolumn
--- @usage local heirline_component = { provider = require("astroui.status").provider.numbercolumn }
--- @see astroui.status.utils.stylize
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.numbercolumn }
+-- @see heirline-components.core.utils.stylize
 function M.numbercolumn(opts)
   opts = extend_tbl({ thousands = false, culright = true, escape = false }, opts)
   return function(self)
@@ -623,8 +623,8 @@ end
 --- A provider function for showing the connected LSP client names
 ---@param opts? table options for explanding null_ls clients, max width percentage, and options passed to the stylize function.
 ---@return function # the function for outputting the LSP client names
--- @usage local heirline_component = { provider = require("astroui.status").provider.lsp_client_names({ integrations = { null_ls = true, conform = true, lint = true }, truncate = 0.25 }) }
--- @see astroui.status.utils.stylize
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.lsp_client_names({ integrations = { null_ls = true, conform = true, lint = true }, truncate = 0.25 }) }
+-- @see heirline-components.core.utils.stylize
 function M.lsp_client_names(opts)
   opts = extend_tbl({
       integrations = {
@@ -701,8 +701,8 @@ end
 --- A provider function for showing the current virtual environment name
 ---@param opts table options passed to the stylize function
 ---@return function # the function for outputting the virtual environment
--- @usage local heirline_component = { provider = require("astroui.status").provider.virtual_env() }
--- @see astroui.status.utils.stylize
+-- @usage local heirline_component = { provider = require("heirline-components.core").provider.virtual_env() }
+-- @see heirline-components.core.utils.stylize
 function M.virtual_env(opts)
   opts = extend_tbl(
     {
