@@ -41,8 +41,7 @@ function M.is_hlsearch() return vim.v.hlsearch ~= 0 end
 ---@return boolean # whether or not statusline showcmd is enabled.
 -- @usage local heirline_component = { provider = "Example Provider", condition = require("heirline-components.core").condition.is_statusline_showcmd }
 function M.is_statusline_showcmd()
-  return vim.fn.has "nvim-0.9" == 1
-      and vim.opt.showcmdloc:get() == "statusline"
+  return vim.opt.showcmdloc:get() == "statusline"
 end
 
 --- A condition function if the current file is in a git repo.
@@ -94,15 +93,11 @@ end
 -- @usage local heirline_component = { provider = "Example Provider", condition = require("heirline-components.core").condition.has_diagnostics }
 function M.has_diagnostics(bufnr)
   if type(bufnr) == "table" then bufnr = bufnr.bufnr end
-  if vim.diagnostic.count then
-    return vim.tbl_contains(
-      vim.diagnostic.count(bufnr or 0),
-      function(v) return v > 0 end,
-      { predicate = true }
-    )
-  else -- TODO: remove when dropping support for neovim 0.9
-    return #vim.diagnostic.get(bufnr or 0) > 0
-  end
+  return vim.tbl_contains(
+    vim.diagnostic.count(bufnr or 0),
+    function(v) return v > 0 end,
+    { predicate = true }
+  )
 end
 
 --- A condition function if there is a defined filetype.

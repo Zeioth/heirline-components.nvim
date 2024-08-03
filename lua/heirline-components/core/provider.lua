@@ -35,14 +35,6 @@ end
 -- local function to resolve the first sign in the signcolumn
 -- specifically for usage when `signcolumn=number`
 local function resolve_sign(bufnr, lnum)
-  --- TODO: remove when dropping support for Neovim v0.9
-  if vim.fn.has "nvim-0.10" == 0 then
-    for _, sign in ipairs(vim.fn.sign_getplaced(bufnr, { group = "*", lnum = lnum })[1].signs) do
-      local defined = vim.fn.sign_getdefined(sign.name)[1]
-      if defined then return defined end
-    end
-  end
-
   local row = lnum - 1
   local extmarks = vim.api.nvim_buf_get_extmarks(
     bufnr, -1, { row, 0 }, { row, -1 }, { details = true, type = "sign" })
@@ -581,16 +573,7 @@ function M.diagnostics(opts)
   if not opts or not opts.severity then return end
   return function(self)
     local bufnr = self and self.bufnr or 0
-    local count
-    if vim.diagnostic.count then
-      count = vim.diagnostic.count(bufnr)[vim.diagnostic.severity[opts.severity]]
-          or 0
-    else -- TODO: remove when dropping support for neovim 0.9
-      count = #vim.diagnostic.get(
-        bufnr,
-        opts.severity and { severity = vim.diagnostic.severity[opts.severity] }
-      )
-    end
+    local count = vim.diagnostic.count(bufnr)[vim.diagnostic.severity[opts.severity]] or 0
     return core_utils.stylize(count ~= 0 and tostring(count) or "", opts)
   end
 end
