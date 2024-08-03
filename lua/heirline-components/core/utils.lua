@@ -171,7 +171,7 @@ function M.icon_provider(bufnr)
       if is_default then
         icon, hl, is_default = mini_icons.get("filetype", _filetype)
       end
-      local color = require("astroui").get_hlgroup(hl).fg
+      local color = require("heirline-components.core.hl").get_hlgroup(hl).fg
       if type(color) == "number" then color = string.format("#%06x", color) end
       return icon, color
     end
