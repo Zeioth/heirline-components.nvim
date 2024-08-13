@@ -142,12 +142,9 @@ end
 ---@return boolean # whether or not treesitter is active.
 -- @usage local heirline_component = { provider = "Example Provider", condition = require("heirline-components.core").condition.treesitter_available }
 function M.treesitter_available(bufnr)
-  if not package.loaded["nvim-treesitter"] then return false end
   if type(bufnr) == "table" then bufnr = bufnr.bufnr end
-  local parsers = require "nvim-treesitter.parsers"
-  return parsers.has_parser(
-    parsers.get_buf_lang(bufnr or vim.api.nvim_get_current_buf())
-  )
+  if not bufnr then bufnr = vim.api.nvim_get_current_buf() end
+  return vim.treesitter.highlighter.active[bufnr] ~= nil
 end
 
 --- A condition function if the foldcolumn is enabled.
