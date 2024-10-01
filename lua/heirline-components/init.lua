@@ -5,7 +5,7 @@
 
 local M = {}
 
-local config = require "heirline-components.config"
+local config = require("heirline-components.config")
 
 M.setup = function(opts)
   config.set(opts)

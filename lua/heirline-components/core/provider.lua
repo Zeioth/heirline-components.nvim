@@ -7,11 +7,11 @@
 
 local M = {}
 
-local condition = require "heirline-components.core.condition"
-local env = require "heirline-components.core.env"
-local core_utils = require "heirline-components.core.utils"
+local condition = require("heirline-components.core.condition")
+local env = require("heirline-components.core.env")
+local core_utils = require("heirline-components.core.utils")
 
-local utils = require "heirline-components.utils"
+local utils = require("heirline-components.utils")
 local extend_tbl = utils.extend_tbl
 local get_icon = utils.get_icon
 local is_available = utils.is_available
@@ -113,9 +113,9 @@ function M.foldcolumn(opts)
   ]]
 
   local fillchars = vim.opt.fillchars:get()
-  local foldopen = fillchars.foldopen or get_icon "FoldOpened"
-  local foldclosed = fillchars.foldclose or get_icon "FoldClosed"
-  local foldsep = fillchars.foldsep or get_icon "FoldSeparator"
+  local foldopen = fillchars.foldopen or get_icon("FoldOpened")
+  local foldclosed = fillchars.foldclose or get_icon("FoldClosed")
+  local foldsep = fillchars.foldsep or get_icon("FoldSeparator")
 
   return function()                                            -- move to M.fold_indicator
     local wp = ffi.C.find_window_by_handle(0, ffi.new "Error") -- get window handler
@@ -180,7 +180,7 @@ function M.spell(opts)
   end
 end
 
---- A provider function for showing if paste is enabled.
+--- A proider function for showing if paste is enabled.
 ---@param opts? table options passed to the stylize function.
 ---@return function # the function for outputting if paste is enabled.
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.paste() }
@@ -470,7 +470,7 @@ function M.unique_path(opts)
         opts.max_length > 0
         and #unique_path > opts.max_length
         and string.sub(unique_path, 1, opts.max_length - 2)
-        .. get_icon "Ellipsis"
+        .. get_icon("Ellipsis")
         .. "/"
       ) or unique_path,
       opts
@@ -780,7 +780,7 @@ function M.compiler_state(opts)
         state,
       }, ""))
     else
-      str = "󰑮"
+      str = get_icon("OverseerToggle")
     end
 
     return core_utils.stylize(str, opts)
@@ -792,15 +792,15 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.compiler_play() }
 -- @see heirline-components.core.utils.stylize
 function M.compiler_play(opts)
-  return core_utils.stylize(table.concat({ "" }, ""), opts)
+  return core_utils.stylize(table.concat({ get_icon("CompilerPlay") }, ""), opts)
 end
 
 --- A provider function for displaying the compiler stop button.
 ---@return string # the stop button.
--- @usage local heirline_component = { provider = require("heirline-components.core").provider.compiler_stop() }
+-- @usage local heirline_component = { provier = require("heirline-components.core").provider.compiler_stop() }
 -- @see heirline-components.core.utils.stylize
 function M.compiler_stop(opts)
-  return core_utils.stylize(table.concat({ "" }, ""), opts)
+  return core_utils.stylize(table.concat({ get_icon("CompilerStop") }, ""), opts)
 end
 
 --- A provider function for displaying the compiler redo button.
@@ -808,7 +808,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.compiler_redo() }
 -- @see heirline-components.core.utils.stylize
 function M.compiler_redo(opts)
-  return core_utils.stylize(table.concat({ "" }, ""), opts)
+  return core_utils.stylize(table.concat({ get_icon("CompilerRedo") }, ""), opts)
 end
 
 --- A provider function for displaying the compiler redo button.
@@ -816,7 +816,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.neotree() }
 -- @see heirline-components.core.utils.stylize
 function M.neotree(opts)
-  return core_utils.stylize(table.concat({ "" }, ""), opts)
+  return core_utils.stylize(table.concat({ get_icon("NeoTree") }, ""), opts)
 end
 
 --- A provider function for displaying the compiler redo button.
@@ -824,7 +824,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.aerial() }
 -- @see heirline-components.core.utils.stylize
 function M.aerial(opts)
-  return core_utils.stylize(table.concat({ "" }, ""), opts)
+  return core_utils.stylize(table.concat({ get_icon("Aerial") }, ""), opts)
 end
 
 --- A provider function for displaying the zen_mode button.
@@ -832,7 +832,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.zen-mode() }
 -- @see heirline-components.core.utils.stylize
 function M.zen_mode(opts)
-  return core_utils.stylize(table.concat({ "󰰶" }, ""), opts)
+  return core_utils.stylize(table.concat({ get_icon("ZenMode") }, ""), opts)
 end
 
 --- A provider function for displaying the write buffer button.
@@ -840,7 +840,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.write_buffer() }
 -- @see heirline-components.core.utils.stylize
 function M.write_buffer(opts)
-  return core_utils.stylize(table.concat({ "" }, ""), opts)
+  return core_utils.stylize(table.concat({ get_icon("BufWrite") }, ""), opts)
 end
 
 --- A provider function for displaying the write all buffers button.
@@ -848,7 +848,7 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.write_all_buffers() }
 -- @see heirline-components.core.utils.stylize
 function M.write_all_buffers(opts)
-  return core_utils.stylize(table.concat({ "" }, ""), opts)
+  return core_utils.stylize(table.concat({ get_icon("BufWriteAll") }, ""), opts)
 end
 
 --- A provider function for displaying the compiler build type.

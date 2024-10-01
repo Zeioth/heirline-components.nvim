@@ -6,7 +6,7 @@
 
 local M = {}
 
-local env = require "heirline-components.core.env"
+local env = require("heirline-components.core.env")
 
 --- A condition function if the window is currently active.
 ---@return boolean # whether or not the window is currently actie.
