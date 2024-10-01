@@ -780,7 +780,7 @@ function M.compiler_state(opts)
         state,
       }, ""))
     else
-      str = get_icon("OverseerToggle")
+      str = get_icon("ToggleResults")
     end
 
     return core_utils.stylize(str, opts)
