@@ -2,8 +2,8 @@
 
 local M = {}
 
-local env = require "heirline-components.core.env"
-local utils = require "heirline-components.utils"
+local env = require("heirline-components.core.env")
+local utils = require("heirline-components.utils")
 
 --- Convert a component parameter table to a table
 --- that can be used with the component builder.

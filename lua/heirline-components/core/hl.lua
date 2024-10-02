@@ -4,9 +4,9 @@
 -- Highlight colors we use on the components.
 
 local M = {}
-local env = require "heirline-components.core.env"
+local env = require("heirline-components.core.env")
+local core_utils = require("heirline-components.core.utils")
 local config = vim.g.heirline_components_config
-local core_utils = require "heirline-components.core.utils"
 
 --- Get the highlight background color of the lualine theme for the current colorscheme.
 ---@param mode string the neovim mode to get the color of.

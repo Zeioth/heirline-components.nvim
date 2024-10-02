@@ -5,12 +5,12 @@
 
 local M = {}
 
-local env = require "heirline-components.core.env"
-local provider = require "heirline-components.core.provider"
-local core_utils = require "heirline-components.core.utils"
+local env = require("heirline-components.core.env")
+local provider = require("heirline-components.core.provider")
+local core_utils = require("heirline-components.core.utils")
 
-local utils = require "heirline-components.utils"
-local buf_utils = require "heirline-components.buffer"
+local utils = require("heirline-components.utils")
+local buf_utils = require("heirline-components.buffer")
 local extend_tbl = utils.extend_tbl
 
 --- An `init` function to build a set of children components for LSP breadcrumbs.
@@ -20,7 +20,7 @@ local extend_tbl = utils.extend_tbl
 function M.breadcrumbs(opts)
   opts = extend_tbl({
     max_depth = 5,
-    separator = env.separators.breadcrumbs or "  ",
+    separator = " " .. utils.get_icon("BreadcrumbSeparator") .. " ",
     icon = { enabled = true, hl = env.icon_highlights.breadcrumbs },
     padding = { left = 0, right = 0 },
   }, opts)
@@ -41,7 +41,7 @@ function M.breadcrumbs(opts)
         table.insert(
           children,
           {
-            provider = utils.get_icon "Ellipsis"
+            provider = utils.get_icon("Ellipsis")
                 .. opts.separator,
           }
         )
@@ -117,8 +117,8 @@ function M.separated_path(opts)
   opts = extend_tbl({
     max_depth = 3,
     path_func = provider.unique_path(),
-    delimiter = vim.fn.has "win32" == 1 and "\\" or "/",
-    separator = env.separators.path or "  ",
+    delimiter = vim.fn.has("win32") == 1 and "\\" or "/",
+    separator = " " .. utils.get_icon("PathSeparator") .. " ",
     suffix = true,
     padding = { left = 0, right = 0 },
   }, opts)
@@ -142,7 +142,7 @@ function M.separated_path(opts)
         table.insert(
           children,
           {
-            provider = utils.get_icon "Ellipsis"
+            provider = utils.get_icon("Ellipsis")
                 .. opts.separator,
           }
         )

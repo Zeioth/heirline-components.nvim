@@ -56,16 +56,16 @@
 
 local M = {}
 
-local condition = require "heirline-components.core.condition"
-local env = require "heirline-components.core.env"
-local hl = require "heirline-components.core.hl"
-local init = require "heirline-components.core.init"
-local provider = require "heirline-components.core.provider"
-local heirline = require "heirline-components.core.heirline"
-local core_utils = require "heirline-components.core.utils"
+local condition = require("heirline-components.core.condition")
+local env = require("heirline-components.core.env")
+local hl = require("heirline-components.core.hl")
+local init = require("heirline-components.core.init")
+local provider = require("heirline-components.core.provider")
+local heirline = require("heirline-components.core.heirline")
+local core_utils = require("heirline-components.core.utils")
 
-local utils = require "heirline-components.utils"
-local buf_utils = require "heirline-components.buffer"
+local utils = require("heirline-components.utils")
+local buf_utils = require("heirline-components.buffer")
 local extend_tbl = utils.extend_tbl
 local get_icon = utils.get_icon
 local is_available = utils.is_available
@@ -269,7 +269,7 @@ function M.cmd_info(opts)
       },
     },
     search_count = {
-      icon = { kind = "Search", padding = { right = 1 } },
+      icon = { kind = "SearchCount", padding = { right = 1 } },
       padding = { left = 1 },
       condition = condition.is_hlsearch,
     },
@@ -615,9 +615,9 @@ function M.foldcolumn(opts)
       callback = function(...)
         local char = core_utils.statuscolumn_clickargs(...).char
         local fillchars = vim.opt_local.fillchars:get()
-        if char == (fillchars.foldopen or get_icon "FoldOpened") then
+        if char == (fillchars.foldopen or get_icon("FoldOpened")) then
           vim.cmd "norm! zc"
-        elseif char == (fillchars.foldclose or get_icon "FoldClosed") then
+        elseif char == (fillchars.foldclose or get_icon("FoldClosed")) then
           vim.cmd "norm! zo"
         end
       end,

@@ -3,9 +3,11 @@
 -- DESCRIPTION:
 -- Constants we use on our components.
 
-local M = {}
+local extend_tbl = require("heirline-components.utils").extend_tbl
+local get_icon = require("heirline-components.utils").get_icon
 local config = vim.g.heirline_components_config
-local extend_tbl = require "heirline-components.utils".extend_tbl
+
+local M = {}
 
 M.fallback_colors = extend_tbl({
   none = "NONE",
@@ -70,8 +72,8 @@ M.separators = {
   right = { "  ", "" },
   center = { "  ", "  " },
   tab = { "", " " },
-  breadcrumbs = "  ",
-  path = "  ",
+  breadcrumbs = " " .. get_icon("BreadcrumbSeparator") .. " ",
+  path = " " .. get_icon("PathSeparator") .. " ",
 }
 
 M.attributes = {

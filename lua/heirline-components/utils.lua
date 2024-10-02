@@ -18,13 +18,11 @@ function M.extend_tbl(default, opts)
   return default and vim.tbl_deep_extend("force", default, opts) or opts
 end
 
---- Get an icon from `lspkind` if it is available and return it.
+--- Get an icon from given its icon name.
 ---@param kind string The kind of icon in `lspkind` to retrieve.
 ---@return string icon.
 function M.get_icon(kind, padding)
-  local icon_pack = "icons"
-  M.icons = vim.g.heirline_components_config.icons
-  local icon = M[icon_pack] and M[icon_pack][kind]
+  local icon = vim.g.heirline_components_config.icons[kind]
   return icon and icon .. string.rep(" ", padding or 0) or ""
 end
 
