@@ -47,7 +47,7 @@ function M.set(opts)
     LSPLoading1 = "",
     LSPLoading2 = "󰀚",
     LSPLoading3 = "",
-    Find = "",
+    SearchCount = "",
     MacroRecording = "",
     ToggleResults = "󰑮",
 

@@ -269,7 +269,7 @@ function M.cmd_info(opts)
       },
     },
     search_count = {
-      icon = { kind = "Find", padding = { right = 1 } },
+      icon = { kind = "SearchCount", padding = { right = 1 } },
       padding = { left = 1 },
       condition = condition.is_hlsearch,
     },
