@@ -182,16 +182,9 @@ function M.icon_provider(bufnr)
   local devicons_avail, devicons = pcall(require, "nvim-web-devicons")
   if devicons_avail then
     cached_icon_provider = function(_bufname, _filetype, _buftype)
-      -- get the icon → by bufname
-      local ok, icon, color = pcall(devicons.get_icon_color, _bufname)
-      if not ok or not color then
-        -- fallback to → attempt by filetype
-        ok, icon, color = pcall(devicons.get_icon_color_by_filetype, _filetype, { default = _buftype == "" })
-        if not ok or not color then
-          -- fallback to → default
-          local default = devicons.get_default_icon()
-          icon, color = default.icon, default.color
-        end
+      local icon, color = devicons.get_icon_color(_bufname)
+      if not color then
+        icon, color = devicons.get_icon_color_by_filetype(_filetype, { default = _buftype == "" })
       end
       return icon, color
     end
