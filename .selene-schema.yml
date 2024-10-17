@@ -36,6 +36,8 @@ globals:
     args:
     - type: string
     - type: function
+  bit:
+    any: true
   jit:
     any: true
   vim:
