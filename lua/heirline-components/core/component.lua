@@ -398,7 +398,10 @@ function M.git_branch(opts)
         end
       end,
     },
-    update = { "User", pattern = "GitSignsUpdate" },
+    update = {
+      "User",
+      pattern = { "GitSignsUpdate", "GitSignsChanged", "MiniDiffUpdated" },
+    },
     init = init.update_events { "BufEnter" },
   }, opts)
   return M.builder(core_utils.setup_providers(opts, { "git_branch" }))
@@ -431,7 +434,10 @@ function M.git_diff(opts)
       color = "git_diff_bg",
       condition = condition.git_changed,
     },
-    update = { "User", pattern = "GitSignsUpdate" },
+    update = {
+      "User",
+      pattern = { "GitSignsUpdate", "GitSignsChanged", "MiniDiffUpdated" },
+    },
     init = init.update_events { "BufEnter" },
   }, opts)
   return M.builder(

@@ -60,12 +60,23 @@ end
 -- @usage local heirline_component = { provider = "Example Provider", condition = require("heirline-components.core").condition.git_changed }
 function M.git_changed(bufnr)
   if type(bufnr) == "table" then bufnr = bufnr.bufnr end
-  local git_status = vim.b[bufnr or 0].gitsigns_status_dict
-  return git_status
-      and (git_status.added or 0)
-      + (git_status.removed or 0)
-      + (git_status.changed or 0)
-      > 0
+  if not bufnr then bufnr = 0 end
+
+  local git_status, n_changes, is_changed
+  local gitsigns = vim.b[bufnr].gitsigns_status_dict
+  local minidiff = vim.b[bufnr].minidiff_summary
+
+  if gitsigns then -- gitsigns support
+    git_status = gitsigns
+    n_changes = (git_status.added or 0) + (git_status.removed or 0) + (git_status.changed or 0)
+  elseif minidiff then -- mini.diff support
+    git_status = minidiff
+    n_changes = (git_status.add or 0) + (git_status.delete or 0) + (git_status.change or 0)
+  end
+
+  is_changed = n_changes and n_changes > 0
+
+  return is_changed
 end
 
 --- A condition function if the current buffer is modified.
