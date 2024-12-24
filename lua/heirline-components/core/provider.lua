@@ -548,17 +548,22 @@ end
 -- @usage local heirline_component = { provider = require("heirline-components.core").provider.git_diff({ type = "added" }) }
 -- @see heirline-components.core.utils.stylize
 function M.git_diff(opts)
-  if not opts or not opts.type then return end
+  if not opts or not opts.type then return end -- guard clause
+
+  local minidiff_types = { added = "add", changed = "change", removed = "delete" }
+
   return function(self)
-    local status = vim.b[self and self.bufnr or 0].gitsigns_status_dict
-    return core_utils.stylize(
-      status
-      and status[opts.type]
-      and status[opts.type] > 0
-      and tostring(status[opts.type])
-      or "",
-      opts
-    )
+    local bufnr, total = self and self.bufnr or 0, nil
+    local gitsigns = vim.b[bufnr].gitsigns_status_dict
+    local minidiff = vim.b[bufnr].minidiff_summary
+
+    if gitsigns then -- gitsigns support
+      total = gitsigns[opts.type]
+    elseif minidiff then -- mini.diff support
+      total = minidiff[minidiff_types[opts.type]]
+    end
+
+    return core_utils.stylize(total and total > 0 and tostring(total) or "", opts)
   end
 end
 
