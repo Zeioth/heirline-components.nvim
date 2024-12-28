@@ -32,7 +32,7 @@ Add it as a dependency of heirline
 ```lua
 {
   "rebelot/heirline.nvim",
-  dependencies = { "Zeioth/heirline-components.nvim" }
+  dependencies = { "Zeioth/heirline-components.nvim" },
   opts = {},
     config = function(_, opts)
       local heirline = require "heirline"
